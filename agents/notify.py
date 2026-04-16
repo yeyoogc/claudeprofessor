@@ -8,7 +8,7 @@ import yagmail
 import config
 
 
-APPROVAL_SERVER = "http://localhost:5001"
+PUBLISH_URL = "https://github.com/yeyoogc/claudeprofessor/actions/workflows/publish.yml"
 
 
 def send_preview_email(topic: str, hosted_urls: list[str], caption: str) -> None:
@@ -50,11 +50,16 @@ def send_preview_email(topic: str, hosted_urls: list[str], caption: str) -> None
         </div>
 
         <div style="margin-top:32px;padding-top:24px;border-top:1px solid #eee;text-align:center;">
-          <p style="font-size:14px;color:#8B6F4E;margin:0 0 12px;">
-            El navegador se abre automaticamente para aprobar.
+          <p style="font-size:15px;font-weight:700;color:#1A1816;margin:0 0 16px;">
+            ¿Publicamos en Instagram?
           </p>
-          <p style="font-size:13px;color:#aaa;margin:0;">
-            Si no: abre <strong>localhost:5001/review</strong> en tu navegador.
+          <a href="{PUBLISH_URL}"
+             style="display:inline-block;background:#D97757;color:#fff;font-weight:700;
+                    font-size:16px;padding:16px 40px;border-radius:12px;text-decoration:none;">
+            ✅ Publicar ahora
+          </a>
+          <p style="font-size:12px;color:#aaa;margin:16px 0 0;">
+            Se abre GitHub Actions → pulsa el botón verde "Run workflow"
           </p>
         </div>
 
