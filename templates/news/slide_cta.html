@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #0a0a0a;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bg-photo {
+    position: absolute;
+    inset: 0;
+    background-image: url('{{BG_IMAGE_URL}}');
+    background-size: cover;
+    background-position: center;
+    filter: saturate(1.05) blur(1px);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(217,119,87,0.3) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.85) 100%);
+  }
+
+  .topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 64px 0;
+  }
+
+  .brand-dot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .brand-dot .logo-sm {
+    width: 20px;
+    height: 20px;
+    fill: #D97757;
+  }
+
+  .slide-pill {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0a0a0a;
+    background: #D97757;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  .main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 70px;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .logo-big {
+    width: 180px;
+    height: 180px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 80px rgba(217,119,87,0.4);
+  }
+
+  .logo-big svg {
+    width: 90px;
+    height: 90px;
+    fill: #D97757;
+  }
+
+  .cta-tag {
+    font-size: 14px;
+    font-weight: 900;
+    color: #D97757;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .cta-title {
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 0.98;
+    color: white;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    max-width: 880px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .cta-subtitle {
+    font-size: 24px;
+    color: rgba(255,255,255,0.80);
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 640px;
+  }
+
+  .follow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #D97757;
+    color: white;
+    border-radius: 999px;
+    padding: 22px 52px;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 40px rgba(217,119,87,0.5);
+    margin-top: 8px;
+  }
+
+  .bottombar {
+    position: absolute;
+    z-index: 3;
+    bottom: 48px;
+    left: 64px;
+    right: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .foot-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .thanks {
+    font-size: 14px;
+    font-weight: 700;
+    color: #D97757;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-photo"></div>
+  <div class="overlay"></div>
+
+  <div class="topbar">
+    <div class="brand-dot">
+      <svg class="logo-sm" viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      <span>@claudeprofessor</span>
+    </div>
+    <div class="slide-pill">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="main">
+    <div class="logo-big">
+      <svg viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+    </div>
+
+    <div class="cta-tag">✦ FOLLOW FOR MORE ✦</div>
+
+    <div class="cta-title">{{CTA_TITLE}}</div>
+
+    <div class="cta-subtitle">{{CTA_SUBTITLE}}</div>
+
+    <div class="follow-btn">
+      Seguir @claudeprofessor →
+    </div>
+  </div>
+
+  <div class="bottombar">
+    <span class="foot-text">← Claude Professor</span>
+    <span class="thanks">¡Gracias por leer! 🧡</span>
+  </div>
+
+</body>
+</html>

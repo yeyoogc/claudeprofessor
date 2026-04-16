@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #FFFDF9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 64px 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2a2520;
+  }
+
+  .brand-asterisk {
+    width: 22px;
+    height: 22px;
+  }
+
+  .slide-pill {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2a2520;
+    background: #FFF;
+    border: 2px solid #2a2520;
+    border-radius: 999px;
+    padding: 6px 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 80px 0;
+    gap: 32px;
+    position: relative;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .step-num-box {
+    background: #1A1816;
+    color: #FFFDF9;
+    width: 84px;
+    height: 84px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .step-label {
+    background: #D97757;
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 14px 24px;
+    border-radius: 14px;
+    border: 3px solid #1A1816;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 62px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: #1A1816;
+    letter-spacing: -0.025em;
+    max-width: 920px;
+  }
+
+  h2 .accent {
+    background: #D97757;
+    color: white;
+    padding: 2px 16px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+
+  .body-text {
+    font-size: 28px;
+    color: #2a2520;
+    line-height: 1.45;
+    font-weight: 500;
+    max-width: 880px;
+    position: relative;
+    padding-left: 22px;
+  }
+
+  .body-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 6px;
+    background: #D97757;
+    border-radius: 3px;
+  }
+
+  .tip-box {
+    background: #FFF;
+    border: 3px solid #1A1816;
+    border-radius: 18px;
+    padding: 26px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    box-shadow: 8px 8px 0 #D97757;
+    margin-right: 40px;
+  }
+
+  .tip-label {
+    background: #1A1816;
+    color: #FFFDF9;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 6px 12px;
+    border-radius: 8px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .tip-text {
+    font-size: 22px;
+    color: #1A1816;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .tip-text strong {
+    color: #D97757;
+    font-weight: 900;
+  }
+
+  /* Decorative */
+  .deco {
+    position: absolute;
+    color: #D97757;
+  }
+  .deco-1 { top: 40px; right: 280px; font-size: 28px; }
+  .deco-2 { bottom: 220px; right: 80px; font-size: 22px; }
+
+  /* Bottom bar */
+  .bottombar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 64px 48px;
+    border-top: 2px solid #1A1816;
+    margin: 0 60px;
+    margin-top: auto;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #D97757, #e8956e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+  }
+
+  .handle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1816;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(26,24,22,0.2);
+  }
+  .dot.active {
+    width: 28px;
+    border-radius: 5px;
+    background: #D97757;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand">
+      <svg class="brand-asterisk" viewBox="0 0 100 100" fill="#D97757">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      <span>@claudeprofessor</span>
+    </div>
+    <div class="slide-pill">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="deco deco-1">✦</div>
+  <div class="deco deco-2">✦</div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="step-row">
+      <div class="step-num-box">{{STEP_NUM}}</div>
+      <div class="step-label">{{STEP_LABEL}}</div>
+    </div>
+
+    <h2>{{TITLE}}</h2>
+
+    <div class="body-text">{{BODY}}</div>
+
+    <div class="tip-box">
+      <div class="tip-label">PRO TIP</div>
+      <div class="tip-text">{{TIP}}</div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottombar">
+    <div class="author">
+      <div class="avatar">✳</div>
+      <span class="handle">@claudeprofessor</span>
+    </div>
+    <div class="dots">
+      {{DOTS}}
+    </div>
+  </div>
+
+</body>
+</html>

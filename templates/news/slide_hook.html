@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #0a0a0a;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bg-photo {
+    position: absolute;
+    inset: 0;
+    background-image: url('{{BG_IMAGE_URL}}');
+    background-size: cover;
+    background-position: center;
+    filter: saturate(1.05);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center top, rgba(217,119,87,0.25) 0%, transparent 55%),
+      linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.88) 78%, rgba(0,0,0,0.98) 100%);
+  }
+
+  .topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 64px 0;
+  }
+
+  .brand-dot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .brand-dot .logo-sm {
+    width: 20px;
+    height: 20px;
+    fill: #D97757;
+  }
+
+  .slide-pill {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0a0a0a;
+    background: #D97757;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Floating logo circle */
+  .logo-circle {
+    position: absolute;
+    top: 260px;
+    left: 80px;
+    z-index: 2;
+    width: 200px;
+    height: 200px;
+    background: #FFF;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .logo-circle svg {
+    width: 90px;
+    height: 90px;
+    fill: #D97757;
+  }
+
+  .logo-circle-text {
+    font-size: 22px;
+    font-weight: 900;
+    color: #1A1816;
+    margin-top: -4px;
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  /* Center brand watermark */
+  .watermark {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(10px);
+    border-radius: 999px;
+    padding: 10px 22px;
+  }
+
+  .watermark-handle {
+    font-size: 15px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .watermark-circle {
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .watermark-circle svg {
+    width: 22px;
+    height: 22px;
+    fill: #D97757;
+  }
+
+  .watermark-tag {
+    font-size: 15px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Main title block */
+  .main {
+    position: absolute;
+    z-index: 2;
+    bottom: 140px;
+    left: 60px;
+    right: 60px;
+  }
+
+  h1 {
+    font-size: 78px;
+    font-weight: 900;
+    line-height: 0.97;
+    color: white;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+
+  h1 .accent {
+    color: #D97757;
+  }
+
+  .swipe-label {
+    font-size: 16px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .tag-line {
+    font-size: 14px;
+    font-weight: 800;
+    color: #D97757;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-photo"></div>
+  <div class="overlay"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand-dot">
+      <svg class="logo-sm" viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      <span>@claudeprofessor</span>
+    </div>
+    <div class="slide-pill">BREAKING</div>
+  </div>
+
+  <!-- Floating Claude logo -->
+  <div class="logo-circle">
+    <svg viewBox="0 0 100 100">
+      <rect x="44" y="5" width="12" height="90" rx="6"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+    </svg>
+    <div class="logo-circle-text">Claude</div>
+  </div>
+
+  <!-- Watermark -->
+  <div class="watermark">
+    <span class="watermark-handle">@CLAUDE</span>
+    <div class="watermark-circle">
+      <svg viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+    </div>
+    <span class="watermark-tag">PROFESSOR</span>
+  </div>
+
+  <!-- Title -->
+  <div class="main">
+    <div class="tag-line">✦ {{TAG}} ✦</div>
+    <h1>{{TITLE}}</h1>
+    <div class="swipe-label">[ SWIPE → ]</div>
+  </div>
+
+</body>
+</html>

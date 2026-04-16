@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Bóveda — ClaudeProfessor</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --coral:  #D97757;
+      --cream:  #FAF9F7;
+      --dark:   #1A1816;
+      --brown:  #8B6F4E;
+      --beige:  #E8D5B0;
+      --card:   #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--dark);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo span { color: var(--coral); }
+    .nav-tag {
+      background: var(--coral);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 64px 24px 56px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { color: var(--coral); font-style: normal; }
+    .hero p {
+      color: #a89e94;
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* SECTION */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--beige);
+    }
+
+    /* CARDS GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1.5px solid var(--beige);
+      transition: border-color 0.2s, transform 0.15s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card:hover {
+      border-color: var(--coral);
+      transform: translateY(-2px);
+    }
+    .card-icon { font-size: 28px; margin-bottom: 12px; }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--brown);
+      line-height: 1.5;
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--coral);
+      background: #fef3ee;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* COMING SOON CARD */
+    .card.locked {
+      opacity: 0.55;
+      cursor: default;
+    }
+    .card.locked:hover { transform: none; border-color: var(--beige); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+      color: var(--brown);
+      border-top: 1px solid var(--beige);
+    }
+    footer a { color: var(--coral); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">✳️ <span>Claude</span>Professor</div>
+  <span class="nav-tag">🔒 Acceso privado</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🔓 Bóveda desbloqueada</div>
+  <h1>Todo lo que necesitas para<br>dominar <em>Claude AI</em></h1>
+  <p>Recursos, guías y prompts exclusivos actualizados cada semana.</p>
+</div>
+
+<main>
+
+  <!-- PROMPTS -->
+  <div class="section-title">✦ Prompts esenciales</div>
+  <div class="grid">
+    <a href="#" class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">El prompt del CEO</div>
+      <div class="card-desc">Haz que Claude piense como un fundador de startup al tomar decisiones de negocio.</div>
+      <span class="card-tag">Productividad</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">✍️</div>
+      <div class="card-title">Escritor fantasma</div>
+      <div class="card-desc">Prompt para crear contenido en tu voz exacta. Dale 3 ejemplos y clona tu estilo.</div>
+      <span class="card-tag">Contenido</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">Investigador profundo</div>
+      <div class="card-desc">Transforma Claude en un analista que extrae, organiza y cuestiona cualquier tema.</div>
+      <span class="card-tag">Research</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">📧</div>
+      <div class="card-title">Email que convierte</div>
+      <div class="card-desc">Prompt para escribir emails de ventas, seguimiento y outreach que no suenan a IA.</div>
+      <span class="card-tag">Marketing</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">🧩</div>
+      <div class="card-title">Debugger de código</div>
+      <div class="card-desc">El prompt exacto para que Claude encuentre, explique y arregle cualquier bug en tu código.</div>
+      <span class="card-tag">Código</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-title">Analista de datos</div>
+      <div class="card-desc">Pega tus datos y Claude los analiza, detecta patrones y genera insights accionables.</div>
+      <span class="card-tag">Análisis</span>
+    </a>
+  </div>
+
+  <!-- GUÍAS -->
+  <div class="section-title">✦ Guías paso a paso</div>
+  <div class="grid">
+    <a href="#" class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Claude Projects: la guía completa</div>
+      <div class="card-desc">Cómo usar Projects para tener un asistente que recuerda todo sobre tu negocio.</div>
+      <span class="card-tag">Guía</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Prompt engineering en 7 pasos</div>
+      <div class="card-desc">El método exacto para escribir prompts que dan resultados predecibles cada vez.</div>
+      <span class="card-tag">Guía</span>
+    </a>
+    <a href="#" class="card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Automatiza tu trabajo con Claude</div>
+      <div class="card-desc">Flujos de trabajo reales con Claude + Zapier / Make para eliminar tareas repetitivas.</div>
+      <span class="card-tag">Automatización</span>
+    </a>
+    <a href="#" class="card locked">
+      <div class="card-icon">🔐</div>
+      <div class="card-title">Claude API para no-developers</div>
+      <div class="card-desc">Próximamente: conecta Claude a tus herramientas sin escribir una línea de código.</div>
+      <span class="card-tag">Próximamente</span>
+    </a>
+  </div>
+
+  <!-- CARRUSELES -->
+  <div class="section-title">✦ Carruseles descargables</div>
+  <div class="grid">
+    <a href="#" class="card">
+      <div class="card-icon">📱</div>
+      <div class="card-title">Pack: 10 trucos de Claude</div>
+      <div class="card-desc">Los carruseles más populares de @claudeprofessor en PDF descargable.</div>
+      <span class="card-tag">Descarga</span>
+    </a>
+    <a href="#" class="card locked">
+      <div class="card-icon">🖼️</div>
+      <div class="card-title">Pack semana 2 — Próximamente</div>
+      <div class="card-desc">Nuevos carruseles cada semana. Vuelve pronto.</div>
+      <span class="card-tag">Próximamente</span>
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  Contenido exclusivo para seguidores de
+  <a href="https://instagram.com/claudeprofessor" target="_blank">@claudeprofessor</a> —
+  No compartas este enlace.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: Daily Carousel Generation
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # 9 AM Spain (UTC+2 verano)
+  workflow_dispatch:       # allows manual trigger for testing
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium --with-deps
+
+      - name: Generate preview
+        run: python run.py --preview
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+      - name: Save preview for publish workflow
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git fetch origin preview 2>/dev/null || git checkout --orphan preview
+          git checkout preview 2>/dev/null || true
+          git checkout main -- .last_preview.json 2>/dev/null || true
+          cp .last_preview.json /tmp/preview.json
+          git checkout preview || git checkout --orphan preview
+          cp /tmp/preview.json .last_preview.json
+          git add .last_preview.json
+          git commit -m "Preview $(date +%Y-%m-%d)" || echo "Nothing to commit"
+          git push origin preview --force

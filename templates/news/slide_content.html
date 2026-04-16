@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #0a0a0a;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Faint photo strip on top for atmosphere */
+  .bg-photo-strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 380px;
+    background-image: url('{{BG_IMAGE_URL}}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.55;
+  }
+
+  .strip-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 460px;
+    background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 50%, #0a0a0a 100%);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(217,119,87,0.04) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+  }
+
+  .topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 64px 0;
+  }
+
+  .brand-dot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .brand-dot .logo-sm {
+    width: 20px;
+    height: 20px;
+    fill: #D97757;
+  }
+
+  .slide-pill {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0a0a0a;
+    background: #D97757;
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  /* Step number */
+  .huge-step {
+    position: absolute;
+    top: 130px;
+    right: 60px;
+    font-size: 320px;
+    font-weight: 900;
+    color: rgba(217,119,87,0.12);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    z-index: 1;
+  }
+
+  /* Main */
+  .main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 380px 70px 0;
+    gap: 22px;
+  }
+
+  .step-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #D97757;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .step-label::before {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background: #D97757;
+  }
+
+  h2 {
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 0.98;
+    color: white;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    max-width: 920px;
+  }
+
+  h2 .accent {
+    color: #D97757;
+  }
+
+  .body-text {
+    font-size: 24px;
+    color: rgba(255,255,255,0.70);
+    line-height: 1.45;
+    font-weight: 400;
+    max-width: 860px;
+  }
+
+  .tip-box {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 8px;
+    max-width: 920px;
+  }
+
+  .tip-bar {
+    width: 6px;
+    background: #D97757;
+    flex-shrink: 0;
+  }
+
+  .tip-content {
+    background: rgba(217,119,87,0.08);
+    border: 1px solid rgba(217,119,87,0.2);
+    border-left: none;
+    padding: 22px 26px;
+    flex: 1;
+  }
+
+  .tip-label {
+    font-size: 12px;
+    font-weight: 900;
+    color: #D97757;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .tip-text {
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .tip-text strong {
+    color: #D97757;
+    font-weight: 800;
+  }
+
+  /* Bottom */
+  .bottombar {
+    position: absolute;
+    z-index: 3;
+    bottom: 48px;
+    left: 64px;
+    right: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .foot-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+  .dot.active {
+    width: 28px;
+    border-radius: 5px;
+    background: #D97757;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-photo-strip"></div>
+  <div class="strip-fade"></div>
+  <div class="grain"></div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand-dot">
+      <svg class="logo-sm" viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      <span>@claudeprofessor</span>
+    </div>
+    <div class="slide-pill">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="huge-step">{{STEP_NUM}}</div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="step-label">{{STEP_LABEL}}</div>
+    <h2>{{TITLE}}</h2>
+    <div class="body-text">{{BODY}}</div>
+    <div class="tip-box">
+      <div class="tip-bar"></div>
+      <div class="tip-content">
+        <div class="tip-label">💡 PRO TIP</div>
+        <div class="tip-text">{{TIP}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottombar">
+    <span class="foot-text">← Swipe →</span>
+    <div class="dots">
+      {{DOTS}}
+    </div>
+  </div>
+
+</body>
+</html>
