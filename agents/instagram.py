@@ -1,4 +1,5 @@
 """Post carousels to Instagram via Meta Graph API."""
+import time
 import requests
 import config
 
@@ -15,6 +16,28 @@ def _post(endpoint: str, **params) -> dict:
     if "error" in data:
         raise RuntimeError(f"Instagram API error: {data['error']}")
     return data
+
+
+def _get(endpoint: str, **params) -> dict:
+    params["access_token"] = TOKEN()
+    resp = requests.get(f"{BASE}/{endpoint}", params=params, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def _wait_until_ready(container_id: str, max_wait: int = 120) -> None:
+    """Poll container status until FINISHED or timeout."""
+    deadline = time.time() + max_wait
+    while time.time() < deadline:
+        data = _get(container_id, fields="status_code")
+        status = data.get("status_code", "")
+        if status == "FINISHED":
+            return
+        if status == "ERROR":
+            raise RuntimeError(f"Container {container_id} failed processing")
+        print(f"  Container {container_id} status: {status} — waiting...")
+        time.sleep(5)
+    raise TimeoutError(f"Container {container_id} not ready after {max_wait}s")
 
 
 def create_carousel(image_urls: list[str], caption: str) -> str:
@@ -38,7 +61,11 @@ def create_carousel(image_urls: list[str], caption: str) -> str:
         container_ids.append(data["id"])
         print(f"  Container created: {data['id']} ({url[:60]}...)")
 
-    # Step 2: create the carousel container
+    # Step 2: wait for all item containers to finish processing
+    for cid in container_ids:
+        _wait_until_ready(cid)
+
+    # Step 3: create the carousel container
     carousel = _post(
         f"{UID()}/media",
         media_type="CAROUSEL",
@@ -48,7 +75,10 @@ def create_carousel(image_urls: list[str], caption: str) -> str:
     carousel_id = carousel["id"]
     print(f"  Carousel container: {carousel_id}")
 
-    # Step 3: publish
+    # Step 4: wait for carousel container to finish processing
+    _wait_until_ready(carousel_id)
+
+    # Step 5: publish
     published = _post(f"{UID()}/media_publish", creation_id=carousel_id)
     post_id = published["id"]
     print(f"  Published: {post_id}")
