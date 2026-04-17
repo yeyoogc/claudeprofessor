@@ -3,119 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@claudeprofessor — Carruseles de Claude AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <title>@claudeprofessor — Claude AI en español</title>
+  <meta name="description" content="Carruseles, guías y recursos sobre Claude AI en español. Skills, MCP, agentes, prompt engineering y más.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0D0D0D;
-      --surface: #141414;
-      --surface2: #1a1a1a;
-      --border: rgba(255,255,255,0.07);
+      --bg: #ffffff;
+      --surface: #F7F5F2;
+      --surface2: #EEEBE6;
+      --border: #E0DBD5;
       --accent: #D97757;
-      --accent-dim: rgba(217,119,87,0.15);
-      --text: #ffffff;
-      --text-muted: rgba(255,255,255,0.4);
-      --text-mid: rgba(255,255,255,0.65);
+      --accent-light: #FBF0EB;
+      --accent-mid: rgba(217,119,87,0.15);
+      --text: #0D0D0D;
+      --text-mid: #3D3935;
+      --text-muted: #8A837C;
+      --text-faint: #B5AFA9;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Header ── */
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ────────────────────────────────────────── HEADER */
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      z-index: 200;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
       padding: 0 24px;
-      height: 64px;
+      height: 60px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 40px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
+      gap: 9px;
+      flex-shrink: 0;
     }
 
-    .brand-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(217,119,87,0.3);
-      border-radius: 8px;
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-
-    .brand-icon svg { fill: var(--accent); width: 16px; height: 16px; }
+    .brand-mark svg { fill: #fff; width: 14px; height: 14px; }
 
     .brand-name {
       font-size: 15px;
       font-weight: 800;
+      letter-spacing: -0.03em;
       color: var(--text);
-      letter-spacing: -0.02em;
     }
 
-    .brand-name span { color: var(--accent); }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
 
-    .header-right {
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 7px;
+      transition: color 0.15s, background 0.15s;
+      border: none;
+      background: none;
+    }
+    .nav-link:hover { color: var(--text); background: var(--surface); }
+    .nav-link.active { color: var(--text); font-weight: 700; background: var(--surface); }
+
+    .header-cta {
+      margin-left: auto;
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-shrink: 0;
     }
 
-    .ig-link {
+    .btn-ig {
       display: flex;
       align-items: center;
       gap: 7px;
       font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
-      text-decoration: none;
       padding: 7px 14px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-ig:hover { color: var(--text); border-color: var(--text-mid); }
+    .btn-ig svg { width: 13px; height: 13px; fill: currentColor; }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: none;
+      padding: 8px;
+      color: var(--text);
+    }
+    .nav-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    @media (max-width: 700px) {
+      .nav-toggle { display: flex; }
+      nav { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column; align-items: flex-start; padding: 12px 16px; gap: 2px; z-index: 300; }
+      nav.open { display: flex; }
+      .nav-link { width: 100%; }
+      .header-inner { gap: 12px; }
+      .header-cta { display: none; }
     }
 
-    .ig-link:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    /* ────────────────────────────────────────── SECTIONS */
+    .section { display: none; }
+    .section.active { display: block; }
 
-    .ig-link svg { width: 14px; height: 14px; fill: currentColor; }
+    /* ────────────────────────────────────────── HOME */
 
-    /* ── Hero ── */
+    /* Hero */
     .hero {
-      padding: 72px 24px 48px;
-      max-width: 1200px;
+      max-width: 1180px;
       margin: 0 auto;
+      padding: 80px 24px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 16px 36px; }
+      .hero-visual { display: none; }
     }
 
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       font-size: 12px;
       font-weight: 700;
       color: var(--accent);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .eyebrow-dot {
@@ -123,134 +184,251 @@
       height: 5px;
       background: var(--accent);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      animation: blink 2.4s infinite;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     .hero h1 {
-      font-size: clamp(36px, 6vw, 72px);
+      font-size: clamp(36px, 5.5vw, 64px);
       font-weight: 900;
-      line-height: 1.0;
+      line-height: 1.02;
       letter-spacing: -0.04em;
       color: var(--text);
-      max-width: 800px;
       margin-bottom: 20px;
     }
+    .hero h1 em { font-style: normal; color: var(--accent); }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .hero p {
+    .hero-sub {
       font-size: 17px;
       color: var(--text-muted);
-      max-width: 480px;
-      line-height: 1.6;
+      max-width: 460px;
+      line-height: 1.65;
+      margin-bottom: 32px;
     }
 
-    /* ── Post count / metadata bar ── */
-    .meta-bar {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px 32px;
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 9px;
+      border: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      color: var(--text-mid);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--surface2); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .hero-asterisk {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      animation: spin-slow 40s linear infinite;
+    }
+    .hero-asterisk svg { width: 180px; height: 180px; fill: var(--border); }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+    .hero-circle {
+      position: absolute;
+      inset: 30px;
+      background: var(--accent-light);
+      border: 2px solid rgba(217,119,87,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-circle svg { width: 56px; height: 56px; fill: var(--accent); }
+
+    /* Stats bar */
+    .stats-bar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .post-count {
-      font-size: 13px;
+    .stat {
+      flex: 1;
+      padding: 24px 0;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px;
       color: var(--text-muted);
       font-weight: 500;
+      margin-top: 3px;
+      display: block;
     }
 
-    .post-count strong { color: var(--text-mid); font-weight: 700; }
+    @media (max-width: 580px) {
+      .stats-bar { gap: 0; }
+      .stat { padding: 16px 0; }
+      .stat-num { font-size: 22px; }
+    }
 
-    /* ── Grid ── */
-    .grid-wrap {
-      max-width: 1200px;
+    /* Home sections */
+    .home-section {
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 0 24px 80px;
+      padding: 56px 24px;
     }
 
-    .grid {
+    .home-section + .home-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .section-header .see-all {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    .section-header .see-all:hover { text-decoration: underline; }
+
+    /* ────────────────────────────────────────── CARDS (shared) */
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 880px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cards-grid { grid-template-columns: 1fr; gap: 12px; } }
 
-    @media (max-width: 580px) {
-      .grid { grid-template-columns: 1fr; gap: 12px; }
-      .hero { padding: 48px 16px 32px; }
-      .meta-bar { padding: 0 16px 24px; }
-      .grid-wrap { padding: 0 16px 60px; }
-      header { padding: 0 16px; }
-    }
-
-    /* ── Card ── */
-    .card {
-      position: relative;
+    /* Carousel card */
+    .carousel-card {
       border-radius: 12px;
       overflow: hidden;
+      border: 1px solid var(--border);
       cursor: pointer;
       background: var(--surface);
-      border: 1px solid var(--border);
-      aspect-ratio: 1 / 1;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .carousel-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      border-color: var(--border);
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(217,119,87,0.2);
+    .carousel-card-img {
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface2);
     }
-
-    .card-img {
+    .carousel-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.35s;
     }
+    .carousel-card:hover .carousel-card-img img { transform: scale(1.04); }
 
-    .card:hover .card-img { transform: scale(1.03); }
-
-    .card-overlay {
+    .slide-badge {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      color: rgba(255,255,255,0.85);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
+      align-items: center;
+      gap: 4px;
     }
 
-    .card:hover .card-overlay { opacity: 1; }
+    .carousel-card-body {
+      padding: 14px 16px 16px;
+    }
 
     .card-tag {
+      display: inline-block;
       font-size: 10px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 0.1em;
+      font-weight: 800;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
     }
 
     .card-title {
       font-size: 14px;
       font-weight: 700;
-      color: #fff;
-      line-height: 1.3;
+      color: var(--text);
+      line-height: 1.35;
       margin-bottom: 6px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -259,524 +437,1606 @@
     }
 
     .card-date {
-      font-size: 11px;
-      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      color: var(--text-faint);
       font-weight: 500;
     }
 
-    .card-slide-count {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
-      padding: 4px 9px;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.7);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .card-slide-count svg { width: 10px; height: 10px; fill: rgba(255,255,255,0.5); }
-
-    /* ── Empty state ── */
-    .empty {
-      grid-column: 1 / -1;
-      padding: 80px 0;
-      text-align: center;
-      color: var(--text-muted);
-    }
-
-    .empty-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 24px;
-      opacity: 0.15;
-    }
-
-    .empty-icon svg { width: 100%; height: 100%; fill: var(--accent); }
-
-    .empty h2 { font-size: 20px; font-weight: 700; color: var(--text-mid); margin-bottom: 10px; }
-    .empty p { font-size: 15px; line-height: 1.6; max-width: 360px; margin: 0 auto; }
-
-    /* ── Modal ── */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      transform: scale(0.94) translateY(12px);
-      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
-    }
-
-    .modal-backdrop.open .modal {
-      transform: scale(1) translateY(0);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      gap: 16px;
-    }
-
-    .modal-meta { flex: 1; min-width: 0; }
-
-    .modal-tag {
-      font-size: 11px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .modal-topic {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.35;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .modal-date {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .modal-close {
-      width: 36px;
-      height: 36px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-
-    .modal-close:hover { background: rgba(255,255,255,0.1); }
-    .modal-close svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
-
-    /* Slide viewer */
-    .slide-viewer {
-      position: relative;
-      aspect-ratio: 1 / 1;
+    /* Guide card */
+    .guide-card {
       border-radius: 12px;
-      overflow: hidden;
-      background: var(--surface);
       border: 1px solid var(--border);
-      touch-action: pan-y;
-      user-select: none;
-    }
-
-    .slides-track {
+      padding: 24px;
+      cursor: pointer;
+      background: var(--bg);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
       display: flex;
-      height: 100%;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-direction: column;
+      gap: 10px;
+    }
+    .guide-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(217,119,87,0.08);
+      transform: translateY(-1px);
     }
 
-    .slide-img {
-      width: 100%;
-      height: 100%;
-      flex-shrink: 0;
-      object-fit: cover;
-      pointer-events: none;
-    }
-
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+    .guide-card-icon {
       width: 40px;
       height: 40px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 50%;
-      cursor: pointer;
+      border-radius: 10px;
+      background: var(--accent-light);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, opacity 0.2s;
-      z-index: 2;
+      font-size: 20px;
+      margin-bottom: 2px;
     }
 
-    .nav-btn:hover { background: rgba(0,0,0,0.85); }
-    .nav-btn.hidden { opacity: 0; pointer-events: none; }
-    .nav-btn svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .guide-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
 
-    .nav-prev { left: 12px; }
-    .nav-next { right: 12px; }
+    .guide-card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-    /* Dots */
-    .slide-dots {
+    .guide-card-meta {
       display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 14px;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
     }
 
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border);
-      border: 1px solid rgba(255,255,255,0.1);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
+    .guide-meta-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
 
-    .dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
+    .guide-meta-time {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-left: auto;
     }
 
-    /* Caption preview */
-    .modal-caption {
-      margin-top: 16px;
-      padding: 14px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+    /* ────────────────────────────────────────── CARRUSELES PAGE */
+    .page-hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .page-hero p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .count-bar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .count-label {
       font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.6;
-      max-height: 90px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+    }
+    .count-label strong { color: var(--text-mid); font-weight: 700; }
+
+    .page-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
 
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 0;
+      color: var(--text-muted);
+    }
+    .empty-state .icon { font-size: 48px; margin-bottom: 20px; opacity: 0.4; }
+    .empty-state h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .empty-state p { font-size: 15px; max-width: 340px; margin: 0 auto; }
+
+    /* Skeleton */
+    .card-skel {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--surface);
+      animation: shimmer 1.6s ease-in-out infinite alternate;
+    }
+    .card-skel .skel-img { aspect-ratio: 1/1; background: var(--surface2); }
+    .card-skel .skel-body { padding: 14px 16px 16px; }
+    .skel-line { height: 12px; background: var(--surface2); border-radius: 4px; margin-bottom: 8px; }
+    .skel-line.s { width: 40%; }
+    .skel-line.m { width: 70%; }
+    .skel-line.l { width: 90%; }
+    @keyframes shimmer { from { opacity: 0.7; } to { opacity: 1; } }
+
+    /* ────────────────────────────────────────── GUÍAS PAGE */
+
+    /* Filter bar */
+    .filter-bar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
-    .footer-brand {
+    .filter-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { color: var(--text); background: var(--surface2); }
+    .filter-btn.active {
+      color: var(--accent);
+      background: var(--accent-light);
+      border-color: rgba(217,119,87,0.3);
+    }
+
+    /* Guides grid */
+    .guides-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 880px) { .guides-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .guides-grid { grid-template-columns: 1fr; } }
+
+    /* ────────────────────────────────────────── ARTICLE VIEW */
+    .article-view { display: none; }
+    .article-view.open { display: block; }
+
+    .article-nav {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+    }
+
+    .breadcrumb {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 13px;
       color: var(--text-muted);
     }
+    .breadcrumb a, .breadcrumb button {
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+    }
+    .breadcrumb a:hover, .breadcrumb button:hover { color: var(--accent); }
+    .breadcrumb-sep { color: var(--text-faint); }
+    .breadcrumb-current { color: var(--text); font-weight: 600; }
 
-    .footer-brand svg { fill: var(--accent); opacity: 0.6; width: 12px; height: 12px; }
-
-    /* ── Skeleton loading ── */
-    .card-skel {
-      aspect-ratio: 1/1;
-      border-radius: 12px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      animation: shimmer 1.6s infinite;
+    .article-header {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 36px 24px 48px;
+      border-bottom: 1px solid var(--border);
     }
 
-    @keyframes shimmer {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+    .article-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .article-header h1 {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .article-header p {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .article-meta .time { font-weight: 600; }
+
+    .article-body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 24px 100px;
+    }
+
+    /* Article typography */
+    .article-body h2 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 48px 0 16px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    .article-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    .article-body h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 32px 0 12px;
+    }
+
+    .article-body p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+    }
+
+    .article-body strong { color: var(--text); font-weight: 700; }
+
+    .article-body ul, .article-body ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .article-body li {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-mid);
+      margin-bottom: 6px;
+    }
+
+    .article-body code {
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      font-size: 13px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 6px;
+      color: var(--text);
+    }
+
+    .article-body pre {
+      background: #0D0D0D;
+      border-radius: 10px;
+      padding: 20px 22px;
+      overflow-x: auto;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.65;
+      border: 1px solid #1E1E1E;
+    }
+    .article-body pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #E8E8E8;
+      font-size: 13px;
+    }
+    .article-body pre .kw { color: #D97757; }
+    .article-body pre .st { color: #A8C77E; }
+    .article-body pre .cm { color: #6A7D6F; }
+    .article-body pre .fn { color: #79B8FF; }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 24px 0;
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+    .callout strong { color: var(--accent); }
+
+    .tip-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 24px 0;
+    }
+    .tip-box .tip-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .tip-box p { font-size: 15px; margin-bottom: 0; }
+
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    .article-body th {
+      background: var(--surface);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .article-body td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-mid);
+    }
+    .article-body tr:last-child td { border-bottom: none; }
+
+    /* ────────────────────────────────────────── RECURSOS PAGE */
+    .recursos-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .recursos-section h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 880px) { .resource-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .resource-grid { grid-template-columns: 1fr; } }
+
+    .resource-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .resource-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(217,119,87,0.07);
+    }
+    .resource-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .resource-info { min-width: 0; }
+    .resource-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .resource-ext {
+      font-size: 10px;
+      color: var(--text-faint);
+      font-weight: 500;
+    }
+    .resource-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ────────────────────────────────────────── MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+      transform: translateY(16px) scale(0.97);
+      transition: transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      padding: 20px 20px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-meta { flex: 1; min-width: 0; }
+    .modal-tag {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .modal-date-text {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 3px;
+    }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: var(--surface2); }
+    .modal-close svg { width: 12px; height: 12px; stroke: var(--text-muted); fill: none; stroke-width: 2.5; }
+
+    .slide-viewer {
+      position: relative;
+      aspect-ratio: 1/1;
+      background: var(--surface);
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .slides-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .slide-img { width: 100%; height: 100%; flex-shrink: 0; object-fit: cover; pointer-events: none; }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: opacity 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .nav-btn svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-btn.hidden { opacity: 0; pointer-events: none; }
+    .nav-prev { left: 10px; }
+    .nav-next { right: 10px; }
+
+    .slide-dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .dot.active { background: var(--accent); transform: scale(1.4); }
+
+    .modal-caption {
+      padding: 14px 20px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    /* ────────────────────────────────────────── FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .footer-brand .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-faint);
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- ═══════════════════════════════════ HEADER -->
   <header>
-    <a class="brand" href="#">
-      <div class="brand-icon">
-        <svg viewBox="0 0 100 100">
-          <rect x="44" y="5" width="12" height="90" rx="6"/>
-          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-        </svg>
-      </div>
-      <span class="brand-name"><span>@</span>claudeprofessor</span>
-    </a>
-    <div class="header-right">
-      <a class="ig-link" href="https://www.instagram.com/claudeprofessor" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-        </svg>
-        Instagram
+    <div class="header-inner">
+      <a class="brand" href="#" onclick="showSection('home');return false;">
+        <div class="brand-mark">
+          <svg viewBox="0 0 100 100">
+            <rect x="44" y="5" width="12" height="90" rx="6"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+          </svg>
+        </div>
+        <span class="brand-name">claudeprofessor</span>
       </a>
+
+      <nav id="main-nav">
+        <button class="nav-link active" onclick="showSection('home')">Inicio</button>
+        <button class="nav-link" onclick="showSection('carruseles')">Carruseles</button>
+        <button class="nav-link" onclick="showSection('guias')">Guías</button>
+        <button class="nav-link" onclick="showSection('recursos')">Recursos</button>
+      </nav>
+
+      <div class="header-cta">
+        <a class="btn-ig" href="https://www.instagram.com/claudeprofessor" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @claudeprofessor
+        </a>
+      </div>
+
+      <button class="nav-toggle" onclick="document.getElementById('main-nav').classList.toggle('open')" aria-label="Menú">
+        <svg viewBox="0 0 20 20"><line x1="2" y1="5" x2="18" y2="5"/><line x1="2" y1="10" x2="18" y2="10"/><line x1="2" y1="15" x2="18" y2="15"/></svg>
+      </button>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-dot"></div>
-      Carruseles publicados
-    </div>
-    <h1>Aprende Claude AI<br>con <em>carruseles</em></h1>
-    <p>Todos los carruseles de @claudeprofessor en un solo lugar. Tips, tutoriales y novedades de Claude AI en español.</p>
-  </section>
 
-  <!-- Meta bar -->
-  <div class="meta-bar">
-    <div class="post-count" id="post-count">Cargando...</div>
+  <!-- ═══════════════════════════════════ INICIO -->
+  <div id="section-home" class="section active">
+
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="eyebrow-dot"></div>
+          Claude AI en español
+        </div>
+        <h1>Aprende a usar<br><em>Claude AI</em><br>de verdad.</h1>
+        <p class="hero-sub">Carruseles, guías y recursos sobre Claude, MCP, Skills, agentes y prompt engineering. Todo en español.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showSection('guias')">Ver guías →</button>
+          <button class="btn-secondary" onclick="showSection('carruseles')">Carruseles</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-asterisk">
+          <svg viewBox="0 0 100 100">
+            <rect x="44" y="5" width="12" height="90" rx="6"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+          </svg>
+        </div>
+        <div class="hero-circle">
+          <svg viewBox="0 0 100 100">
+            <rect x="44" y="5" width="12" height="90" rx="6"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+            <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat">
+        <span class="stat-num" id="stat-carruseles">—</span>
+        <span class="stat-label">Carruseles</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Guías</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20+</span>
+        <span class="stat-label">MCPs listados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">ES</span>
+        <span class="stat-label">Solo en español</span>
+      </div>
+    </div>
+
+    <!-- Latest carousels -->
+    <div class="home-section">
+      <div class="section-header">
+        <h2>Últimos carruseles</h2>
+        <button class="see-all" onclick="showSection('carruseles')">Ver todos →</button>
+      </div>
+      <div class="cards-grid" id="home-carousels">
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+      </div>
+    </div>
+
+    <!-- Featured guides -->
+    <div class="home-section">
+      <div class="section-header">
+        <h2>Guías destacadas</h2>
+        <button class="see-all" onclick="showSection('guias')">Ver todas →</button>
+      </div>
+      <div class="cards-grid" id="home-guides"></div>
+    </div>
+
+  </div><!-- /section-home -->
+
+
+  <!-- ═══════════════════════════════════ CARRUSELES -->
+  <div id="section-carruseles" class="section">
+    <div class="page-hero">
+      <h1>Carruseles</h1>
+      <p>Todos los carruseles publicados en Instagram. Tips, tutoriales y novedades de Claude AI.</p>
+    </div>
+    <div class="count-bar">
+      <div class="count-label" id="carousels-count">Cargando...</div>
+    </div>
+    <div class="page-grid">
+      <div class="cards-grid" id="carousels-grid">
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+        <div class="card-skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line s"></div><div class="skel-line m"></div><div class="skel-line l"></div></div></div>
+      </div>
+    </div>
   </div>
 
-  <!-- Grid -->
-  <div class="grid-wrap">
-    <div class="grid" id="grid">
-      <div class="card-skel"></div>
-      <div class="card-skel"></div>
-      <div class="card-skel"></div>
+
+  <!-- ═══════════════════════════════════ GUÍAS -->
+  <div id="section-guias" class="section">
+
+    <!-- Article listing -->
+    <div id="guides-listing">
+      <div class="page-hero">
+        <h1>Guías</h1>
+        <p>Documentación práctica sobre Claude, Skills, MCP, agentes y prompt engineering. Todo lo que necesitas para dominar Claude AI.</p>
+      </div>
+
+      <div class="filter-bar" id="guide-filters">
+        <button class="filter-btn active" data-cat="all">Todas</button>
+        <button class="filter-btn" data-cat="claude-code">Claude Code</button>
+        <button class="filter-btn" data-cat="mcp">MCP</button>
+        <button class="filter-btn" data-cat="skills">Skills</button>
+        <button class="filter-btn" data-cat="agentes">Agentes</button>
+        <button class="filter-btn" data-cat="prompts">Prompts</button>
+      </div>
+
+      <div class="guides-grid" id="guides-grid"></div>
+    </div>
+
+    <!-- Article view -->
+    <div id="article-view" class="article-view">
+      <div class="article-nav">
+        <div class="breadcrumb">
+          <button onclick="showSection('guias')">Inicio</button>
+          <span class="breadcrumb-sep">›</span>
+          <button onclick="closeArticle()">Guías</button>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current" id="article-breadcrumb">Guía</span>
+        </div>
+      </div>
+      <div class="article-header">
+        <div class="article-tag" id="article-tag"></div>
+        <h1 id="article-title"></h1>
+        <p id="article-desc"></p>
+        <div class="article-meta">
+          <span class="time" id="article-time"></span>
+          <span id="article-date"></span>
+        </div>
+      </div>
+      <div class="article-body" id="article-body"></div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════ RECURSOS -->
+  <div id="section-recursos" class="section">
+    <div class="page-hero">
+      <h1>Recursos</h1>
+      <p>MCPs, herramientas, documentación oficial y proyectos de la comunidad para trabajar con Claude AI.</p>
+    </div>
+
+    <div class="recursos-section">
+      <h2>MCP Servers populares</h2>
+      <div class="resource-grid" id="mcp-grid"></div>
+    </div>
+
+    <div class="recursos-section">
+      <h2>Documentación oficial</h2>
+      <div class="resource-grid" id="docs-grid"></div>
+    </div>
+
+    <div class="recursos-section">
+      <h2>Proyectos de la comunidad</h2>
+      <div class="resource-grid" id="community-grid"></div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-brand">
-      <svg viewBox="0 0 100 100">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
-      @claudeprofessor · Tips diarios de Claude AI
-    </div>
-  </footer>
 
-  <!-- Modal -->
-  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
+  <!-- ═══════════════════════════════════ MODAL (carruseles) -->
+  <div class="modal-backdrop" id="modal-backdrop">
     <div class="modal" id="modal">
       <div class="modal-header">
         <div class="modal-meta">
           <div class="modal-tag" id="modal-tag"></div>
-          <div class="modal-topic" id="modal-topic"></div>
-          <div class="modal-date" id="modal-date"></div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-date-text" id="modal-date"></div>
         </div>
         <button class="modal-close" id="modal-close" aria-label="Cerrar">
-          <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
         </button>
       </div>
-
       <div class="slide-viewer" id="slide-viewer">
         <div class="slides-track" id="slides-track"></div>
-        <button class="nav-btn nav-prev hidden" id="nav-prev" aria-label="Anterior">
-          <svg viewBox="0 0 16 16"><polyline points="10,2 4,8 10,14"/></svg>
-        </button>
-        <button class="nav-btn nav-next" id="nav-next" aria-label="Siguiente">
-          <svg viewBox="0 0 16 16"><polyline points="6,2 12,8 6,14"/></svg>
-        </button>
+        <button class="nav-btn nav-prev hidden" id="nav-prev"><svg viewBox="0 0 14 14"><polyline points="9,2 3,7 9,12"/></svg></button>
+        <button class="nav-btn nav-next" id="nav-next"><svg viewBox="0 0 14 14"><polyline points="5,2 11,7 5,12"/></svg></button>
       </div>
-
       <div class="slide-dots" id="slide-dots"></div>
       <div class="modal-caption" id="modal-caption"></div>
     </div>
   </div>
 
+
+  <!-- ═══════════════════════════════════ FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="dot"></div>
+        @claudeprofessor
+      </div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/claudeprofessor" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://anthropic.com" target="_blank" rel="noopener">Anthropic</a>
+        <a href="https://docs.anthropic.com" target="_blank" rel="noopener">Docs</a>
+      </div>
+      <div class="footer-copy">Tips diarios de Claude AI en español</div>
+    </div>
+  </footer>
+
+
   <script>
-    const ASTERISK_SVG = `<svg viewBox="0 0 100 100" style="width:40px;height:40px;fill:#D97757;opacity:0.3;margin-bottom:16px">
-      <rect x="44" y="5" width="12" height="90" rx="6"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-    </svg>`;
+  // ═══════════════════════════════════════════════════════ DATA
 
-    let allPosts = [];
+  const GUIDES = [
+    {
+      id: "que-es-mcp",
+      cat: "mcp",
+      icon: "🔌",
+      title: "Qué es MCP y cómo conectarlo a Claude",
+      desc: "El Model Context Protocol permite a Claude conectarse con herramientas externas como GitHub, Notion, Slack o bases de datos. Aprende qué es, por qué importa y cómo configurar tu primer servidor MCP.",
+      time: "8 min",
+      date: "2026-04-15",
+      tag: "MCP",
+      content: `
+        <h2>Qué es el Model Context Protocol</h2>
+        <p>MCP (Model Context Protocol) es un estándar abierto creado por Anthropic que permite a Claude conectarse con herramientas externas, APIs y fuentes de datos. En lugar de que Claude solo tenga acceso a su conocimiento de entrenamiento, con MCP puede leer tu base de datos, escribir en Notion, buscar en GitHub o ejecutar comandos en tu sistema.</p>
+        <p>Piénsalo como un sistema de enchufes universal: defines los servidores MCP que quieres usar, y Claude sabe automáticamente qué herramientas tiene disponibles.</p>
+        <div class="callout"><strong>La clave:</strong> MCP no es una integración punto a punto. Es un protocolo estándar, lo que significa que cualquier herramienta puede implementarlo y Claude la entenderá automáticamente.</div>
+        <h2>Cómo funciona</h2>
+        <p>La arquitectura tiene tres partes:</p>
+        <ul>
+          <li><strong>MCP Client</strong> — Claude Code o Claude Desktop (el que inicia la conexión)</li>
+          <li><strong>MCP Server</strong> — el programa que expone las herramientas (puede ser local o remoto)</li>
+          <li><strong>Herramientas</strong> — las funciones que el servidor ofrece (leer archivo, buscar, crear, etc.)</li>
+        </ul>
+        <p>Cuando le pides a Claude algo que requiere una herramienta MCP, Claude decide qué herramienta usar, llama al servidor, obtiene la respuesta, y la incorpora en su respuesta final. Todo de forma transparente.</p>
+        <h2>Configurar MCP en Claude Code</h2>
+        <p>En Claude Code, los servidores MCP se configuran con el comando <code>claude mcp add</code>. Hay dos tipos: servidores locales (se ejecutan en tu máquina) y remotos (se conectan por HTTP).</p>
+        <h3>Ejemplo: GitHub MCP</h3>
+        <pre><code><span class="cm"># Añadir el servidor MCP de GitHub</span>
+claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-    function formatDate(dateStr) {
-      if (!dateStr) return '';
-      const d = new Date(dateStr + 'T12:00:00');
-      return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
+<span class="cm"># Con token de autenticación</span>
+claude mcp add github -e GITHUB_TOKEN=ghp_xxxx -- npx -y @modelcontextprotocol/server-github</code></pre>
+        <p>Una vez configurado, puedes decirle a Claude: <em>"Busca todos los issues abiertos en mi repositorio que tengan el label 'bug'"</em> y Claude usará GitHub directamente.</p>
+        <h3>Ejemplo: Notion MCP</h3>
+        <pre><code><span class="cm"># Añadir el servidor MCP de Notion</span>
+claude mcp add notion -e NOTION_API_KEY=secret_xxx -- npx -y @notionhq/notion-mcp-server</code></pre>
+        <h2>Servidores MCP más populares</h2>
+        <table>
+          <tr><th>Servidor</th><th>Para qué sirve</th><th>Instalar</th></tr>
+          <tr><td>GitHub</td><td>Repos, issues, PRs, código</td><td><code>@modelcontextprotocol/server-github</code></td></tr>
+          <tr><td>Notion</td><td>Páginas, bases de datos, notas</td><td><code>@notionhq/notion-mcp-server</code></td></tr>
+          <tr><td>Brave Search</td><td>Búsqueda web en tiempo real</td><td><code>@modelcontextprotocol/server-brave-search</code></td></tr>
+          <tr><td>Filesystem</td><td>Leer/escribir archivos locales</td><td><code>@modelcontextprotocol/server-filesystem</code></td></tr>
+          <tr><td>Postgres</td><td>Consultas a base de datos</td><td><code>@modelcontextprotocol/server-postgres</code></td></tr>
+          <tr><td>Slack</td><td>Mensajes, canales, usuarios</td><td><code>@modelcontextprotocol/server-slack</code></td></tr>
+        </table>
+        <h2>Ver qué servidores tienes activos</h2>
+        <pre><code><span class="cm"># Listar todos los servidores MCP configurados</span>
+claude mcp list
 
-    function renderGrid(posts) {
-      const grid = document.getElementById('grid');
-      const countEl = document.getElementById('post-count');
+<span class="cm"># Ver detalles de un servidor</span>
+claude mcp get github</code></pre>
+        <div class="tip-box">
+          <div class="tip-label">Pro tip</div>
+          <p>Puedes configurar servidores MCP diferentes por proyecto añadiendo un archivo <code>.mcp.json</code> en la raíz del proyecto. Así cada proyecto tiene exactamente las herramientas que necesita.</p>
+        </div>
+        <h2>Crear tu propio servidor MCP</h2>
+        <p>Si tienes una API propia o una herramienta interna, puedes crear tu servidor MCP. El SDK oficial de Anthropic tiene soporte en Python y TypeScript, y hay SDKs de comunidad para otros lenguajes.</p>
+        <pre><code><span class="cm"># Python (instalar SDK)</span>
+pip install mcp
 
-      if (posts.length === 0) {
-        countEl.innerHTML = '';
-        grid.innerHTML = `
-          <div class="empty">
-            ${ASTERISK_SVG}
-            <h2>Aún no hay carruseles</h2>
-            <p>Cuando se publique el primer carrusel aparecerá aquí automáticamente.</p>
-          </div>`;
-        return;
+<span class="cm"># TypeScript</span>
+npm install @modelcontextprotocol/sdk</code></pre>
+        <p>La comunidad ya tiene más de 1.000 servidores MCP publicados. Antes de construir uno, busca en <strong>mcp.so</strong> o en el repositorio oficial de Anthropic.</p>
+      `
+    },
+    {
+      id: "claude-code-guia",
+      cat: "claude-code",
+      icon: "⌨️",
+      title: "Claude Code: guía completa para empezar",
+      desc: "Instala Claude Code, configura tu CLAUDE.md, aprende los comandos esenciales y empieza a programar con un agente de verdad a tu lado.",
+      time: "12 min",
+      date: "2026-04-12",
+      tag: "Claude Code",
+      content: `
+        <h2>Qué es Claude Code</h2>
+        <p>Claude Code es la CLI oficial de Anthropic. No es solo un chatbot en la terminal: es un agente de programación que puede leer tu código, editar archivos, ejecutar comandos, buscar en la web y conectarse a herramientas externas vía MCP. Todo desde tu terminal.</p>
+        <div class="callout"><strong>La diferencia clave:</strong> Claude Code ve tu proyecto completo, no solo el fragmento que le pegas. Entiende el contexto, la estructura y las dependencias.</div>
+        <h2>Instalación</h2>
+        <pre><code><span class="cm"># Necesitas Node.js 18+</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="cm"># Verificar instalación</span>
+claude --version
+
+<span class="cm"># Iniciar sesión (abrirá el navegador)</span>
+claude login</code></pre>
+        <h2>Tu primer proyecto</h2>
+        <p>Navega a cualquier directorio y ejecuta <code>claude</code>. Claude analizará el proyecto automáticamente. Puedes empezar a hacer preguntas directamente.</p>
+        <pre><code><span class="cm"># Entrar en un proyecto</span>
+cd mi-proyecto
+claude
+
+<span class="cm"># Claude leerá CLAUDE.md si existe</span></code></pre>
+        <h2>CLAUDE.md: el archivo más importante</h2>
+        <p>El archivo <code>CLAUDE.md</code> en la raíz de tu proyecto le dice a Claude todo lo que necesita saber: cómo funciona el proyecto, qué comandos usar, qué evitar, los patrones de código que prefieres.</p>
+        <pre><code><span class="cm"># Ejemplo de CLAUDE.md</span>
+<span class="st"># Mi Proyecto</span>
+
+## Stack
+- Next.js 14 con App Router
+- Prisma + PostgreSQL
+- Tailwind CSS
+
+## Comandos
+- \`npm run dev\` para desarrollo
+- \`npm run build\` para producción
+- \`npm test\` para tests
+
+## Reglas
+- Siempre usar TypeScript strict
+- No usar \`any\`
+- Tests con Vitest</code></pre>
+        <h2>Comandos esenciales</h2>
+        <table>
+          <tr><th>Comando</th><th>Para qué</th></tr>
+          <tr><td><code>/help</code></td><td>Ver todos los comandos disponibles</td></tr>
+          <tr><td><code>/clear</code></td><td>Limpiar contexto y empezar conversación nueva</td></tr>
+          <tr><td><code>/compact</code></td><td>Comprimir contexto para conversaciones largas</td></tr>
+          <tr><td><code>/memory</code></td><td>Ver y editar la memoria persistente</td></tr>
+          <tr><td><code>/mcp</code></td><td>Ver servidores MCP activos</td></tr>
+          <tr><td><code>! comando</code></td><td>Ejecutar comando de shell directamente</td></tr>
+        </table>
+        <h2>Modo agente: /loop</h2>
+        <p>Con el comando <code>/loop</code>, Claude entra en modo autónomo. Le das una tarea compleja y Claude planifica, ejecuta pasos, verifica el resultado y continúa hasta terminar. No necesitas supervisar cada paso.</p>
+        <pre><code>/loop Refactoriza todos los componentes React de la carpeta src/components
+para usar hooks modernos en vez de clases. Asegúrate de que los tests pasen.</code></pre>
+        <h2>Skills: potencia a Claude con habilidades</h2>
+        <p>Las Skills son archivos <code>SKILL.md</code> que enseñan a Claude a hacer cosas específicas con herramientas concretas. Puedes instalarlas en <code>~/.claude/skills/</code> y estarán disponibles en todos tus proyectos.</p>
+        <div class="tip-box">
+          <div class="tip-label">Pro tip</div>
+          <p>Crea un skill para cada flujo repetitivo que tengas: deploy, crear componentes, generar tests, actualizar documentación. Invócalos con <code>/nombre-skill</code> desde cualquier proyecto.</p>
+        </div>
+        <h2>Hooks: automatizar acciones</h2>
+        <p>Los hooks ejecutan comandos automáticamente cuando ocurren ciertos eventos (antes de guardar un archivo, después de ejecutar código, etc.). Se configuran en <code>~/.claude/settings.json</code>.</p>
+        <pre><code><span class="st">{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{"type": "command", "command": "npm run lint --fix"}]
       }
+    ]
+  }
+}</span></code></pre>
+        <p>Este hook ejecuta el linter automáticamente cada vez que Claude edita o crea un archivo.</p>
+      `
+    },
+    {
+      id: "crear-skills",
+      cat: "skills",
+      icon: "🛠️",
+      title: "Cómo crear Skills para Claude Code",
+      desc: "Las Skills son la forma más potente de extender Claude Code. Aprende a diseñar, escribir y publicar tu propia Skill para automatizar cualquier flujo de trabajo.",
+      time: "10 min",
+      date: "2026-04-10",
+      tag: "Skills",
+      content: `
+        <h2>Qué es una Skill</h2>
+        <p>Una Skill es un archivo <code>SKILL.md</code> que define un conjunto de instrucciones, contexto y herramientas disponibles para Claude en un flujo de trabajo específico. Cuando invocas una Skill con <code>/nombre</code>, Claude lee ese archivo y actúa según sus instrucciones, con acceso a las herramientas que la Skill define.</p>
+        <p>Piénsalo como un "modo especialista": cuando activas la Skill de diseño frontend, Claude entiende los principios de diseño, las convenciones del proyecto, y sabe qué herramientas usar.</p>
+        <h2>Estructura básica de una Skill</h2>
+        <pre><code><span class="cm"># ~/.claude/skills/mi-skill/SKILL.md</span>
 
-      countEl.innerHTML = `<strong>${posts.length}</strong> carrusel${posts.length !== 1 ? 'es' : ''} publicado${posts.length !== 1 ? 's' : ''}`;
+<span class="st"># Nombre de la Skill
 
-      grid.innerHTML = posts.map((post, i) => {
-        const cover = post.slides && post.slides[0] ? post.slides[0] : '';
-        const tag = post.tag || 'Claude AI';
-        const topic = post.topic || 'Sin título';
-        const date = formatDate(post.date);
-        const count = post.slides ? post.slides.length : 0;
+Descripción de qué hace esta skill y cuándo usarla.
 
-        return `
-          <div class="card" data-index="${i}" tabindex="0" role="button" aria-label="Ver carrusel: ${topic}">
-            ${cover ? `<img class="card-img" src="${cover}" alt="${topic}" loading="lazy">` : ''}
-            <div class="card-slide-count">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="9" height="9" rx="1.5"/><rect x="13" y="2" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg>
-              ${count}
-            </div>
-            <div class="card-overlay">
-              <div class="card-tag">${tag}</div>
-              <div class="card-title">${topic}</div>
-              <div class="card-date">${date}</div>
-            </div>
-          </div>`;
-      }).join('');
+## Contexto
+Información de fondo que Claude necesita saber.
 
-      grid.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', () => openModal(parseInt(card.dataset.index)));
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') openModal(parseInt(card.dataset.index));
-        });
-      });
+## Proceso
+1. Primer paso
+2. Segundo paso
+3. Tercer paso
+
+## Herramientas disponibles
+- Leer archivos del proyecto
+- Editar código
+- Ejecutar comandos
+
+## Reglas
+- Regla específica importante
+- Otra restricción</span></code></pre>
+        <h2>Crear una Skill desde cero</h2>
+        <p>Vamos a crear una Skill que genera tests automáticamente para cualquier función que le pasemos.</p>
+        <pre><code><span class="cm"># Crear directorio de la skill</span>
+mkdir ~/.claude/skills/generar-tests
+touch ~/.claude/skills/generar-tests/SKILL.md</code></pre>
+        <p>Contenido del archivo:</p>
+        <pre><code><span class="st"># Generador de Tests
+
+Genera tests unitarios completos para funciones y módulos.
+Úsame cuando quieras añadir cobertura de tests a código existente.
+
+## Proceso
+1. Lee el archivo o función objetivo
+2. Identifica los casos: happy path, edge cases, errores
+3. Genera tests con nombres descriptivos en español
+4. Verifica que los tests pasan
+
+## Estilo
+- Vitest para proyectos con Vite/Node
+- Jest para proyectos con CRA o Next
+- Describe blocks por función, it blocks por caso
+- Nombres: "debería [comportamiento] cuando [condición]"
+
+## Reglas
+- Mínimo 80% de cobertura de ramas
+- Siempre incluir test de valor null/undefined
+- No mockear la lógica core, solo dependencias externas</span></code></pre>
+        <h2>Invocar la Skill</h2>
+        <p>Desde cualquier proyecto en Claude Code:</p>
+        <pre><code>/generar-tests
+
+<span class="cm"># Claude leerá el SKILL.md y preguntará qué función quieres testear.</span>
+<span class="cm"># O puedes pasar argumentos directos:</span>
+
+/generar-tests src/utils/formatDate.ts</code></pre>
+        <h2>Skills con subcomandos</h2>
+        <p>Para Skills más complejas, puedes definir subcomandos en el SKILL.md:</p>
+        <pre><code><span class="st">## Subcomandos
+
+| Comando | Acción |
+|---------|--------|
+| list    | Listar tests existentes |
+| add     | Generar tests para archivo específico |
+| coverage| Ver cobertura actual |</span></code></pre>
+        <div class="callout"><strong>Convención:</strong> guarda tus Skills personales en <code>~/.claude/skills/</code> para que estén disponibles en todos tus proyectos. Las Skills específicas de un proyecto van en <code>.claude/skills/</code> dentro del proyecto.</div>
+        <h2>Skills de la comunidad</h2>
+        <p>Hay dos repositorios principales con Skills de comunidad:</p>
+        <ul>
+          <li><strong>awesome-llm-apps</strong> — 100+ aplicaciones y Skills de agentes Claude</li>
+          <li><strong>Repositorio oficial de Claude Code</strong> — Skills mantenidas por Anthropic</li>
+        </ul>
+        <p>Para instalar una Skill de la comunidad, simplemente copia el directorio con el <code>SKILL.md</code> en <code>~/.claude/skills/</code>.</p>
+        <div class="tip-box">
+          <div class="tip-label">Pro tip</div>
+          <p>Las mejores Skills tienen una sola responsabilidad clara. Una Skill que hace demasiadas cosas es confusa para Claude. Mejor tres Skills específicas que una Skill genérica.</p>
+        </div>
+      `
+    },
+    {
+      id: "prompt-engineering",
+      cat: "prompts",
+      icon: "✍️",
+      title: "Prompt engineering avanzado con Claude",
+      desc: "Claude responde diferente según cómo le hablas. Aprende a usar XML tags, system prompts, few-shot examples y chain of thought para sacar el máximo partido.",
+      time: "9 min",
+      date: "2026-04-08",
+      tag: "Prompts",
+      content: `
+        <h2>Por qué importa el prompt engineering</h2>
+        <p>Claude es extremadamente sensible al contexto y al formato del prompt. La diferencia entre un prompt mediocre y uno bien diseñado puede ser la diferencia entre una respuesta genérica y una que resuelve exactamente tu problema. No es magia: es estructura.</p>
+        <h2>XML tags: la técnica más poderosa</h2>
+        <p>Claude fue entrenado con grandes cantidades de datos en XML. Usar XML tags en tus prompts ayuda a Claude a separar claramente las partes del prompt y entender qué es contexto, qué es instrucción y qué es el input real.</p>
+        <pre><code><span class="st">Analiza este código y encuentra bugs:
+
+&lt;codigo&gt;
+function calcularTotal(items) {
+  return items.reduce((sum, item) => sum + item.precio, 0)
+}
+&lt;/codigo&gt;
+
+&lt;contexto&gt;
+Es una función de carrito de compras.
+Los items pueden tener descuentos que deben aplicarse.
+&lt;/contexto&gt;
+
+Responde en formato:
+- Bug encontrado: [descripción]
+- Línea: [número]
+- Solución: [código corregido]</span></code></pre>
+        <h2>System prompts: define el personaje</h2>
+        <p>El system prompt es la instrucción que Claude recibe antes de tu mensaje. Define el rol, el tono, las restricciones y el formato de respuesta esperado. Es el contexto persistente de toda la conversación.</p>
+        <pre><code><span class="st">Eres un revisor de código senior especializado en Python.
+Tu trabajo es revisar pull requests y dar feedback constructivo.
+
+Reglas:
+- Sé directo y específico, no genérico
+- Prioriza seguridad > performance > legibilidad
+- Si el código es correcto, dilo explícitamente
+- Sugiere solo cambios que aporten valor real
+- Máximo 5 comentarios por revisión
+
+Formato de respuesta:
+APROBADO/CAMBIOS REQUERIDOS
+[comentarios numerados]</span></code></pre>
+        <h2>Few-shot examples: mostrar, no solo decir</h2>
+        <p>A veces la forma más eficiente de comunicar el formato exacto que quieres es con ejemplos. Los few-shot examples muestran a Claude exactamente el patrón que debe seguir.</p>
+        <pre><code><span class="st">Convierte estas frases técnicas a lenguaje simple:
+
+Entrada: "La API retorna un 429 status code"
+Salida: "El servidor está ocupado, intenta en un momento"
+
+Entrada: "El proceso terminó con exit code 1"
+Salida: "El programa falló al ejecutarse"
+
+Entrada: "La función tiene complejidad O(n²)"
+Salida: ???</span></code></pre>
+        <h2>Chain of thought: forzar razonamiento</h2>
+        <p>Para tareas complejas o matemáticas, pedir a Claude que piense paso a paso mejora significativamente la calidad. No es un truco: obliga al modelo a no saltarse pasos lógicos.</p>
+        <div class="callout"><strong>Cuándo usarlo:</strong> problemas de lógica, cálculos, decisiones con múltiples variables, debugging complejo. Para respuestas simples, el chain of thought añade ruido innecesario.</div>
+        <pre><code><span class="st">Necesito saber qué base de datos usar para mi aplicación.
+
+Piensa paso a paso:
+1. Analiza el tipo de datos (estructurados vs no estructurados)
+2. Evalúa los patrones de acceso (lectura pesada vs escritura)
+3. Considera la escala esperada
+4. Ten en cuenta el equipo y su experiencia
+
+Mis datos: usuarios con perfiles, posts con comentarios,
+relaciones complejas entre entidades, 10k usuarios iniciales.</span></code></pre>
+        <h2>Prompts para código: mejores prácticas</h2>
+        <table>
+          <tr><th>En vez de...</th><th>Usa esto</th></tr>
+          <tr><td>"Arregla este código"</td><td>"Encuentra el bug en la función X que causa Y. Explica la causa raíz."</td></tr>
+          <tr><td>"Escribe una función"</td><td>"Escribe una función TypeScript pura (sin efectos secundarios) que..."</td></tr>
+          <tr><td>"Hazlo mejor"</td><td>"Optimiza para legibilidad manteniendo el comportamiento. No cambies la firma."</td></tr>
+          <tr><td>"Explícame esto"</td><td>"Explícame esto como si supiera Python pero no conociera asyncio."</td></tr>
+        </table>
+        <div class="tip-box">
+          <div class="tip-label">Regla de oro</div>
+          <p>Si Claude no entiende tu prompt a la primera, el problema casi siempre es que falta contexto o el objetivo no está claro. Añade: qué estás construyendo, para quién, y qué restricciones hay.</p>
+        </div>
+      `
+    },
+    {
+      id: "agentes-claude",
+      cat: "agentes",
+      icon: "🤖",
+      title: "Construir agentes con Claude: guía práctica",
+      desc: "Los agentes con Claude van más allá de un chatbot. Aprende a construir sistemas multi-agente, usar tool use, y conectar Claude con el mundo real.",
+      time: "11 min",
+      date: "2026-04-05",
+      tag: "Agentes",
+      content: `
+        <h2>Qué es un agente con Claude</h2>
+        <p>Un agente es un sistema donde Claude no solo responde preguntas, sino que toma decisiones, ejecuta herramientas, observa resultados y continúa hasta completar un objetivo. La diferencia es el bucle: ask → think → act → observe → repeat.</p>
+        <div class="callout"><strong>Cuándo usar agentes:</strong> cuando la tarea tiene múltiples pasos, cuando el resultado de un paso determina el siguiente, o cuando necesitas que Claude interactúe con el mundo real (APIs, archivos, bases de datos).</div>
+        <h2>Tool use: la base de los agentes</h2>
+        <p>Tool use (o function calling) permite a Claude llamar funciones que defines tú. Claude decide cuándo llamar la herramienta, con qué argumentos, y cómo usar el resultado.</p>
+        <pre><code><span class="kw">import</span> anthropic
+
+client = anthropic.Anthropic()
+
+tools = [
+    {
+        <span class="st">"name"</span>: <span class="st">"buscar_web"</span>,
+        <span class="st">"description"</span>: <span class="st">"Busca información en internet"</span>,
+        <span class="st">"input_schema"</span>: {
+            <span class="st">"type"</span>: <span class="st">"object"</span>,
+            <span class="st">"properties"</span>: {
+                <span class="st">"query"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"description"</span>: <span class="st">"Término de búsqueda"</span>}
+            },
+            <span class="st">"required"</span>: [<span class="st">"query"</span>]
+        }
     }
+]
 
-    // ── Modal ──────────────────────────────────────────────────────────────
-    let currentPost = null;
-    let currentSlide = 0;
-    let touchStartX = 0;
+response = client.messages.create(
+    model=<span class="st">"claude-opus-4-7"</span>,
+    max_tokens=1024,
+    tools=tools,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"¿Cuáles son las últimas noticias de Claude AI?"</span>}]
+)</code></pre>
+        <h2>El bucle agente básico</h2>
+        <p>El bucle agente procesa las llamadas a herramientas hasta que Claude devuelve una respuesta final sin más herramientas pendientes:</p>
+        <pre><code><span class="kw">def</span> <span class="fn">run_agent</span>(prompt, tools, tool_functions):
+    messages = [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]
 
-    function openModal(index) {
-      currentPost = allPosts[index];
-      currentSlide = 0;
+    <span class="kw">while</span> True:
+        response = client.messages.create(
+            model=<span class="st">"claude-opus-4-7"</span>,
+            max_tokens=4096,
+            tools=tools,
+            messages=messages
+        )
 
-      document.getElementById('modal-tag').textContent = currentPost.tag || 'Claude AI';
-      document.getElementById('modal-topic').textContent = currentPost.topic || '';
-      document.getElementById('modal-date').textContent = formatDate(currentPost.date);
-      document.getElementById('modal-caption').textContent = currentPost.caption || '';
+        <span class="kw">if</span> response.stop_reason == <span class="st">"end_turn"</span>:
+            <span class="kw">break</span>  <span class="cm"># Claude terminó</span>
 
-      buildSlides();
-      updateNav();
-      buildDots();
+        <span class="cm"># Procesar tool calls</span>
+        tool_results = []
+        <span class="kw">for</span> block <span class="kw">in</span> response.content:
+            <span class="kw">if</span> block.type == <span class="st">"tool_use"</span>:
+                result = tool_functions[block.name](**block.input)
+                tool_results.append({
+                    <span class="st">"type"</span>: <span class="st">"tool_result"</span>,
+                    <span class="st">"tool_use_id"</span>: block.id,
+                    <span class="st">"content"</span>: str(result)
+                })
 
-      document.getElementById('modal-backdrop').classList.add('open');
-      document.body.style.overflow = 'hidden';
+        <span class="cm"># Añadir respuesta de Claude y resultados</span>
+        messages.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: response.content})
+        messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: tool_results})
+
+    <span class="kw">return</span> response</code></pre>
+        <h2>Sistemas multi-agente</h2>
+        <p>Para tareas muy complejas, puedes usar múltiples agentes Claude especializados. Un orquestador decide qué subagente llamar, y cada subagente tiene su propio conjunto de herramientas y contexto.</p>
+        <table>
+          <tr><th>Patrón</th><th>Cuándo usarlo</th></tr>
+          <tr><td>Orquestador + subagentes</td><td>Tareas con fases paralelas independientes</td></tr>
+          <tr><td>Pipeline secuencial</td><td>Cada paso depende del anterior (extrae → transforma → genera)</td></tr>
+          <tr><td>Agente con memoria</td><td>Tareas largas que necesitan recordar contexto previo</td></tr>
+          <tr><td>Agente con verificador</td><td>Cuando la precisión es crítica (un Claude genera, otro verifica)</td></tr>
+        </table>
+        <h2>Claude con LangGraph</h2>
+        <p>LangGraph es una librería para construir agentes stateful con grafos. Funciona muy bien con Claude para flujos complejos donde el estado evoluciona a lo largo de múltiples pasos.</p>
+        <pre><code><span class="kw">from</span> langgraph.graph <span class="kw">import</span> StateGraph
+<span class="kw">from</span> langchain_anthropic <span class="kw">import</span> ChatAnthropic
+
+llm = ChatAnthropic(model=<span class="st">"claude-opus-4-7"</span>)
+
+<span class="cm"># Define el grafo de estados</span>
+graph = StateGraph(AgentState)
+graph.add_node(<span class="st">"agente"</span>, call_model)
+graph.add_node(<span class="st">"herramientas"</span>, call_tools)
+graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</code></pre>
+        <div class="tip-box">
+          <div class="tip-label">Consejo importante</div>
+          <p>Añade siempre un límite de iteraciones a tu bucle agente. Un agente sin límite puede entrar en bucles infinitos. Un máximo de 10-20 iteraciones es suficiente para la mayoría de tareas.</p>
+        </div>
+      `
     }
+  ];
 
-    function closeModal() {
-      document.getElementById('modal-backdrop').classList.remove('open');
-      document.body.style.overflow = '';
-      currentPost = null;
-    }
+  const MCP_RESOURCES = [
+    { icon: "🐙", title: "GitHub MCP", desc: "Repositorios, issues, pull requests y código", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/github", ext: "npm" },
+    { icon: "📝", title: "Notion MCP", desc: "Bases de datos, páginas y contenido de Notion", url: "https://github.com/notionhq/notion-mcp-server", ext: "npm" },
+    { icon: "🔍", title: "Brave Search", desc: "Búsquedas en tiempo real desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search", ext: "npm" },
+    { icon: "📊", title: "PostgreSQL", desc: "Consultas SQL directas desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres", ext: "npm" },
+    { icon: "💬", title: "Slack MCP", desc: "Mensajes y canales de Slack", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/slack", ext: "npm" },
+    { icon: "📁", title: "Filesystem", desc: "Leer y escribir archivos locales de forma segura", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem", ext: "npm" },
+    { icon: "🎨", title: "Figma MCP", desc: "Acceder a diseños y componentes de Figma", url: "https://github.com/sonnylazuardi/cursor-talk-to-figma-mcp", ext: "npm" },
+    { icon: "☁️", title: "Vercel MCP", desc: "Deployments, logs y proyectos de Vercel", url: "https://vercel.com/docs/mcp", ext: "npm" },
+    { icon: "📈", title: "TradingView MCP", desc: "Datos de mercado y análisis técnico", url: "https://github.com/tradingview/mcp-server", ext: "npm" },
+  ];
 
-    function buildSlides() {
-      const track = document.getElementById('slides-track');
-      const slides = currentPost.slides || [];
-      track.style.width = `${slides.length * 100}%`;
-      track.innerHTML = slides.map(url =>
-        `<img class="slide-img" src="${url}" alt="" draggable="false">`
-      ).join('');
-      track.style.transform = 'translateX(0)';
-    }
+  const DOCS_RESOURCES = [
+    { icon: "📖", title: "Docs de Anthropic", desc: "Documentación oficial de Claude y la API", url: "https://docs.anthropic.com", ext: "anthropic.com" },
+    { icon: "⌨️", title: "Claude Code Docs", desc: "Referencia completa del CLI Claude Code", url: "https://docs.anthropic.com/claude-code", ext: "anthropic.com" },
+    { icon: "🔌", title: "MCP Specification", desc: "Especificación técnica del protocolo MCP", url: "https://spec.modelcontextprotocol.io", ext: "modelcontextprotocol.io" },
+    { icon: "🛠️", title: "MCP Servers Registry", desc: "Directorio oficial de servidores MCP", url: "https://github.com/modelcontextprotocol/servers", ext: "github.com" },
+    { icon: "🍳", title: "Claude Cookbook", desc: "Ejemplos de código y recetas de uso con Claude", url: "https://github.com/anthropics/anthropic-cookbook", ext: "github.com" },
+    { icon: "💰", title: "Precios de Claude", desc: "Costes actualizados de todos los modelos", url: "https://www.anthropic.com/pricing", ext: "anthropic.com" },
+  ];
 
-    function goToSlide(n) {
-      const slides = currentPost.slides || [];
-      currentSlide = Math.max(0, Math.min(n, slides.length - 1));
-      const pct = (currentSlide / slides.length) * 100;
-      document.getElementById('slides-track').style.transform = `translateX(-${pct}%)`;
-      updateNav();
-      updateDots();
-    }
+  const COMMUNITY_RESOURCES = [
+    { icon: "🚀", title: "awesome-llm-apps", desc: "100+ aplicaciones y agentes construidos con Claude", url: "https://github.com/Shubhamsaboo/awesome-llm-apps", ext: "github.com" },
+    { icon: "🌍", title: "tododeia.com", desc: "Comunidad hispana de Claude AI, guías y recursos", url: "https://tododeia.com", ext: "tododeia.com" },
+    { icon: "🔨", title: "mcp.so", desc: "Directorio de comunidad de servidores MCP", url: "https://mcp.so", ext: "mcp.so" },
+    { icon: "🤖", title: "CrewAI", desc: "Framework de agentes multi-rol compatible con Claude", url: "https://github.com/joaomdmoura/crewAI", ext: "github.com" },
+    { icon: "🕸️", title: "LangGraph", desc: "Grafos de agentes stateful con Claude", url: "https://github.com/langchain-ai/langgraph", ext: "github.com" },
+    { icon: "📡", title: "Anthropic Discord", desc: "Comunidad oficial de desarrolladores de Anthropic", url: "https://www.anthropic.com/discord", ext: "discord" },
+  ];
 
-    function updateNav() {
-      const slides = currentPost ? currentPost.slides || [] : [];
-      const prev = document.getElementById('nav-prev');
-      const next = document.getElementById('nav-next');
-      prev.classList.toggle('hidden', currentSlide === 0);
-      next.classList.toggle('hidden', currentSlide >= slides.length - 1);
-    }
+  // ═══════════════════════════════════════════════════════ ROUTING
 
-    function buildDots() {
-      const slides = currentPost.slides || [];
-      const dots = document.getElementById('slide-dots');
-      dots.innerHTML = slides.map((_, i) =>
-        `<div class="dot${i === 0 ? ' active' : ''}" data-i="${i}"></div>`
-      ).join('');
-      dots.querySelectorAll('.dot').forEach(dot => {
-        dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.i)));
-      });
-    }
+  function showSection(name) {
+    // Close article view if open
+    document.getElementById('article-view').classList.remove('open');
+    document.getElementById('guides-listing').style.display = '';
 
-    function updateDots() {
-      document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
 
-    // Nav buttons
-    document.getElementById('nav-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
-    document.getElementById('nav-next').addEventListener('click', () => goToSlide(currentSlide + 1));
-    document.getElementById('modal-close').addEventListener('click', closeModal);
+    const sectionEl = document.getElementById('section-' + name);
+    if (sectionEl) sectionEl.classList.add('active');
 
-    // Backdrop click
-    document.getElementById('modal-backdrop').addEventListener('click', e => {
-      if (e.target === document.getElementById('modal-backdrop')) closeModal();
+    const navMap = { home:'Inicio', carruseles:'Carruseles', guias:'Guías', recursos:'Recursos' };
+    document.querySelectorAll('.nav-link').forEach(btn => {
+      if (btn.textContent.trim() === (navMap[name] || '')) btn.classList.add('active');
     });
 
-    // Keyboard
-    document.addEventListener('keydown', e => {
-      if (!currentPost) return;
-      if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    // Close mobile nav
+    document.getElementById('main-nav').classList.remove('open');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ═══════════════════════════════════════════════════════ CAROUSELS
+
+  let allPosts = [];
+  let currentPost = null;
+  let currentSlide = 0;
+  let touchStartX = 0;
+
+  function formatDate(str) {
+    if (!str) return '';
+    const d = new Date(str + 'T12:00:00');
+    return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function carouselCardHTML(post, index) {
+    const cover = post.slides && post.slides[0] ? post.slides[0] : '';
+    const tag = post.tag || 'Claude AI';
+    const count = post.slides ? post.slides.length : 0;
+    return `
+      <div class="carousel-card" data-index="${index}" tabindex="0">
+        <div class="carousel-card-img">
+          ${cover ? `<img src="${cover}" alt="${post.topic}" loading="lazy">` : ''}
+          <div class="slide-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)"><rect x="2" y="2" width="9" height="9" rx="1.5"/><rect x="13" y="2" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg>
+            ${count}
+          </div>
+        </div>
+        <div class="carousel-card-body">
+          <div class="card-tag">${tag}</div>
+          <div class="card-title">${post.topic}</div>
+          <div class="card-date">${formatDate(post.date)}</div>
+        </div>
+      </div>`;
+  }
+
+  function renderCarousels(posts, gridId, countId, max) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const shown = max ? posts.slice(0, max) : posts;
+
+    if (shown.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div class="icon">✳</div><h3>Sin carruseles todavía</h3><p>En cuanto se publique el primer carrusel aparecerá aquí.</p></div>`;
+      if (countId) document.getElementById(countId).innerHTML = '';
+      return;
+    }
+
+    grid.innerHTML = shown.map((p, i) => carouselCardHTML(p, i)).join('');
+    if (countId) {
+      const el = document.getElementById(countId);
+      if (el) el.innerHTML = `<strong>${posts.length}</strong> carrusel${posts.length !== 1 ? 'es' : ''} publicado${posts.length !== 1 ? 's' : ''}`;
+    }
+
+    grid.querySelectorAll('.carousel-card').forEach(card => {
+      const open = () => openModal(parseInt(card.dataset.index));
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') open(); });
+    });
+  }
+
+  // Modal
+  function openModal(index) {
+    currentPost = allPosts[index];
+    currentSlide = 0;
+    document.getElementById('modal-tag').textContent = currentPost.tag || 'Claude AI';
+    document.getElementById('modal-title').textContent = currentPost.topic || '';
+    document.getElementById('modal-date').textContent = formatDate(currentPost.date);
+    document.getElementById('modal-caption').textContent = currentPost.caption || '';
+    buildSlides();
+    buildDots();
+    updateNav();
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function buildSlides() {
+    const track = document.getElementById('slides-track');
+    const slides = currentPost.slides || [];
+    track.style.width = slides.length * 100 + '%';
+    track.innerHTML = slides.map(u => `<img class="slide-img" src="${u}" draggable="false">`).join('');
+    track.style.transform = 'translateX(0)';
+  }
+
+  function goToSlide(n) {
+    const len = (currentPost.slides || []).length;
+    currentSlide = Math.max(0, Math.min(n, len - 1));
+    const pct = (currentSlide / len) * 100;
+    document.getElementById('slides-track').style.transform = `translateX(-${pct}%)`;
+    updateNav(); updateDots();
+  }
+
+  function updateNav() {
+    const len = currentPost ? (currentPost.slides || []).length : 0;
+    document.getElementById('nav-prev').classList.toggle('hidden', currentSlide === 0);
+    document.getElementById('nav-next').classList.toggle('hidden', currentSlide >= len - 1);
+  }
+
+  function buildDots() {
+    const dots = document.getElementById('slide-dots');
+    dots.innerHTML = (currentPost.slides || []).map((_,i) =>
+      `<div class="dot${i===0?' active':''}" data-i="${i}"></div>`
+    ).join('');
+    dots.querySelectorAll('.dot').forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.i)));
+  }
+
+  function updateDots() {
+    document.querySelectorAll('#slide-dots .dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
+  }
+
+  document.getElementById('nav-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
+  document.getElementById('nav-next').addEventListener('click', () => goToSlide(currentSlide + 1));
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-backdrop').addEventListener('click', e => { if (e.target===document.getElementById('modal-backdrop')) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (!currentPost) return;
+    if (e.key==='Escape') closeModal();
+    if (e.key==='ArrowLeft') goToSlide(currentSlide-1);
+    if (e.key==='ArrowRight') goToSlide(currentSlide+1);
+  });
+
+  const viewer = document.getElementById('slide-viewer');
+  viewer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  viewer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
+  // ═══════════════════════════════════════════════════════ GUIDES
+
+  function renderGuideCard(guide) {
+    return `
+      <div class="guide-card" onclick="openArticle('${guide.id}')">
+        <div class="guide-card-icon">${guide.icon}</div>
+        <div class="guide-card-title">${guide.title}</div>
+        <div class="guide-card-desc">${guide.desc}</div>
+        <div class="guide-card-meta">
+          <span class="guide-meta-tag">${guide.tag}</span>
+          <span class="guide-meta-time">⏱ ${guide.time} de lectura</span>
+        </div>
+      </div>`;
+  }
+
+  function renderGuides(cat) {
+    const filtered = cat === 'all' ? GUIDES : GUIDES.filter(g => g.cat === cat);
+    document.getElementById('guides-grid').innerHTML = filtered.map(renderGuideCard).join('');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGuides(btn.dataset.cat);
+    });
+  });
+
+  function openArticle(id) {
+    const guide = GUIDES.find(g => g.id === id);
+    if (!guide) return;
+
+    document.getElementById('guides-listing').style.display = 'none';
+    document.getElementById('article-view').classList.add('open');
+
+    document.getElementById('article-breadcrumb').textContent = guide.title;
+    document.getElementById('article-tag').textContent = guide.tag;
+    document.getElementById('article-title').textContent = guide.title;
+    document.getElementById('article-desc').textContent = guide.desc;
+    document.getElementById('article-time').textContent = '⏱ ' + guide.time + ' de lectura';
+    document.getElementById('article-date').textContent = formatDate(guide.date);
+    document.getElementById('article-body').innerHTML = guide.content;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeArticle() {
+    document.getElementById('article-view').classList.remove('open');
+    document.getElementById('guides-listing').style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ═══════════════════════════════════════════════════════ RECURSOS
+
+  function renderResources(resources, gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = resources.map(r => `
+      <a class="resource-card" href="${r.url}" target="_blank" rel="noopener">
+        <div class="resource-icon">${r.icon}</div>
+        <div class="resource-info">
+          <div class="resource-title">${r.title} <span class="resource-ext">${r.ext}</span></div>
+          <div class="resource-desc">${r.desc}</div>
+        </div>
+      </a>`).join('');
+  }
+
+  // ═══════════════════════════════════════════════════════ HOME GUIDES
+
+  function renderHomeGuides() {
+    const grid = document.getElementById('home-guides');
+    if (!grid) return;
+    grid.innerHTML = GUIDES.slice(0, 3).map(renderGuideCard).join('');
+  }
+
+  // ═══════════════════════════════════════════════════════ INIT
+
+  // Load carousels
+  fetch('posts.json?_=' + Date.now())
+    .then(r => r.json())
+    .then(posts => {
+      allPosts = posts.slice().reverse();
+
+      // Stats
+      const statEl = document.getElementById('stat-carruseles');
+      if (statEl) statEl.textContent = allPosts.length;
+
+      // Home grid (latest 3)
+      renderCarousels(allPosts, 'home-carousels', null, 3);
+
+      // Full carousels page
+      renderCarousels(allPosts, 'carousels-grid', 'carousels-count');
+    })
+    .catch(() => {
+      allPosts = [];
+      renderCarousels([], 'home-carousels', null, 3);
+      renderCarousels([], 'carousels-grid', 'carousels-count');
+      const statEl = document.getElementById('stat-carruseles');
+      if (statEl) statEl.textContent = '0';
     });
 
-    // Touch swipe
-    const viewer = document.getElementById('slide-viewer');
-    viewer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    viewer.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 40) goToSlide(currentSlide + (dx < 0 ? 1 : -1));
-    }, { passive: true });
+  // Guides
+  renderGuides('all');
+  renderHomeGuides();
 
-    // ── Load posts ─────────────────────────────────────────────────────────
-    fetch('posts.json?_=' + Date.now())
-      .then(r => r.json())
-      .then(posts => {
-        allPosts = posts.slice().reverse(); // newest first
-        renderGrid(allPosts);
-      })
-      .catch(() => {
-        allPosts = [];
-        renderGrid([]);
-      });
+  // Recursos
+  renderResources(MCP_RESOURCES, 'mcp-grid');
+  renderResources(DOCS_RESOURCES, 'docs-grid');
+  renderResources(COMMUNITY_RESOURCES, 'community-grid');
   </script>
+
 </body>
 </html>
