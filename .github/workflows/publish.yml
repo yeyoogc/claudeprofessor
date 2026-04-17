@@ -11,8 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: preview
+
+      - name: Fetch preview data
+        run: |
+          git fetch origin preview
+          git checkout origin/preview -- .last_preview.json
 
       - uses: actions/setup-python@v5
         with:
