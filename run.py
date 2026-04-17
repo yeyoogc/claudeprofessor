@@ -31,12 +31,12 @@ from agents.notify import send_preview_email
 import config
 
 
-def run(dry_run: bool = False, preview: bool = False) -> None:
+def run(dry_run: bool = False, preview: bool = False, topic_hint: str = None, template_hint: str = None) -> None:
     print(f"[{date.today()}] Starting @claudeprofessor daily post (v2)...")
 
-    # ── Step 1: Generate content with Gemini Flash (FREE) ─────────────────
-    print("Generating content with Gemini Flash...")
-    data = generate_content()
+    # ── Step 1: Generate content ───────────────────────────────────────────
+    print("Generating content...")
+    data = generate_content(topic_hint=topic_hint, template_hint=template_hint)
     topic = data["topic"]
     caption = data["caption"]
     hashtags = data.get("hashtags", config.DEFAULT_HASHTAGS)

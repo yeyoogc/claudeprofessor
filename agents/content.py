@@ -50,6 +50,8 @@ Search for the latest Claude / Anthropic news and pick the best topic for today'
 
 Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body max 25 words, tips max 20 words):
 
+{topic_section}
+
 {{
   "topic": "one-line topic description in English",
   "template_style": "flat" | "news" | "editorial" | "dark" | "photo",
@@ -116,7 +118,7 @@ def _extract_text(response) -> str:
     return "".join(parts)
 
 
-def generate_content() -> dict:
+def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
     if not config.ANTHROPIC_API_KEY:
         print("  ANTHROPIC_API_KEY not set. Using curated content bank...")
         from agents.content_bank import get_random_content
@@ -127,13 +129,22 @@ def generate_content() -> dict:
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
     today = date.today().isoformat()
 
+    if topic_hint:
+        topic_section = (
+            f"IMPORTANT — use EXACTLY this topic for the carousel:\n{topic_hint}\n"
+            + (f'Set "template_style" to "{template_hint}".\n' if template_hint else "")
+            + "Do NOT search for a different topic. Generate the full JSON based on the information above."
+        )
+    else:
+        topic_section = ""
+
     print("  Calling Claude Haiku 4.5 + web_search...")
     response = client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=2048,
         system=SYSTEM_PROMPT,
         tools=[{"type": "web_search_20260209", "name": "web_search", "allowed_callers": ["direct"]}],
-        messages=[{"role": "user", "content": USER_PROMPT.format(today=today)}],
+        messages=[{"role": "user", "content": USER_PROMPT.format(today=today, topic_section=topic_section)}],
     )
 
     text = _extract_text(response)
@@ -143,6 +154,10 @@ def generate_content() -> dict:
         return get_random_content()
 
     data = _parse_json(text)
+
+    # Enforce template if caller requested one
+    if template_hint:
+        data["template_style"] = template_hint
 
     required = {"topic", "hook", "slides", "cta", "caption"}
     missing = required - set(data.keys())
