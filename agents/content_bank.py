@@ -210,7 +210,7 @@ CONTENT_BANK = [
 ]
 
 
-STYLE_ROTATION = ["editorial", "flat", "news"]
+STYLE_ROTATION = ["editorial", "flat", "news", "grid", "dark", "photo"]
 BG_QUERY_FALLBACK = "artificial intelligence abstract technology orange"
 
 

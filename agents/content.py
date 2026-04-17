@@ -26,6 +26,9 @@ Template style rules:
 - "flat": Lists, prompt collections, quick tips compilations (e.g. "5 tricks", "10 prompts").
 - "news": Announcements, product launches, new features, bold comparisons.
 - "editorial": Tutorials, how-to deep dives, conceptual explanations.
+- "grid": Resource roundups, developer tools, productivity hacks, tool showcases.
+- "dark": High-impact announcements, dramatic reveals, power-user secrets, bold "X changed everything" moments.
+- "photo": Viral listicle hooks ("36 prompts", "5 secrets"), human-interest angles, broad-audience tips.
 
 Output ONLY valid JSON — no markdown fences, no text before or after.
 """
@@ -39,8 +42,8 @@ Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body 
 
 {{
   "topic": "one-line topic description in English",
-  "template_style": "flat" | "news" | "editorial",
-  "bg_query": "3-6 English words for Unsplash photo search",
+  "template_style": "flat" | "news" | "editorial" | "dark" | "photo",
+  "bg_query": "3-6 English words for Unsplash photo search (bright vivid colors for 'photo' style; abstract dark for 'news'/'dark')",
   "hook": {{
     "tag": "Short Category Name",
     "title": "Catchy title with one <span class=\\"accent\\">accented</span> word",
@@ -139,7 +142,7 @@ def generate_content() -> dict:
         raise ValueError(f"Expected 4 slides, got {len(data['slides'])}")
 
     style = data.get("template_style", "editorial")
-    if style not in {"flat", "news", "editorial"}:
+    if style not in {"flat", "news", "editorial", "grid"}:
         style = "editorial"
     data["template_style"] = style
     data.setdefault("bg_query", "artificial intelligence technology abstract")

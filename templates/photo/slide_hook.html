@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      font-family: 'Inter', sans-serif;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Full-bleed photo */
+    .bg-photo {
+      position: absolute;
+      inset: 0;
+      background-image: url('{{BG_IMAGE_URL}}');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.9) saturate(1.1);
+    }
+
+    /* Gradient overlay — heavy bottom, light top so photo shows */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.05) 0%,
+          rgba(0,0,0,0.1) 35%,
+          rgba(0,0,0,0.55) 60%,
+          rgba(0,0,0,0.92) 80%,
+          rgba(0,0,0,1) 100%
+        );
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 44px 52px 0;
+    }
+
+    .brand-pill {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+      padding: 9px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.05em;
+    }
+
+    .brand-pill svg { fill: #D97757; }
+
+    /* Claude logo circle — floats top right */
+    .logo-circle {
+      width: 96px;
+      height: 96px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 4px 20px rgba(217,119,87,0.3));
+    }
+
+    .logo-circle svg {
+      width: 44px;
+      height: 44px;
+      fill: #D97757;
+    }
+
+    /* Spacer */
+    .spacer { flex: 1; }
+
+    /* Bottom content */
+    .text-block {
+      position: relative;
+      z-index: 3;
+      padding: 0 52px 0;
+    }
+
+    .tag-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tag-pill {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0D0D0D;
+      background: #D97757;
+      padding: 7px 16px;
+      border-radius: 6px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 100px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 0.90;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      max-width: 980px;
+    }
+
+    h1 .accent { color: #D97757; }
+
+    .subtitle {
+      font-size: 23px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 820px;
+      margin-bottom: 36px;
+    }
+
+    .bottom-bar {
+      position: relative;
+      z-index: 3;
+      padding: 20px 52px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(217,119,87,0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      color: #D97757;
+    }
+
+    .author-text .name {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .author-text .sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+
+    .save-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-photo"></div>
+  <div class="overlay"></div>
+
+  <div class="top-bar">
+    <div class="brand-pill">
+      <svg width="16" height="16" viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      claudeprofessor
+    </div>
+    <div class="logo-circle">
+      <svg viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="text-block">
+    <div class="tag-row">
+      <div class="tag-pill">{{TAG}}</div>
+    </div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="author">
+      <div class="avatar">✳</div>
+      <div class="author-text">
+        <div class="name">@claudeprofessor</div>
+        <div class="sub">Tips diarios de Claude AI</div>
+      </div>
+    </div>
+    <div class="save-badge">
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M0 0h16v20l-8-5-8 5V0z" fill="rgba(255,255,255,0.7)"/>
+      </svg>
+      SAVE
+    </div>
+  </div>
+
+</body>
+</html>

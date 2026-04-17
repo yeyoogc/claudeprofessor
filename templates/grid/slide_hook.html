@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      font-family: 'Inter', sans-serif;
+      background-color: #F2F0EB;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.18) 1.5px, transparent 1.5px);
+      background-size: 34px 34px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 52px 0;
+      flex-shrink: 0;
+    }
+
+    .top-label {
+      font-size: 20px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .top-handle {
+      font-size: 20px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 32px 52px 24px;
+      gap: 52px;
+    }
+
+    .text-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #0A0A0A;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    h1 {
+      font-size: 82px;
+      font-weight: 900;
+      color: #0A0A0A;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+    }
+
+    h1 .accent { color: #D97757; }
+
+    .subtitle {
+      font-size: 22px;
+      color: #666;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .device-side {
+      width: 248px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-wrap {
+      filter: drop-shadow(0 24px 48px rgba(0,0,0,0.28)) drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+
+    .bottom-bar {
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+      padding: 24px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.45);
+      flex-shrink: 0;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      background: #0A0A0A;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #D97757;
+      flex-shrink: 0;
+    }
+
+    .author-text .handle {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0A0A0A;
+    }
+
+    .author-text .tagline {
+      font-size: 13px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    .save-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #0A0A0A;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span class="top-label">{{TAG}}</span>
+    <span class="top-handle">claudeprofessor.com</span>
+  </div>
+
+  <div class="content">
+
+    <div class="text-side">
+      <div class="tag-pill">{{TAG}}</div>
+      <h1>{{TITLE}}</h1>
+      <p class="subtitle">{{SUBTITLE}}</p>
+    </div>
+
+    <div class="device-side">
+      <svg class="phone-wrap" width="248" height="504" viewBox="0 0 248 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="screen-clip">
+            <rect x="10" y="14" width="228" height="476" rx="34" ry="34"/>
+          </clipPath>
+          <linearGradient id="phone-shine" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4a4a4a"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Phone body -->
+        <rect x="0" y="0" width="248" height="504" rx="42" ry="42" fill="url(#phone-shine)"/>
+
+        <!-- Screen background fallback -->
+        <rect x="10" y="14" width="228" height="476" rx="34" ry="34" fill="#1a1a2e"/>
+
+        <!-- Screen image from Unsplash -->
+        <image
+          href="{{BG_IMAGE_URL}}"
+          x="10" y="14" width="228" height="476"
+          clip-path="url(#screen-clip)"
+          preserveAspectRatio="xMidYMid slice"
+        />
+
+        <!-- Screen overlay: subtle dark vignette for realism -->
+        <rect x="10" y="14" width="228" height="476" rx="34" ry="34"
+              fill="rgba(0,0,0,0.06)" clip-path="url(#screen-clip)"/>
+
+        <!-- Phone frame inner border (subtle highlight) -->
+        <rect x="1" y="1" width="246" height="502" rx="41" ry="41"
+              fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+
+        <!-- Dynamic island -->
+        <rect x="84" y="21" width="80" height="24" rx="12" ry="12" fill="#000"/>
+
+        <!-- Side button (right) -->
+        <rect x="246" y="148" width="4" height="72" rx="2" fill="#333"/>
+
+        <!-- Volume buttons (left) -->
+        <rect x="-2" y="124" width="4" height="36" rx="2" fill="#333"/>
+        <rect x="-2" y="174" width="4" height="52" rx="2" fill="#333"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <div class="bottom-bar">
+    <div class="author">
+      <div class="avatar">✳</div>
+      <div class="author-text">
+        <div class="handle">@claudeprofessor</div>
+        <div class="tagline">Tips diarios de Claude AI</div>
+      </div>
+    </div>
+    <div class="save-badge">
+      <svg width="20" height="26" viewBox="0 0 20 26" fill="none">
+        <path d="M0 0h20v26l-10-6.5L0 26V0z" fill="#0A0A0A"/>
+      </svg>
+      SAVE for LATER
+    </div>
+  </div>
+
+</body>
+</html>

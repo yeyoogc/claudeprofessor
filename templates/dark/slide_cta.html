@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      font-family: 'Inter', sans-serif;
+      background: #0D0D0D;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 6px 6px;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: absolute;
+      top: 240px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(217,119,87,0.18) 0%, rgba(217,119,87,0.05) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .top-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 48px 56px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand svg { fill: #D97757; }
+
+    .counter {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.08em;
+    }
+
+    /* Small asterisk */
+    .asterisk-small {
+      position: absolute;
+      top: 130px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      filter: drop-shadow(0 0 28px rgba(217,119,87,0.45));
+    }
+
+    .asterisk-small svg {
+      width: 120px;
+      height: 120px;
+      fill: #D97757;
+    }
+
+    .content {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 56px 40px;
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 900;
+      color: #D97757;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background: #D97757;
+    }
+
+    h1 {
+      font-size: 88px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      max-width: 920px;
+    }
+
+    .cta-subtitle {
+      font-size: 26px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 700px;
+      margin-bottom: 44px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .btn-follow {
+      background: #fff;
+      color: #0D0D0D;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 18px 44px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-tips {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #D97757;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 18px 32px;
+      border-radius: 100px;
+    }
+
+    .bottom-bar {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 24px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .dot.active {
+      width: 28px;
+      border-radius: 5px;
+      background: #D97757;
+    }
+
+    .foot-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow"></div>
+
+  <div class="top-bar">
+    <div class="brand">
+      <svg width="18" height="18" viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      claudeprofessor
+    </div>
+    <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="asterisk-small">
+    <svg viewBox="0 0 100 100">
+      <rect x="44" y="5" width="12" height="90" rx="6"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">cada día un nuevo truco</div>
+    <h1>{{CTA_TITLE}}</h1>
+    <p class="cta-subtitle">{{CTA_SUBTITLE}}</p>
+    <div class="btn-row">
+      <div class="btn-follow">Seguir @claudeprofessor</div>
+      <div class="btn-tips">✳ Tips diarios →</div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="foot-label">claudeprofessor.com</div>
+    <div class="dots">{{DOTS}}</div>
+  </div>
+
+</body>
+</html>

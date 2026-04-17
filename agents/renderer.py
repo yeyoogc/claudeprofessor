@@ -12,7 +12,7 @@ from agents.unsplash import fetch_bg_image
 
 TEMPLATES_ROOT = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
-VALID_STYLES = {"flat", "news", "editorial"}
+VALID_STYLES = {"flat", "news", "editorial", "grid", "dark", "photo"}
 
 
 def _build_dots_html(total: int, active_index: int) -> str:
@@ -106,9 +106,9 @@ async def render_carousel(content: dict) -> list[str]:
     content_template = (style_dir / "slide_content.html").read_text(encoding="utf-8")
     cta_template = (style_dir / "slide_cta.html").read_text(encoding="utf-8")
 
-    # News style needs a background image — fetch once, reuse across slides
+    # News + grid styles use a background/device image from Unsplash
     bg_url = ""
-    if style == "news":
+    if style in ("news", "grid", "photo"):
         bg_query = content.get("bg_query", "abstract technology orange")
         bg_url = fetch_bg_image(bg_query)
         print(f"  Background: {bg_url[:80]}...")
