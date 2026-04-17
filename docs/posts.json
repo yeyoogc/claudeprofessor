@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "id": "18118694059653944",
+    "topic": "Claude Design: Create visual prototypes and slides with natural language",
+    "tag": "Claude Design",
+    "date": "2026-04-17",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/56b597d268b0_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/692fa4b0cb59_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/53aec0d36460_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/31f4cf588e17_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/c1209f1a417c_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/fd6748cfbde6_slide_06.jpg"
+    ],
+    "instagram_id": "18118694059653944"
+  },
+  {
+    "id": "18002463554870196",
+    "topic": "Claude Opus 4.7: The Most Powerful Anthropic Model",
+    "tag": "Claude Opus 4.7",
+    "date": "2026-04-17",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/8ccba29faee5_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/0286629db6c1_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/a4cd2ad9e08d_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/9f80c8ba77f9_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/2fe770e66172_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/141dc3dc4214_slide_06.jpg"
+    ],
+    "instagram_id": "18002463554870196"
+  },
+  {
+    "id": "18000734480745458",
+    "topic": "Claude Code Routines: Cloud automation with schedule, API, and GitHub triggers",
+    "tag": "Claude Code",
+    "date": "2026-04-17",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/1815f2fea958_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/3933d6015062_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/df8522d539cd_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/82d26b72428d_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/6515afa2ae7d_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/827656b3a0c3_slide_06.jpg"
+    ],
+    "instagram_id": "18000734480745458"
+  },
+  {
+    "id": "18118102141579296",
+    "topic": "Claude Code v2.1.110: TUI fullscreen, push notifications, improved focus controls",
+    "tag": "Claude Code",
+    "date": "2026-04-17",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/e2194e5ddc06_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/51b5ea6ec39b_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/4643358e13b4_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/1b9b0d932d6b_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/e173ea472c1f_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/36b61e087c70_slide_06.jpg"
+    ],
+    "instagram_id": "18118102141579296"
+  },
+  {
+    "id": "17903522316241281",
+    "topic": "Claude Code Skills: Reusable superpowers for your specialized assistant",
+    "tag": "Claude Code",
+    "date": "2026-04-17",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/7e3ea217e6cb_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/97bd6ade1cd5_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/d934250f6bb9_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/72a892bea60e_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/8caf80a4061e_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/72c7142bba20_slide_06.jpg"
+    ],
+    "instagram_id": "17903522316241281"
+  }
+]

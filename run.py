@@ -88,7 +88,7 @@ def run(dry_run: bool = False, preview: bool = False, topic_hint: str = None, te
     # ── Step 5: Update gallery ────────────────────────────────────────────
     posts_file = Path(__file__).parent / "docs" / "posts.json"
     try:
-        existing = json.loads(posts_file.read_text()) if posts_file.exists() else []
+        existing = json.loads(posts_file.read_text(encoding="utf-8")) if posts_file.exists() else []
     except (json.JSONDecodeError, OSError):
         existing = []
     existing.append({
@@ -100,7 +100,7 @@ def run(dry_run: bool = False, preview: bool = False, topic_hint: str = None, te
         "caption": full_caption,
         "instagram_id": post_id,
     })
-    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Gallery updated: {len(existing)} posts total")
 
 
@@ -118,7 +118,7 @@ def publish_last() -> None:
     # Append to docs/posts.json for the gallery site
     posts_file = Path(__file__).parent / "docs" / "posts.json"
     try:
-        existing = json.loads(posts_file.read_text()) if posts_file.exists() else []
+        existing = json.loads(posts_file.read_text(encoding="utf-8")) if posts_file.exists() else []
     except (json.JSONDecodeError, OSError):
         existing = []
     existing.append({
@@ -130,7 +130,7 @@ def publish_last() -> None:
         "caption": preview["caption"],
         "instagram_id": post_id,
     })
-    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Gallery updated: {len(existing)} posts total")
 
 
