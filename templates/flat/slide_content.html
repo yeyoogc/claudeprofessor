@@ -9,146 +9,127 @@
   body {
     width: 1080px;
     height: 1080px;
-    background: #FFFDF9;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F5F3EF;
+    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
   }
 
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(42,37,32,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42,37,32,0.07) 1px, transparent 1px);
+    background-size: 38px 38px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .topbar {
+    position: relative; z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 48px 64px 0;
+    padding: 44px 64px 0;
   }
 
-  .brand {
+  .step-badge {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #2a2520;
+    gap: 16px;
   }
 
-  .brand-asterisk {
-    width: 22px;
-    height: 22px;
-  }
-
-  .slide-pill {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2a2520;
-    background: #FFF;
-    border: 2px solid #2a2520;
-    border-radius: 999px;
-    padding: 6px 18px;
-    letter-spacing: 0.05em;
-  }
-
-  .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 60px 80px 0;
-    gap: 32px;
-    position: relative;
-  }
-
-  .step-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .step-num-box {
+  .step-num {
     background: #1A1816;
-    color: #FFFDF9;
-    width: 84px;
-    height: 84px;
-    border-radius: 18px;
+    color: #F5F3EF;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 44px;
+    font-size: 36px;
     font-weight: 900;
     letter-spacing: -0.04em;
   }
 
   .step-label {
     background: #D97757;
-    color: white;
-    font-size: 22px;
+    color: #fff;
+    font-size: 18px;
     font-weight: 800;
-    padding: 14px 24px;
-    border-radius: 14px;
-    border: 3px solid #1A1816;
-    letter-spacing: 0.05em;
+    padding: 10px 22px;
+    border-radius: 10px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
+  .slide-counter {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(42,37,32,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  .main {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 44px 72px 0;
+    gap: 28px;
+  }
+
   h2 {
-    font-size: 62px;
+    font-size: 72px;
     font-weight: 900;
-    line-height: 1.05;
+    line-height: 0.95;
     color: #1A1816;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.035em;
     max-width: 920px;
   }
 
   h2 .accent {
-    background: #D97757;
-    color: white;
-    padding: 2px 16px;
-    border-radius: 10px;
-    display: inline-block;
+    color: #D97757;
   }
 
   .body-text {
     font-size: 28px;
-    color: #2a2520;
-    line-height: 1.45;
+    color: rgba(42,37,32,0.75);
+    line-height: 1.5;
     font-weight: 500;
     max-width: 880px;
-    position: relative;
-    padding-left: 22px;
-  }
-
-  .body-text::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
-    width: 6px;
-    background: #D97757;
-    border-radius: 3px;
+    padding-left: 24px;
+    border-left: 5px solid rgba(42,37,32,0.15);
   }
 
   .tip-box {
-    background: #FFF;
-    border: 3px solid #1A1816;
-    border-radius: 18px;
-    padding: 26px 30px;
+    background: #fff;
+    border: 2px solid #1A1816;
+    border-radius: 16px;
+    padding: 22px 28px;
     display: flex;
     align-items: flex-start;
-    gap: 18px;
-    box-shadow: 8px 8px 0 #D97757;
-    margin-right: 40px;
+    gap: 16px;
+    box-shadow: 6px 6px 0 #D97757;
+    max-width: 880px;
   }
 
   .tip-label {
     background: #1A1816;
-    color: #FFFDF9;
-    font-size: 13px;
+    color: #F5F3EF;
+    font-size: 12px;
     font-weight: 900;
-    padding: 6px 12px;
-    border-radius: 8px;
-    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 6px;
+    letter-spacing: 0.12em;
     white-space: nowrap;
+    text-transform: uppercase;
+    margin-top: 2px;
   }
 
   .tip-text {
@@ -158,53 +139,47 @@
     font-weight: 600;
   }
 
-  .tip-text strong {
-    color: #D97757;
-    font-weight: 900;
-  }
-
-  /* Decorative */
-  .deco {
-    position: absolute;
-    color: #D97757;
-  }
-  .deco-1 { top: 40px; right: 280px; font-size: 28px; }
-  .deco-2 { bottom: 220px; right: 80px; font-size: 22px; }
+  .tip-text strong { color: #D97757; font-weight: 900; }
 
   /* Bottom bar */
   .bottombar {
+    position: relative; z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 64px 48px;
-    border-top: 2px solid #1A1816;
-    margin: 0 60px;
+    padding: 18px 64px 40px;
+    border-top: 1.5px solid rgba(42,37,32,0.15);
+    margin: 0 56px;
     margin-top: auto;
   }
 
   .author {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
 
-  .avatar {
-    width: 44px;
-    height: 44px;
+  .avatar-img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #D97757, #e8956e);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 900;
-    font-size: 20px;
+    border: 2px solid #1A1816;
+    object-fit: cover;
+    background: #0D0D0D;
+    flex-shrink: 0;
   }
 
-  .handle {
-    font-size: 20px;
-    font-weight: 700;
+  .author-name {
+    font-size: 17px;
+    font-weight: 800;
     color: #1A1816;
+    line-height: 1.2;
+  }
+
+  .author-handle {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(42,37,32,0.4);
   }
 
   .dots {
@@ -214,62 +189,46 @@
   }
 
   .dot {
-    width: 10px; height: 10px;
+    width: 9px; height: 9px;
     border-radius: 50%;
-    background: rgba(26,24,22,0.2);
+    background: rgba(42,37,32,0.18);
   }
+
   .dot.active {
-    width: 28px;
-    border-radius: 5px;
+    width: 26px;
+    border-radius: 4px;
     background: #D97757;
   }
 </style>
 </head>
 <body>
 
-  <!-- Top bar -->
   <div class="topbar">
-    <div class="brand">
-      <svg class="brand-asterisk" viewBox="0 0 100 100" fill="#D97757">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
-      <span>@claudeprofessor</span>
-    </div>
-    <div class="slide-pill">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
-  </div>
-
-  <div class="deco deco-1">✦</div>
-  <div class="deco deco-2">✦</div>
-
-  <!-- Main -->
-  <div class="main">
-    <div class="step-row">
-      <div class="step-num-box">{{STEP_NUM}}</div>
+    <div class="step-badge">
+      <div class="step-num">{{STEP_NUM}}</div>
       <div class="step-label">{{STEP_LABEL}}</div>
     </div>
+    <div class="slide-counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
 
+  <div class="main">
     <h2>{{TITLE}}</h2>
-
     <div class="body-text">{{BODY}}</div>
-
     <div class="tip-box">
-      <div class="tip-label">PRO TIP</div>
+      <div class="tip-label">TIP</div>
       <div class="tip-text">{{TIP}}</div>
     </div>
   </div>
 
-  <!-- Bottom bar -->
   <div class="bottombar">
     <div class="author">
-      <div class="avatar">✳</div>
-      <span class="handle">@claudeprofessor</span>
+      <img class="avatar-img" src="{{MASCOT_DATA_URI}}" alt="claudeprofessor" />
+      <div>
+        <div class="author-name">Claude Professor</div>
+        <div class="author-handle">@claudeprofessor</div>
+      </div>
     </div>
-    <div class="dots">
-      {{DOTS}}
-    </div>
+    <div class="dots">{{DOTS}}</div>
   </div>
 
 </body>

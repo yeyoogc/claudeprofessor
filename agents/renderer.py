@@ -5,10 +5,24 @@ No external design tools needed — everything is local.
 
 import os
 import asyncio
+import base64
 from pathlib import Path
 from playwright.async_api import async_playwright
 
 from agents.unsplash import fetch_bg_image
+
+_MASCOT_DATA_URI: str | None = None
+
+def _mascot_uri() -> str:
+    global _MASCOT_DATA_URI
+    if _MASCOT_DATA_URI is None:
+        p = Path(__file__).parent.parent / "docs" / "img" / "mascot.png"
+        if p.exists():
+            b64 = base64.b64encode(p.read_bytes()).decode()
+            _MASCOT_DATA_URI = f"data:image/png;base64,{b64}"
+        else:
+            _MASCOT_DATA_URI = ""
+    return _MASCOT_DATA_URI
 
 TEMPLATES_ROOT = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
@@ -25,20 +39,19 @@ def _build_dots_html(total: int, active_index: int) -> str:
 
 
 def _inject_hook(template: str, data: dict, total_slides: int, bg_url: str = "") -> str:
-    """Inject content into the hook slide template."""
     html = template
     html = html.replace("{{TAG}}", data.get("tag", "Claude AI"))
     html = html.replace("{{TITLE}}", data.get("title", ""))
     html = html.replace("{{SUBTITLE}}", data.get("subtitle", ""))
     html = html.replace("{{TOTAL_SLIDES}}", f"{total_slides:02d}")
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
+    html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
     return html
 
 
 def _inject_content(template: str, data: dict, slide_idx: int, total_slides: int, bg_url: str = "") -> str:
-    """Inject content into a content slide template."""
     html = template
-    step_num = slide_idx  # 1-based step numbering (slide 2 = step 1, etc)
+    step_num = slide_idx
     html = html.replace("{{STEP_NUM}}", str(step_num))
     html = html.replace("{{STEP_LABEL}}", data.get("step_label", f"Paso {step_num}"))
     html = html.replace("{{SLIDE_NUM}}", f"{slide_idx + 1:02d}")
@@ -48,18 +61,19 @@ def _inject_content(template: str, data: dict, slide_idx: int, total_slides: int
     html = html.replace("{{TIP}}", data.get("tip", ""))
     html = html.replace("{{DOTS}}", _build_dots_html(total_slides, slide_idx))
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
+    html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
     return html
 
 
 def _inject_cta(template: str, data: dict, total_slides: int, bg_url: str = "") -> str:
-    """Inject content into the CTA slide template."""
     html = template
-    html = html.replace("{{CTA_TITLE}}", data.get("cta_title", "¡Síguenos para más tips! 🧡"))
+    html = html.replace("{{CTA_TITLE}}", data.get("cta_title", "Síguenos para más tips"))
     html = html.replace("{{CTA_SUBTITLE}}", data.get("cta_subtitle", "Cada día un nuevo truco de Claude AI"))
     html = html.replace("{{SLIDE_NUM}}", f"{total_slides:02d}")
     html = html.replace("{{TOTAL_SLIDES}}", f"{total_slides:02d}")
     html = html.replace("{{DOTS}}", _build_dots_html(total_slides, total_slides - 1))
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
+    html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
     return html
 
 
