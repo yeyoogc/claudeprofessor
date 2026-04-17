@@ -35,3 +35,11 @@ jobs:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+      - name: Update gallery
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add docs/posts.json
+          git commit -m "Gallery: add post $(date +%Y-%m-%d)" || echo "Nothing to commit"
+          git push origin master

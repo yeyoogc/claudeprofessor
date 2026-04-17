@@ -69,7 +69,13 @@ def run(dry_run: bool = False, preview: bool = False) -> None:
     if preview:
         # Save for --publish later
         with open(PREVIEW_FILE, "w") as f:
-            json.dump({"topic": topic, "urls": hosted_urls, "caption": full_caption}, f)
+            json.dump({
+                "topic": topic,
+                "tag": data.get("hook", {}).get("tag", "Claude AI"),
+                "date": date.today().isoformat(),
+                "urls": hosted_urls,
+                "caption": full_caption,
+            }, f)
         send_preview_email(topic, hosted_urls, full_caption)
         print(f"\n[PREVIEW] Email sent. Run `python run.py --publish` to post.")
         return
@@ -85,11 +91,29 @@ def publish_last() -> None:
         print("No preview found. Run `python run.py --preview` first.")
         sys.exit(1)
     with open(PREVIEW_FILE) as f:
-        data = json.load(f)
-    print(f"Publishing: {data['topic']}")
-    post_id = create_carousel(data["urls"], data["caption"])
+        preview = json.load(f)
+    print(f"Publishing: {preview['topic']}")
+    post_id = create_carousel(preview["urls"], preview["caption"])
     os.remove(PREVIEW_FILE)
     print(f"Done! Post ID: {post_id}")
+
+    # Append to docs/posts.json for the gallery site
+    posts_file = Path(__file__).parent / "docs" / "posts.json"
+    try:
+        existing = json.loads(posts_file.read_text()) if posts_file.exists() else []
+    except (json.JSONDecodeError, OSError):
+        existing = []
+    existing.append({
+        "id": post_id,
+        "topic": preview["topic"],
+        "tag": preview.get("tag", "Claude AI"),
+        "date": preview.get("date", date.today().isoformat()),
+        "slides": preview["urls"],
+        "caption": preview["caption"],
+        "instagram_id": post_id,
+    })
+    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    print(f"Gallery updated: {len(existing)} posts total")
 
 
 if __name__ == "__main__":

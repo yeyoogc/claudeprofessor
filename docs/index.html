@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@claudeprofessor — Carruseles de Claude AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D0D;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --border: rgba(255,255,255,0.07);
+      --accent: #D97757;
+      --accent-dim: rgba(217,119,87,0.15);
+      --text: #ffffff;
+      --text-muted: rgba(255,255,255,0.4);
+      --text-mid: rgba(255,255,255,0.65);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(217,119,87,0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg { fill: var(--accent); width: 16px; height: 16px; }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-name span { color: var(--accent); }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ig-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .ig-link:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+    .ig-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 24px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* ── Post count / metadata bar ── */
+    .meta-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .post-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .post-count strong { color: var(--text-mid); font-weight: 700; }
+
+    /* ── Grid ── */
+    .grid-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 580px) {
+      .grid { grid-template-columns: 1fr; gap: 12px; }
+      .hero { padding: 48px 16px 32px; }
+      .meta-bar { padding: 0 16px 24px; }
+      .grid-wrap { padding: 0 16px 60px; }
+      header { padding: 0 16px; }
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      aspect-ratio: 1 / 1;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(217,119,87,0.2);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-img { transform: scale(1.03); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .card:hover .card-overlay { opacity: 1; }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-date {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .card-slide-count {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-slide-count svg { width: 10px; height: 10px; fill: rgba(255,255,255,0.5); }
+
+    /* ── Empty state ── */
+    .empty {
+      grid-column: 1 / -1;
+      padding: 80px 0;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      opacity: 0.15;
+    }
+
+    .empty-icon svg { width: 100%; height: 100%; fill: var(--accent); }
+
+    .empty h2 { font-size: 20px; font-weight: 700; color: var(--text-mid); margin-bottom: 10px; }
+    .empty p { font-size: 15px; line-height: 1.6; max-width: 360px; margin: 0 auto; }
+
+    /* ── Modal ── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      transform: scale(0.94) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    .modal-backdrop.open .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 16px;
+    }
+
+    .modal-meta { flex: 1; min-width: 0; }
+
+    .modal-tag {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .modal-topic {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.1); }
+    .modal-close svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+
+    /* Slide viewer */
+    .slide-viewer {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .slides-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, opacity 0.2s;
+      z-index: 2;
+    }
+
+    .nav-btn:hover { background: rgba(0,0,0,0.85); }
+    .nav-btn.hidden { opacity: 0; pointer-events: none; }
+    .nav-btn svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .nav-prev { left: 12px; }
+    .nav-next { right: 12px; }
+
+    /* Dots */
+    .slide-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* Caption preview */
+    .modal-caption {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-height: 90px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-brand svg { fill: var(--accent); opacity: 0.6; width: 12px; height: 12px; }
+
+    /* ── Skeleton loading ── */
+    .card-skel {
+      aspect-ratio: 1/1;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      animation: shimmer 1.6s infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a class="brand" href="#">
+      <div class="brand-icon">
+        <svg viewBox="0 0 100 100">
+          <rect x="44" y="5" width="12" height="90" rx="6"/>
+          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+          <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+        </svg>
+      </div>
+      <span class="brand-name"><span>@</span>claudeprofessor</span>
+    </a>
+    <div class="header-right">
+      <a class="ig-link" href="https://www.instagram.com/claudeprofessor" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        Instagram
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot"></div>
+      Carruseles publicados
+    </div>
+    <h1>Aprende Claude AI<br>con <em>carruseles</em></h1>
+    <p>Todos los carruseles de @claudeprofessor en un solo lugar. Tips, tutoriales y novedades de Claude AI en español.</p>
+  </section>
+
+  <!-- Meta bar -->
+  <div class="meta-bar">
+    <div class="post-count" id="post-count">Cargando...</div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid-wrap">
+    <div class="grid" id="grid">
+      <div class="card-skel"></div>
+      <div class="card-skel"></div>
+      <div class="card-skel"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-brand">
+      <svg viewBox="0 0 100 100">
+        <rect x="44" y="5" width="12" height="90" rx="6"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+      </svg>
+      @claudeprofessor · Tips diarios de Claude AI
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="modal-meta">
+          <div class="modal-tag" id="modal-tag"></div>
+          <div class="modal-topic" id="modal-topic"></div>
+          <div class="modal-date" id="modal-date"></div>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Cerrar">
+          <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+        </button>
+      </div>
+
+      <div class="slide-viewer" id="slide-viewer">
+        <div class="slides-track" id="slides-track"></div>
+        <button class="nav-btn nav-prev hidden" id="nav-prev" aria-label="Anterior">
+          <svg viewBox="0 0 16 16"><polyline points="10,2 4,8 10,14"/></svg>
+        </button>
+        <button class="nav-btn nav-next" id="nav-next" aria-label="Siguiente">
+          <svg viewBox="0 0 16 16"><polyline points="6,2 12,8 6,14"/></svg>
+        </button>
+      </div>
+
+      <div class="slide-dots" id="slide-dots"></div>
+      <div class="modal-caption" id="modal-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    const ASTERISK_SVG = `<svg viewBox="0 0 100 100" style="width:40px;height:40px;fill:#D97757;opacity:0.3;margin-bottom:16px">
+      <rect x="44" y="5" width="12" height="90" rx="6"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
+      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
+    </svg>`;
+
+    let allPosts = [];
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function renderGrid(posts) {
+      const grid = document.getElementById('grid');
+      const countEl = document.getElementById('post-count');
+
+      if (posts.length === 0) {
+        countEl.innerHTML = '';
+        grid.innerHTML = `
+          <div class="empty">
+            ${ASTERISK_SVG}
+            <h2>Aún no hay carruseles</h2>
+            <p>Cuando se publique el primer carrusel aparecerá aquí automáticamente.</p>
+          </div>`;
+        return;
+      }
+
+      countEl.innerHTML = `<strong>${posts.length}</strong> carrusel${posts.length !== 1 ? 'es' : ''} publicado${posts.length !== 1 ? 's' : ''}`;
+
+      grid.innerHTML = posts.map((post, i) => {
+        const cover = post.slides && post.slides[0] ? post.slides[0] : '';
+        const tag = post.tag || 'Claude AI';
+        const topic = post.topic || 'Sin título';
+        const date = formatDate(post.date);
+        const count = post.slides ? post.slides.length : 0;
+
+        return `
+          <div class="card" data-index="${i}" tabindex="0" role="button" aria-label="Ver carrusel: ${topic}">
+            ${cover ? `<img class="card-img" src="${cover}" alt="${topic}" loading="lazy">` : ''}
+            <div class="card-slide-count">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="9" height="9" rx="1.5"/><rect x="13" y="2" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg>
+              ${count}
+            </div>
+            <div class="card-overlay">
+              <div class="card-tag">${tag}</div>
+              <div class="card-title">${topic}</div>
+              <div class="card-date">${date}</div>
+            </div>
+          </div>`;
+      }).join('');
+
+      grid.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => openModal(parseInt(card.dataset.index)));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') openModal(parseInt(card.dataset.index));
+        });
+      });
+    }
+
+    // ── Modal ──────────────────────────────────────────────────────────────
+    let currentPost = null;
+    let currentSlide = 0;
+    let touchStartX = 0;
+
+    function openModal(index) {
+      currentPost = allPosts[index];
+      currentSlide = 0;
+
+      document.getElementById('modal-tag').textContent = currentPost.tag || 'Claude AI';
+      document.getElementById('modal-topic').textContent = currentPost.topic || '';
+      document.getElementById('modal-date').textContent = formatDate(currentPost.date);
+      document.getElementById('modal-caption').textContent = currentPost.caption || '';
+
+      buildSlides();
+      updateNav();
+      buildDots();
+
+      document.getElementById('modal-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.remove('open');
+      document.body.style.overflow = '';
+      currentPost = null;
+    }
+
+    function buildSlides() {
+      const track = document.getElementById('slides-track');
+      const slides = currentPost.slides || [];
+      track.style.width = `${slides.length * 100}%`;
+      track.innerHTML = slides.map(url =>
+        `<img class="slide-img" src="${url}" alt="" draggable="false">`
+      ).join('');
+      track.style.transform = 'translateX(0)';
+    }
+
+    function goToSlide(n) {
+      const slides = currentPost.slides || [];
+      currentSlide = Math.max(0, Math.min(n, slides.length - 1));
+      const pct = (currentSlide / slides.length) * 100;
+      document.getElementById('slides-track').style.transform = `translateX(-${pct}%)`;
+      updateNav();
+      updateDots();
+    }
+
+    function updateNav() {
+      const slides = currentPost ? currentPost.slides || [] : [];
+      const prev = document.getElementById('nav-prev');
+      const next = document.getElementById('nav-next');
+      prev.classList.toggle('hidden', currentSlide === 0);
+      next.classList.toggle('hidden', currentSlide >= slides.length - 1);
+    }
+
+    function buildDots() {
+      const slides = currentPost.slides || [];
+      const dots = document.getElementById('slide-dots');
+      dots.innerHTML = slides.map((_, i) =>
+        `<div class="dot${i === 0 ? ' active' : ''}" data-i="${i}"></div>`
+      ).join('');
+      dots.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.i)));
+      });
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    // Nav buttons
+    document.getElementById('nav-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
+    document.getElementById('nav-next').addEventListener('click', () => goToSlide(currentSlide + 1));
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+
+    // Backdrop click
+    document.getElementById('modal-backdrop').addEventListener('click', e => {
+      if (e.target === document.getElementById('modal-backdrop')) closeModal();
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (!currentPost) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    });
+
+    // Touch swipe
+    const viewer = document.getElementById('slide-viewer');
+    viewer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    viewer.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+    // ── Load posts ─────────────────────────────────────────────────────────
+    fetch('posts.json?_=' + Date.now())
+      .then(r => r.json())
+      .then(posts => {
+        allPosts = posts.slice().reverse(); // newest first
+        renderGrid(allPosts);
+      })
+      .catch(() => {
+        allPosts = [];
+        renderGrid([]);
+      });
+  </script>
+</body>
+</html>
