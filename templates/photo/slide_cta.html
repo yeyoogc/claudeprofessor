@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -10,156 +10,153 @@
       width: 1080px;
       height: 1080px;
       font-family: 'Inter', sans-serif;
-      background: #111;
-      display: flex;
-      flex-direction: column;
+      background: #0a0a0a;
       overflow: hidden;
       position: relative;
     }
 
-    .bg-photo {
+    /* Full-bleed photo, very dark */
+    .bg {
       position: absolute;
       inset: 0;
       background-image: url('{{BG_IMAGE_URL}}');
       background-size: cover;
       background-position: center;
-      filter: saturate(0.7) brightness(0.45);
+      filter: brightness(0.22) saturate(0.7);
     }
 
     .overlay {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 60% 40%, rgba(217,119,87,0.18) 0%, transparent 55%),
-        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 60%, rgba(0,0,0,0.97) 100%);
+        radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.5) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0.98) 100%);
     }
 
-    .top-bar {
-      position: relative;
-      z-index: 3;
+    /* Top */
+    .top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 44px 52px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 44px 52px 0;
     }
 
-    .brand-pill {
+    .handle {
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
       display: flex;
       align-items: center;
-      gap: 9px;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 100px;
-      padding: 9px 18px;
-      font-size: 15px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.05em;
+      gap: 8px;
     }
 
-    .brand-pill svg { fill: #D97757; }
+    .handle-dot {
+      width: 6px; height: 6px;
+      background: #D97757;
+      border-radius: 50%;
+    }
 
     .counter {
       font-size: 15px;
       font-weight: 700;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
     }
 
+    /* Bottom content */
     .content {
-      flex: 1;
-      position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 52px 40px;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 0 52px 56px;
     }
 
     .eyebrow {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 900;
       color: #D97757;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .eyebrow::before {
       content: '';
-      width: 36px;
-      height: 2px;
+      width: 32px; height: 2px;
       background: #D97757;
     }
 
     h1 {
-      font-size: 96px;
+      font-size: 104px;
       font-weight: 900;
       color: #fff;
-      line-height: 0.90;
+      line-height: 0.92;
       letter-spacing: -0.04em;
-      text-transform: uppercase;
       margin-bottom: 28px;
-      max-width: 960px;
+      max-width: 940px;
     }
 
-    .cta-subtitle {
-      font-size: 24px;
-      color: rgba(255,255,255,0.55);
+    h1 .accent {
+      color: #D97757;
+      font-style: italic;
+    }
+
+    .cta-sub {
+      font-size: 26px;
       font-weight: 400;
+      color: rgba(255,255,255,0.5);
       line-height: 1.5;
       max-width: 700px;
       margin-bottom: 44px;
     }
 
-    .btn-row {
+    /* Follow line — no pills, just text */
+    .follow-line {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 0;
+      margin-bottom: 40px;
     }
 
-    .btn-follow {
-      background: #fff;
-      color: #0D0D0D;
-      font-size: 18px;
+    .follow-at {
+      font-size: 22px;
       font-weight: 900;
-      padding: 18px 44px;
-      border-radius: 100px;
-      letter-spacing: 0.04em;
-    }
-
-    .btn-tips {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #D97757;
       color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 18px 32px;
-      border-radius: 100px;
+      letter-spacing: -0.01em;
     }
 
-    .bottom-bar {
-      position: relative;
-      z-index: 3;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      padding: 22px 52px;
+    .follow-sep {
+      font-size: 22px;
+      color: rgba(255,255,255,0.2);
+      margin: 0 16px;
+    }
+
+    .follow-action {
+      font-size: 20px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Bottom bar */
+    .bottom {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
-    .foot-label {
-      font-size: 14px;
+    .foot-handle {
+      font-size: 15px;
       font-weight: 700;
       color: rgba(255,255,255,0.25);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .dots {
@@ -169,31 +166,26 @@
     }
 
     .dot {
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.18);
     }
 
     .dot.active {
       width: 28px;
-      border-radius: 5px;
+      border-radius: 4px;
       background: #D97757;
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-photo"></div>
+  <div class="bg"></div>
   <div class="overlay"></div>
 
-  <div class="top-bar">
-    <div class="brand-pill">
-      <svg width="16" height="16" viewBox="0 0 100 100">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
+  <div class="top">
+    <div class="handle">
+      <div class="handle-dot"></div>
       claudeprofessor
     </div>
     <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
@@ -202,16 +194,16 @@
   <div class="content">
     <div class="eyebrow">cada día un nuevo truco</div>
     <h1>{{CTA_TITLE}}</h1>
-    <p class="cta-subtitle">{{CTA_SUBTITLE}}</p>
-    <div class="btn-row">
-      <div class="btn-follow">Seguir @claudeprofessor</div>
-      <div class="btn-tips">✳ Tips diarios →</div>
+    <p class="cta-sub">{{CTA_SUBTITLE}}</p>
+    <div class="follow-line">
+      <span class="follow-at">@claudeprofessor</span>
+      <span class="follow-sep">·</span>
+      <span class="follow-action">Claude AI en español</span>
     </div>
-  </div>
-
-  <div class="bottom-bar">
-    <div class="foot-label">claudeprofessor.com</div>
-    <div class="dots">{{DOTS}}</div>
+    <div class="bottom">
+      <div class="foot-handle">claudeprofessor.page</div>
+      <div class="dots">{{DOTS}}</div>
+    </div>
   </div>
 
 </body>

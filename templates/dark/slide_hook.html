@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,203 +11,169 @@
       height: 1080px;
       font-family: 'Inter', sans-serif;
       background: #0D0D0D;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
       position: relative;
     }
 
-    /* Subtle noise texture */
-    body::after {
-      content: '';
+    /* Coral accent band — top of slide */
+    .band {
       position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 6px 6px;
-      pointer-events: none;
+      top: 0; left: 0; right: 0;
+      height: 320px;
+      background: #D97757;
+      clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
     }
 
-    /* Coral radial glow behind asterisk */
-    .glow {
+    /* Faint category ghost inside band */
+    .band-ghost {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 560px;
-      height: 560px;
-      background: radial-gradient(circle, rgba(217,119,87,0.22) 0%, rgba(217,119,87,0.06) 40%, transparent 70%);
-      pointer-events: none;
+      top: -24px;
+      right: -20px;
+      font-size: 340px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.12);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      user-select: none;
     }
 
-    .top-bar {
-      position: relative;
-      z-index: 2;
+    /* Top row */
+    .top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 44px 52px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 48px 56px 0;
+      justify-content: space-between;
     }
 
     .handle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      color: rgba(255,255,255,0.5);
+      color: rgba(0,0,0,0.5);
       letter-spacing: 0.06em;
-      text-transform: uppercase;
+      text-transform: lowercase;
     }
 
-    .handle svg { fill: #D97757; }
-
-    .tag-pill {
-      font-size: 14px;
+    .category-tag {
+      font-size: 13px;
       font-weight: 800;
-      color: rgba(255,255,255,0.9);
-      border: 2px solid rgba(255,255,255,0.18);
-      border-radius: 100px;
-      padding: 8px 20px;
-      letter-spacing: 0.1em;
+      color: rgba(0,0,0,0.6);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
 
-    /* Center asterisk */
-    .asterisk-wrap {
+    /* Main text — bottom-anchored */
+    .text {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -56%);
-      z-index: 2;
-      filter: drop-shadow(0 0 40px rgba(217,119,87,0.5)) drop-shadow(0 0 80px rgba(217,119,87,0.2));
-    }
-
-    .asterisk-wrap svg {
-      width: 220px;
-      height: 220px;
-      fill: #D97757;
-    }
-
-    /* Bottom text block */
-    .text-block {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      padding: 0 56px 0;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 0 52px 56px;
     }
 
     h1 {
-      font-size: 96px;
+      font-size: 112px;
       font-weight: 900;
       color: #fff;
       line-height: 0.92;
       letter-spacing: -0.04em;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      max-width: 960px;
     }
 
-    h1 .accent { color: #D97757; }
+    h1 .accent {
+      color: #D97757;
+      font-style: italic;
+    }
 
-    .subtitle {
+    .sub {
       font-size: 24px;
-      color: rgba(255,255,255,0.55);
       font-weight: 400;
+      color: rgba(255,255,255,0.45);
       line-height: 1.5;
-      max-width: 780px;
+      max-width: 700px;
       margin-bottom: 40px;
     }
 
-    .bottom-bar {
-      position: relative;
-      z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 28px 56px;
+    /* Bottom bar */
+    .bottom {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
     }
 
-    .author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .avatar {
-      width: 50px;
-      height: 50px;
-      background: #1a1a1a;
-      border: 2px solid rgba(217,119,87,0.4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #D97757;
-      flex-shrink: 0;
-    }
-
-    .author-text .name {
+    .author-name {
       font-size: 17px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: -0.01em;
     }
 
-    .author-text .tagline {
-      font-size: 13px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 2px;
-    }
-
-    .counter {
+    .author-sep {
       font-size: 17px;
-      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      margin: 0 12px;
+    }
+
+    .author-tag {
+      font-size: 15px;
       color: rgba(255,255,255,0.3);
-      letter-spacing: 0.06em;
+    }
+
+    .swipe-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .swipe-arrow {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .swipe-arrow svg {
+      width: 14px; height: 14px;
+      fill: none;
+      stroke: rgba(255,255,255,0.45);
+      stroke-width: 2;
     }
   </style>
 </head>
 <body>
 
-  <div class="glow"></div>
-
-  <div class="top-bar">
-    <div class="handle">
-      <svg width="18" height="18" viewBox="0 0 100 100">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
-      claudeprofessor
-    </div>
-    <div class="tag-pill">{{TAG}}</div>
+  <div class="band">
+    <div class="band-ghost">{{TAG}}</div>
   </div>
 
-  <div class="asterisk-wrap">
-    <svg viewBox="0 0 100 100">
-      <rect x="44" y="5" width="12" height="90" rx="6"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-    </svg>
+  <div class="top">
+    <div class="handle">claudeprofessor</div>
+    <div class="category-tag">{{TAG}}</div>
   </div>
 
-  <div class="text-block">
+  <div class="text">
     <h1>{{TITLE}}</h1>
-    <p class="subtitle">{{SUBTITLE}}</p>
-  </div>
-
-  <div class="bottom-bar">
-    <div class="author">
-      <div class="avatar">✳</div>
-      <div class="author-text">
-        <div class="name">@claudeprofessor</div>
-        <div class="tagline">Tips diarios de Claude AI</div>
+    <p class="sub">{{SUBTITLE}}</p>
+    <div class="bottom">
+      <div style="display:flex;align-items:center;">
+        <span class="author-name">@claudeprofessor</span>
+        <span class="author-sep">·</span>
+        <span class="author-tag">Claude AI en español</span>
+      </div>
+      <div class="swipe-hint">
+        Desliza
+        <div class="swipe-arrow">
+          <svg viewBox="0 0 14 14"><polyline points="5,2 11,7 5,12"/></svg>
+        </div>
       </div>
     </div>
-    <div class="counter">01 / {{TOTAL_SLIDES}}</div>
   </div>
 
 </body>

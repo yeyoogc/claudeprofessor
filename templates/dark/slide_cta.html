@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,161 +11,146 @@
       height: 1080px;
       font-family: 'Inter', sans-serif;
       background: #0D0D0D;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
       position: relative;
     }
 
-    body::after {
-      content: '';
+    /* Coral accent band at top */
+    .band {
       position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 6px 6px;
-      pointer-events: none;
+      top: 0; left: 0; right: 0;
+      height: 280px;
+      background: #D97757;
+      clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
     }
 
-    .glow {
+    /* Ghost CTA label inside band */
+    .band-ghost {
       position: absolute;
-      top: 240px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(217,119,87,0.18) 0%, rgba(217,119,87,0.05) 45%, transparent 70%);
-      pointer-events: none;
+      top: -32px;
+      right: -16px;
+      font-size: 300px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.1);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      user-select: none;
     }
 
-    .top-bar {
-      position: relative;
-      z-index: 2;
+    /* Top */
+    .top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 44px 52px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 48px 56px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 18px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .brand svg { fill: #D97757; }
-
-    .counter {
+    .handle {
       font-size: 16px;
       font-weight: 700;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.08em;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
     }
 
-    /* Small asterisk */
-    .asterisk-small {
-      position: absolute;
-      top: 130px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      filter: drop-shadow(0 0 28px rgba(217,119,87,0.45));
+    .counter {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.35);
+      letter-spacing: 0.1em;
     }
 
-    .asterisk-small svg {
-      width: 120px;
-      height: 120px;
-      fill: #D97757;
-    }
-
+    /* Bottom content */
     .content {
-      flex: 1;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 56px 40px;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 0 52px 56px;
     }
 
     .eyebrow {
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 900;
       color: #D97757;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .eyebrow::before {
       content: '';
-      width: 40px;
-      height: 2px;
+      width: 32px; height: 2px;
       background: #D97757;
     }
 
     h1 {
-      font-size: 88px;
+      font-size: 104px;
       font-weight: 900;
       color: #fff;
       line-height: 0.92;
       letter-spacing: -0.04em;
       margin-bottom: 28px;
-      max-width: 920px;
+      max-width: 940px;
     }
 
-    .cta-subtitle {
+    h1 .accent {
+      color: #D97757;
+      font-style: italic;
+    }
+
+    .cta-sub {
       font-size: 26px;
-      color: rgba(255,255,255,0.5);
       font-weight: 400;
+      color: rgba(255,255,255,0.45);
       line-height: 1.5;
       max-width: 700px;
       margin-bottom: 44px;
     }
 
-    .btn-row {
+    /* Follow line */
+    .follow-line {
       display: flex;
       align-items: center;
-      gap: 18px;
+      margin-bottom: 40px;
     }
 
-    .btn-follow {
-      background: #fff;
-      color: #0D0D0D;
-      font-size: 18px;
+    .follow-at {
+      font-size: 22px;
       font-weight: 900;
-      padding: 18px 44px;
-      border-radius: 100px;
-      letter-spacing: 0.04em;
-    }
-
-    .btn-tips {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #D97757;
       color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 18px 32px;
-      border-radius: 100px;
+      letter-spacing: -0.01em;
     }
 
-    .bottom-bar {
-      position: relative;
-      z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 24px 56px;
+    .follow-sep {
+      font-size: 22px;
+      color: rgba(255,255,255,0.2);
+      margin: 0 16px;
+    }
+
+    .follow-action {
+      font-size: 20px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Bottom bar */
+    .bottom {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+    }
+
+    .foot-handle {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.04em;
     }
 
     .dots {
@@ -175,65 +160,42 @@
     }
 
     .dot {
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: rgba(255,255,255,0.15);
     }
 
     .dot.active {
       width: 28px;
-      border-radius: 5px;
+      border-radius: 4px;
       background: #D97757;
-    }
-
-    .foot-label {
-      font-size: 14px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
-  <div class="glow"></div>
-
-  <div class="top-bar">
-    <div class="brand">
-      <svg width="18" height="18" viewBox="0 0 100 100">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
-      claudeprofessor
-    </div>
-    <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  <div class="band">
+    <div class="band-ghost">FIN</div>
   </div>
 
-  <div class="asterisk-small">
-    <svg viewBox="0 0 100 100">
-      <rect x="44" y="5" width="12" height="90" rx="6"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-      <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-    </svg>
+  <div class="top">
+    <div class="handle">claudeprofessor</div>
+    <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
   </div>
 
   <div class="content">
     <div class="eyebrow">cada día un nuevo truco</div>
     <h1>{{CTA_TITLE}}</h1>
-    <p class="cta-subtitle">{{CTA_SUBTITLE}}</p>
-    <div class="btn-row">
-      <div class="btn-follow">Seguir @claudeprofessor</div>
-      <div class="btn-tips">✳ Tips diarios →</div>
+    <p class="cta-sub">{{CTA_SUBTITLE}}</p>
+    <div class="follow-line">
+      <span class="follow-at">@claudeprofessor</span>
+      <span class="follow-sep">·</span>
+      <span class="follow-action">Claude AI en español</span>
     </div>
-  </div>
-
-  <div class="bottom-bar">
-    <div class="foot-label">claudeprofessor.com</div>
-    <div class="dots">{{DOTS}}</div>
+    <div class="bottom">
+      <div class="foot-handle">claudeprofessor.page</div>
+      <div class="dots">{{DOTS}}</div>
+    </div>
   </div>
 
 </body>

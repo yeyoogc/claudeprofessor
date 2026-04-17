@@ -53,7 +53,7 @@ Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body 
 {{
   "topic": "one-line topic description in English",
   "template_style": "flat" | "news" | "editorial" | "dark" | "photo",
-  "bg_query": "3-6 English words for Unsplash photo search (bright vivid colors for 'photo' style; abstract dark for 'news'/'dark')",
+  "bg_query": "3-6 English words for Unsplash photo search. For 'photo' style: editorial portrait or lifestyle photo (person, face, hands working, close-up texture) — NOT abstract tech. For 'news'/'dark' style: dark moody abstract or dramatic landscape.",
   "hook": {{
     "tag": "Short Category Name",
     "title": "Catchy title with one <span class=\\"accent\\">accented</span> word",
@@ -86,7 +86,7 @@ Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body 
     }}
   ],
   "cta": {{
-    "cta_title": "Engaging CTA title (max 10 words) \U0001F9E1",
+    "cta_title": "Engaging CTA title (max 10 words)",
     "cta_subtitle": "Short subtitle inviting to follow (max 12 words)"
   }},
   "caption": "Engaging Instagram caption in Spanish (2-4 sentences, emojis, references the topic, ends with a question). No hashtags.",

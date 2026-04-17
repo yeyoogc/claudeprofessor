@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,900;1,700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,160 +11,126 @@
       height: 1080px;
       font-family: 'Inter', sans-serif;
       background: #0D0D0D;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
       position: relative;
     }
 
-    body::after {
-      content: '';
+    /* Step number — huge ghost */
+    .step-ghost {
       position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 6px 6px;
-      pointer-events: none;
-    }
-
-    /* Huge step watermark */
-    .step-watermark {
-      position: absolute;
-      top: -30px;
-      right: 30px;
-      font-size: 400px;
+      top: -40px;
+      right: 20px;
+      font-size: 500px;
       font-weight: 900;
       color: rgba(217,119,87,0.06);
       line-height: 1;
       letter-spacing: -0.06em;
-      pointer-events: none;
       user-select: none;
+      z-index: 1;
     }
 
-    .top-bar {
-      position: relative;
-      z-index: 2;
+    /* Thin left accent bar */
+    .accent-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: #D97757;
+    }
+
+    /* Top */
+    .top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 44px 52px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 48px 56px 0;
+      justify-content: space-between;
     }
 
     .step-label {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 900;
       color: #D97757;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .step-label::before {
       content: '';
-      width: 32px;
-      height: 2px;
+      width: 32px; height: 2px;
       background: #D97757;
     }
 
-    .slide-counter {
-      font-size: 16px;
+    .counter {
+      font-size: 15px;
       font-weight: 700;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.1em;
     }
 
+    /* Content — lower 2/3 */
     .content {
-      flex: 1;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 32px 56px 24px;
-      gap: 24px;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 0 52px 56px;
     }
 
     h2 {
-      font-size: 78px;
+      font-size: 88px;
       font-weight: 900;
       color: #fff;
-      line-height: 0.95;
-      letter-spacing: -0.035em;
-      max-width: 880px;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      max-width: 940px;
     }
 
     h2 .accent { color: #D97757; }
 
-    .body-text {
+    .body {
       font-size: 26px;
-      color: rgba(255,255,255,0.65);
       font-weight: 400;
+      color: rgba(255,255,255,0.5);
       line-height: 1.55;
       max-width: 820px;
+      margin-bottom: 40px;
     }
 
-    .tip-box {
-      display: flex;
-      align-items: stretch;
-      max-width: 860px;
-      gap: 0;
+    .body strong { color: rgba(255,255,255,0.8); font-weight: 700; }
+
+    /* Key insight strip */
+    .insight {
+      border-left: 4px solid #D97757;
+      padding: 0 0 0 24px;
+      margin-bottom: 40px;
     }
 
-    .tip-bar {
-      width: 5px;
-      background: #D97757;
-      flex-shrink: 0;
-      border-radius: 3px 0 0 3px;
-    }
-
-    .tip-inner {
-      background: rgba(217,119,87,0.07);
-      border: 1px solid rgba(217,119,87,0.18);
-      border-left: none;
-      padding: 20px 24px;
-      flex: 1;
-    }
-
-    .tip-label {
-      font-size: 11px;
-      font-weight: 900;
-      color: #D97757;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .tip-text {
-      font-size: 20px;
-      color: rgba(255,255,255,0.8);
+    .insight-text {
+      font-size: 22px;
       font-weight: 500;
+      color: rgba(255,255,255,0.6);
       line-height: 1.5;
+      font-style: italic;
     }
 
-    .tip-text strong { color: #D97757; font-weight: 800; }
-
-    .bottom-bar {
-      position: relative;
-      z-index: 2;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 24px 56px;
+    /* Bottom */
+    .bottom {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     .handle {
-      display: flex;
-      align-items: center;
-      gap: 8px;
       font-size: 15px;
       font-weight: 700;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
     }
-
-    .handle svg { fill: #D97757; width: 14px; height: 14px; }
 
     .dots {
       display: flex;
@@ -173,50 +139,38 @@
     }
 
     .dot {
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: rgba(255,255,255,0.15);
     }
 
     .dot.active {
       width: 28px;
-      border-radius: 5px;
+      border-radius: 4px;
       background: #D97757;
     }
   </style>
 </head>
 <body>
 
-  <div class="step-watermark">{{STEP_NUM}}</div>
+  <div class="accent-bar"></div>
+  <div class="step-ghost">{{STEP_NUM}}</div>
 
-  <div class="top-bar">
+  <div class="top">
     <div class="step-label">{{STEP_LABEL}}</div>
-    <div class="slide-counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+    <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
   </div>
 
   <div class="content">
     <h2>{{TITLE}}</h2>
-    <p class="body-text">{{BODY}}</p>
-    <div class="tip-box">
-      <div class="tip-bar"></div>
-      <div class="tip-inner">
-        <div class="tip-label">💡 PRO TIP</div>
-        <div class="tip-text">{{TIP}}</div>
-      </div>
+    <p class="body">{{BODY}}</p>
+    <div class="insight">
+      <div class="insight-text">{{TIP}}</div>
     </div>
-  </div>
-
-  <div class="bottom-bar">
-    <div class="handle">
-      <svg viewBox="0 0 100 100">
-        <rect x="44" y="5" width="12" height="90" rx="6"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/>
-        <rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/>
-      </svg>
-      claudeprofessor
+    <div class="bottom">
+      <div class="handle">@claudeprofessor</div>
+      <div class="dots">{{DOTS}}</div>
     </div>
-    <div class="dots">{{DOTS}}</div>
   </div>
 
 </body>
