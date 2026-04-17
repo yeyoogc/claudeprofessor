@@ -56,7 +56,9 @@ def fetch_bg_image(query: str) -> str:
 
 
 def _daily_seed(query: str) -> int:
-    h = hashlib.md5(f"{date.today().isoformat()}:{query}".encode()).hexdigest()
+    from datetime import datetime
+    stamp = datetime.now().strftime("%Y-%m-%d-%H")
+    h = hashlib.md5(f"{stamp}:{query}".encode()).hexdigest()
     return int(h[:8], 16)
 
 

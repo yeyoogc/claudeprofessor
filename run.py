@@ -85,6 +85,24 @@ def run(dry_run: bool = False, preview: bool = False) -> None:
     post_id = create_carousel(hosted_urls, full_caption)
     print(f"Done! Post ID: {post_id}")
 
+    # ── Step 5: Update gallery ────────────────────────────────────────────
+    posts_file = Path(__file__).parent / "docs" / "posts.json"
+    try:
+        existing = json.loads(posts_file.read_text()) if posts_file.exists() else []
+    except (json.JSONDecodeError, OSError):
+        existing = []
+    existing.append({
+        "id": post_id,
+        "topic": topic,
+        "tag": data.get("hook", {}).get("tag", "Claude AI"),
+        "date": date.today().isoformat(),
+        "slides": hosted_urls,
+        "caption": full_caption,
+        "instagram_id": post_id,
+    })
+    posts_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    print(f"Gallery updated: {len(existing)} posts total")
+
 
 def publish_last() -> None:
     if not os.path.exists(PREVIEW_FILE):
