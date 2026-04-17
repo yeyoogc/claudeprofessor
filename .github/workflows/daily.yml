@@ -39,12 +39,11 @@ jobs:
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git fetch origin preview 2>/dev/null || git checkout --orphan preview
-          git checkout preview 2>/dev/null || true
-          git checkout main -- .last_preview.json 2>/dev/null || true
           cp .last_preview.json /tmp/preview.json
-          git checkout preview || git checkout --orphan preview
+          git fetch origin
+          git checkout -B preview
+          git reset --mixed origin/master 2>/dev/null || git reset --mixed HEAD
           cp /tmp/preview.json .last_preview.json
-          git add .last_preview.json
+          git add -f .last_preview.json
           git commit -m "Preview $(date +%Y-%m-%d)" || echo "Nothing to commit"
           git push origin preview --force
