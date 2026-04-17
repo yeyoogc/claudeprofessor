@@ -7,6 +7,7 @@
   <meta name="description" content="Carruseles, guías y recursos sobre Claude AI en español. Skills, MCP, agentes, prompt engineering y más.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     :root {
       --bg: #ffffff;
@@ -468,8 +469,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
       margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+    .guide-card-icon [data-lucide] {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+      stroke-width: 2;
     }
 
     .guide-card-title {
@@ -860,9 +867,22 @@
       box-shadow: 0 4px 16px rgba(217,119,87,0.07);
     }
     .resource-icon {
-      font-size: 24px;
+      width: 32px;
+      height: 32px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 1px;
+    }
+    .resource-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
+      color: var(--accent);
+    }
+    .resource-icon svg[stroke] {
+      fill: none;
     }
     .resource-info { min-width: 0; }
     .resource-title {
@@ -1320,7 +1340,7 @@
     {
       id: "que-es-mcp",
       cat: "mcp",
-      icon: "🔌",
+      icon: "plug",
       title: "Qué es MCP y cómo conectarlo a Claude",
       desc: "El Model Context Protocol permite a Claude conectarse con herramientas externas como GitHub, Notion, Slack o bases de datos. Aprende qué es, por qué importa y cómo configurar tu primer servidor MCP.",
       time: "8 min",
@@ -1384,7 +1404,7 @@ npm install @modelcontextprotocol/sdk</code></pre>
     {
       id: "claude-code-guia",
       cat: "claude-code",
-      icon: "⌨️",
+      icon: "terminal",
       title: "Claude Code: guía completa para empezar",
       desc: "Instala Claude Code, configura tu CLAUDE.md, aprende los comandos esenciales y empieza a programar con un agente de verdad a tu lado.",
       time: "12 min",
@@ -1467,7 +1487,7 @@ para usar hooks modernos en vez de clases. Asegúrate de que los tests pasen.</c
     {
       id: "crear-skills",
       cat: "skills",
-      icon: "🛠️",
+      icon: "wrench",
       title: "Cómo crear Skills para Claude Code",
       desc: "Las Skills son la forma más potente de extender Claude Code. Aprende a diseñar, escribir y publicar tu propia Skill para automatizar cualquier flujo de trabajo.",
       time: "10 min",
@@ -1561,7 +1581,7 @@ Genera tests unitarios completos para funciones y módulos.
     {
       id: "prompt-engineering",
       cat: "prompts",
-      icon: "✍️",
+      icon: "pen-tool",
       title: "Prompt engineering avanzado con Claude",
       desc: "Claude responde diferente según cómo le hablas. Aprende a usar XML tags, system prompts, few-shot examples y chain of thought para sacar el máximo partido.",
       time: "9 min",
@@ -1646,7 +1666,7 @@ relaciones complejas entre entidades, 10k usuarios iniciales.</span></code></pre
     {
       id: "agentes-claude",
       cat: "agentes",
-      icon: "🤖",
+      icon: "bot",
       title: "Construir agentes con Claude: guía práctica",
       desc: "Los agentes con Claude van más allá de un chatbot. Aprende a construir sistemas multi-agente, usar tool use, y conectar Claude con el mundo real.",
       time: "11 min",
@@ -1743,34 +1763,53 @@ graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</
     }
   ];
 
+  // Simple Icons SVG paths (monochrome, will be colored via CSS fill)
+  const SI = {
+    github: `<svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`,
+    notion: `<svg viewBox="0 0 24 24"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>`,
+    brave: `<svg viewBox="0 0 24 24"><path d="M19.243 6.497L20.999 3H3l1.757 3.497.521 1.043a7.694 7.694 0 00-.208 4.537l.05.194c.44 1.668 1.308 3.173 2.56 4.518l.22.237 3.03 3.103.07.072L12 21l.992-1.017 3.1-3.103.22-.237c1.252-1.345 2.119-2.85 2.56-4.518l.05-.194a7.68 7.68 0 00-.208-4.537zm-1.929 4.274l-.038.147c-.359 1.358-1.065 2.582-2.08 3.652l-.22.24-2.976 2.969-2.977-2.969-.22-.24c-1.015-1.07-1.72-2.294-2.08-3.652l-.038-.147a5.961 5.961 0 01.167-3.484L7.8 5.4H16.2l.647 1.887a5.961 5.961 0 01.167 3.484h-.7z"/></svg>`,
+    postgresql: `<svg viewBox="0 0 24 24"><path d="M17.128 0a10.134 10.134 0 00-2.755.403l-.063.02A10.922 10.922 0 0012.6.258C11.422.238 10.41.524 9.594 1 8.79.721 7.122.24 5.364.336 4.14.403 2.804.775 1.814 1.82.827 2.865.305 4.482.415 6.682c.03.607.095 1.199.19 1.768a21.1 21.1 0 00.042.217l.049.241.023.1.023.089a7.16 7.16 0 00.63 1.733c.35.635.837 1.19 1.533 1.463.218.082.446.13.676.144a13.83 13.83 0 002.15 4.677c.63.9 1.373 1.858 2.31 2.464.484.31 1.04.533 1.624.533h.04c.58 0 1.116-.223 1.618-.5a5.946 5.946 0 001.627-1.336h.016c1.037-.004 1.843-.243 2.443-.606.827.27 1.626.285 2.265.13.816-.2 1.366-.7 1.683-1.163.614-.896.82-1.975.9-2.909a15.95 15.95 0 00-.064-2.81c-.063-.539-.166-1.018-.259-1.41l-.033-.13a8.51 8.51 0 00-.27-.895c-.233-.64-.546-1.198-.962-1.63A3.96 3.96 0 0019.5.623a6.698 6.698 0 00-2.372-.622z"/></svg>`,
+    slack: `<svg viewBox="0 0 24 24"><path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z"/></svg>`,
+    figma: `<svg viewBox="0 0 24 24"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.356-3.019 3.02 0 1.664 1.354 3.018 3.019 3.018h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.026-4.49 4.515-4.49c2.489 0 4.515 2.014 4.515 4.49S10.661 24 8.172 24zm0-7.509c-1.665 0-3.044 1.355-3.044 3.019s1.379 3.019 3.044 3.019c1.665 0 3.044-1.355 3.044-3.019s-1.379-3.019-3.044-3.019zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h.097c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019h-.097z"/></svg>`,
+    vercel: `<svg viewBox="0 0 24 24"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>`,
+    tradingview: `<svg viewBox="0 0 24 24"><path d="M3 3h18v2H3zm3 4h12v2H6zm-3 4h18v2H3zm3 4h12v2H6zM3 19h18v2H3z"/></svg>`,
+    anthropic: `<svg viewBox="0 0 100 100"><rect x="44" y="5" width="12" height="90" rx="6"/><rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(45 50 50)"/><rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(90 50 50)"/><rect x="44" y="5" width="12" height="90" rx="6" transform="rotate(135 50 50)"/></svg>`,
+    book: `<i data-lucide="book-open"></i>`,
+    mcp: `<i data-lucide="plug"></i>`,
+    filesystem: `<i data-lucide="folder"></i>`,
+    crewai: `<svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-11h2v6h-2zm0-4h2v2h-2z"/></svg>`,
+    langgraph: `<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 12h9M16.8 7.7l-9.3 8.6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>`,
+    discord: `<svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>`,
+  };
+
   const MCP_RESOURCES = [
-    { icon: "🐙", title: "GitHub MCP", desc: "Repositorios, issues, pull requests y código", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/github", ext: "npm" },
-    { icon: "📝", title: "Notion MCP", desc: "Bases de datos, páginas y contenido de Notion", url: "https://github.com/notionhq/notion-mcp-server", ext: "npm" },
-    { icon: "🔍", title: "Brave Search", desc: "Búsquedas en tiempo real desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search", ext: "npm" },
-    { icon: "📊", title: "PostgreSQL", desc: "Consultas SQL directas desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres", ext: "npm" },
-    { icon: "💬", title: "Slack MCP", desc: "Mensajes y canales de Slack", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/slack", ext: "npm" },
-    { icon: "📁", title: "Filesystem", desc: "Leer y escribir archivos locales de forma segura", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem", ext: "npm" },
-    { icon: "🎨", title: "Figma MCP", desc: "Acceder a diseños y componentes de Figma", url: "https://github.com/sonnylazuardi/cursor-talk-to-figma-mcp", ext: "npm" },
-    { icon: "☁️", title: "Vercel MCP", desc: "Deployments, logs y proyectos de Vercel", url: "https://vercel.com/docs/mcp", ext: "npm" },
-    { icon: "📈", title: "TradingView MCP", desc: "Datos de mercado y análisis técnico", url: "https://github.com/tradingview/mcp-server", ext: "npm" },
+    { icon: SI.github, title: "GitHub MCP", desc: "Repositorios, issues, pull requests y código", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/github", ext: "npm" },
+    { icon: SI.notion, title: "Notion MCP", desc: "Bases de datos, páginas y contenido de Notion", url: "https://github.com/notionhq/notion-mcp-server", ext: "npm" },
+    { icon: SI.brave, title: "Brave Search", desc: "Búsquedas en tiempo real desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search", ext: "npm" },
+    { icon: SI.postgresql, title: "PostgreSQL", desc: "Consultas SQL directas desde Claude", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres", ext: "npm" },
+    { icon: SI.slack, title: "Slack MCP", desc: "Mensajes y canales de Slack", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/slack", ext: "npm" },
+    { icon: SI.filesystem, title: "Filesystem", desc: "Leer y escribir archivos locales de forma segura", url: "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem", ext: "npm" },
+    { icon: SI.figma, title: "Figma MCP", desc: "Acceder a diseños y componentes de Figma", url: "https://github.com/sonnylazuardi/cursor-talk-to-figma-mcp", ext: "npm" },
+    { icon: SI.vercel, title: "Vercel MCP", desc: "Deployments, logs y proyectos de Vercel", url: "https://vercel.com/docs/mcp", ext: "npm" },
+    { icon: SI.tradingview, title: "TradingView MCP", desc: "Datos de mercado y gráficos en tiempo real", url: "https://github.com/tradingview/mcp-server", ext: "npm" },
   ];
 
   const DOCS_RESOURCES = [
-    { icon: "📖", title: "Docs de Anthropic", desc: "Documentación oficial de Claude y la API", url: "https://docs.anthropic.com", ext: "anthropic.com" },
-    { icon: "⌨️", title: "Claude Code Docs", desc: "Referencia completa del CLI Claude Code", url: "https://docs.anthropic.com/claude-code", ext: "anthropic.com" },
-    { icon: "🔌", title: "MCP Specification", desc: "Especificación técnica del protocolo MCP", url: "https://spec.modelcontextprotocol.io", ext: "modelcontextprotocol.io" },
-    { icon: "🛠️", title: "MCP Servers Registry", desc: "Directorio oficial de servidores MCP", url: "https://github.com/modelcontextprotocol/servers", ext: "github.com" },
-    { icon: "🍳", title: "Claude Cookbook", desc: "Ejemplos de código y recetas de uso con Claude", url: "https://github.com/anthropics/anthropic-cookbook", ext: "github.com" },
-    { icon: "💰", title: "Precios de Claude", desc: "Costes actualizados de todos los modelos", url: "https://www.anthropic.com/pricing", ext: "anthropic.com" },
+    { icon: SI.anthropic, title: "Docs de Anthropic", desc: "Documentación oficial de Claude y la API", url: "https://docs.anthropic.com", ext: "anthropic.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`, title: "Claude Code Docs", desc: "Referencia completa del CLI Claude Code", url: "https://docs.anthropic.com/claude-code", ext: "anthropic.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`, title: "MCP Specification", desc: "Especificación técnica del protocolo MCP", url: "https://spec.modelcontextprotocol.io", ext: "modelcontextprotocol.io" },
+    { icon: SI.github, title: "MCP Servers Registry", desc: "Directorio oficial de servidores MCP", url: "https://github.com/modelcontextprotocol/servers", ext: "github.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>`, title: "Claude Cookbook", desc: "Ejemplos de código y recetas de uso con Claude", url: "https://github.com/anthropics/anthropic-cookbook", ext: "github.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`, title: "Precios de Claude", desc: "Costes actualizados de todos los modelos", url: "https://www.anthropic.com/pricing", ext: "anthropic.com" },
   ];
 
   const COMMUNITY_RESOURCES = [
-    { icon: "🚀", title: "awesome-llm-apps", desc: "100+ aplicaciones y agentes construidos con Claude", url: "https://github.com/Shubhamsaboo/awesome-llm-apps", ext: "github.com" },
-    { icon: "🌍", title: "tododeia.com", desc: "Comunidad hispana de Claude AI, guías y recursos", url: "https://tododeia.com", ext: "tododeia.com" },
-    { icon: "🔨", title: "mcp.so", desc: "Directorio de comunidad de servidores MCP", url: "https://mcp.so", ext: "mcp.so" },
-    { icon: "🤖", title: "CrewAI", desc: "Framework de agentes multi-rol compatible con Claude", url: "https://github.com/joaomdmoura/crewAI", ext: "github.com" },
-    { icon: "🕸️", title: "LangGraph", desc: "Grafos de agentes stateful con Claude", url: "https://github.com/langchain-ai/langgraph", ext: "github.com" },
-    { icon: "📡", title: "Anthropic Discord", desc: "Comunidad oficial de desarrolladores de Anthropic", url: "https://www.anthropic.com/discord", ext: "discord" },
+    { icon: SI.github, title: "awesome-llm-apps", desc: "100+ aplicaciones y agentes construidos con Claude", url: "https://github.com/Shubhamsaboo/awesome-llm-apps", ext: "github.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`, title: "tododeia.com", desc: "Comunidad hispana de Claude AI, guías y recursos", url: "https://tododeia.com", ext: "tododeia.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`, title: "mcp.so", desc: "Directorio de comunidad de servidores MCP", url: "https://mcp.so", ext: "mcp.so" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>`, title: "CrewAI", desc: "Framework de agentes multi-rol compatible con Claude", url: "https://github.com/joaomdmoura/crewAI", ext: "github.com" },
+    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="17.2" y1="7.5" x2="7" y2="12"/><line x1="17.2" y1="16.5" x2="7" y2="12"/></svg>`, title: "LangGraph", desc: "Grafos de agentes stateful con Claude", url: "https://github.com/langchain-ai/langgraph", ext: "github.com" },
+    { icon: SI.discord, title: "Anthropic Discord", desc: "Comunidad oficial de desarrolladores de Anthropic", url: "https://www.anthropic.com/discord", ext: "discord" },
   ];
 
   // ═══════════════════════════════════════════════════════ ROUTING
@@ -1932,7 +1971,7 @@ graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</
   function renderGuideCard(guide) {
     return `
       <div class="guide-card" onclick="openArticle('${guide.id}')">
-        <div class="guide-card-icon">${guide.icon}</div>
+        <div class="guide-card-icon"><i data-lucide="${guide.icon}"></i></div>
         <div class="guide-card-title">${guide.title}</div>
         <div class="guide-card-desc">${guide.desc}</div>
         <div class="guide-card-meta">
@@ -1944,7 +1983,9 @@ graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</
 
   function renderGuides(cat) {
     const filtered = cat === 'all' ? GUIDES : GUIDES.filter(g => g.cat === cat);
-    document.getElementById('guides-grid').innerHTML = filtered.map(renderGuideCard).join('');
+    const grid = document.getElementById('guides-grid');
+    grid.innerHTML = filtered.map(renderGuideCard).join('');
+    lucide.createIcons({ scope: grid });
   }
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1992,6 +2033,7 @@ graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</
           <div class="resource-desc">${r.desc}</div>
         </div>
       </a>`).join('');
+    lucide.createIcons({ scope: grid });
   }
 
   // ═══════════════════════════════════════════════════════ HOME GUIDES
@@ -2000,6 +2042,7 @@ graph.add_conditional_edges(<span class="st">"agente"</span>, should_continue)</
     const grid = document.getElementById('home-guides');
     if (!grid) return;
     grid.innerHTML = GUIDES.slice(0, 3).map(renderGuideCard).join('');
+    lucide.createIcons({ scope: grid });
   }
 
   // ═══════════════════════════════════════════════════════ INIT
