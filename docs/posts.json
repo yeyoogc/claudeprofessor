@@ -73,5 +73,21 @@
       "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/72c7142bba20_slide_06.jpg"
     ],
     "instagram_id": "17903522316241281"
+  },
+  {
+    "id": "18198834298347954",
+    "topic": "Claude Design: AI-powered visual design tool launched",
+    "tag": "Nuevas Herramientas",
+    "date": "2026-04-18",
+    "slides": [
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/f40f0666b0c7_slide_01.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/b1272a19e4a0_slide_02.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/ebd6b9f1a296_slide_03.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/7143bd642118_slide_04.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/78eb008d1a44_slide_05.jpg",
+      "https://twswhlxcsjkcyowzjxjm.supabase.co/storage/v1/object/public/carousel-images/1f9d3bb88fa7_slide_06.jpg"
+    ],
+    "caption": "🎨 Acaba de salir Claude Design y ya está revolucionando cómo hacemos prototipos. Sin Figma, sin esperar al diseñador, sin código. Solo prompts en español y Claude genera interfaces profesionales. ¿Ya la probaste? 🚀 Comenta qué te gustaría diseñar con IA.\n\n#ClaudeAI #AnthropicAI #AITips #PromptEngineering #ClaudeProfessor #LearnAI #AITools #ArtificialIntelligence #AIAssistant #TechTips #MachineLearning #AIProductivity #ChatAI #FutureOfWork #AIHacks",
+    "instagram_id": "18198834298347954"
   }
 ]
