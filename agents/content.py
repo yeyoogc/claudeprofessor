@@ -55,7 +55,7 @@ Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body 
 {{
   "topic": "one-line topic description in English",
   "template_style": "flat" | "news" | "editorial" | "dark" | "photo",
-  "bg_query": "3-6 English words for Unsplash photo search. For 'photo' style: editorial portrait or lifestyle photo (person, face, hands working, close-up texture) — NOT abstract tech. For 'news'/'dark' style: dark moody abstract or dramatic landscape.",
+  "bg_query": "3-8 English keywords describing the SPECIFIC topic for Unsplash image search. Be precise: 'terminal code dark screen', 'api developer python code', 'mcp server integration network', 'claude model benchmark thinking', 'agent autonomous workflow pipeline', 'person typing laptop productivity', etc. Match the actual topic — never generic 'ai robot' or 'technology abstract'. For 'photo' style: person/hands/lifestyle. For 'news'/'dark': dramatic moody version of the topic.",
   "hook": {{
     "tag": "Short Category Name",
     "title": "Catchy title with one <span class=\\"accent\\">accented</span> word",
