@@ -88,8 +88,8 @@ Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body 
     }}
   ],
   "cta": {{
-    "cta_title": "Engaging CTA title (max 10 words)",
-    "cta_subtitle": "Short subtitle inviting to follow (max 12 words)"
+    "cta_title": "Comenta PROFESOR para desbloquear [specific guide related to this topic] (max 10 words, always start with 'Comenta PROFESOR')",
+    "cta_subtitle": "Short subtitle saying what they'll get + invite to follow (max 12 words)"
   }},
   "caption": "Engaging Instagram caption in Spanish (2-4 sentences, emojis, references the topic, ends with a question). No hashtags.",
   "hashtags": "#ClaudeAI #AnthropicAI #AITips #PromptEngineering #ClaudeProfessor #LearnAI #AITools #ArtificialIntelligence #AIAssistant #TechTips #MachineLearning #AIProductivity #ChatAI #FutureOfWork #AIHacks"
@@ -167,7 +167,7 @@ def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
         raise ValueError(f"Expected 4 slides, got {len(data['slides'])}")
 
     style = data.get("template_style", "editorial")
-    if style not in {"flat", "news", "editorial", "grid"}:
+    if style not in {"flat", "news", "editorial", "grid", "dark", "photo"}:
         style = "editorial"
     data["template_style"] = style
     data.setdefault("bg_query", "artificial intelligence technology abstract")
