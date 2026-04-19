@@ -12,6 +12,7 @@ POST_HOUR_UTC = int(os.getenv("POST_HOUR_UTC", "12"))
 POST_MINUTE_UTC = int(os.getenv("POST_MINUTE_UTC", "0"))
 
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY", "")
+FIGMA_ACCESS_TOKEN = os.getenv("FIGMA_ACCESS_TOKEN", "")
 
 EMAIL_FROM = os.environ["EMAIL_FROM"]
 EMAIL_APP_PASSWORD = os.environ["EMAIL_APP_PASSWORD"]

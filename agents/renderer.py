@@ -10,6 +10,7 @@ from pathlib import Path
 from playwright.async_api import async_playwright
 
 from agents.unsplash import fetch_bg_image
+from agents.design_picker import pick as pick_design
 
 _MASCOT_DATA_URI: str | None = None
 
@@ -26,7 +27,7 @@ def _mascot_uri() -> str:
 
 TEMPLATES_ROOT = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
-VALID_STYLES = {"flat", "news", "editorial", "grid", "dark", "photo", "bold"}
+VALID_STYLES = {"flat", "news", "editorial", "grid", "dark", "photo", "bold", "dynamic"}
 
 
 def _build_dots_html(total: int, active_index: int) -> str:
@@ -38,7 +39,13 @@ def _build_dots_html(total: int, active_index: int) -> str:
     return "\n      ".join(dots)
 
 
-def _inject_hook(template: str, data: dict, total_slides: int, bg_url: str = "") -> str:
+def _inject_design_vars(html: str, design: dict) -> str:
+    html = html.replace("{{PALETTE}}", design.get("palette", ""))
+    html = html.replace("{{LAYOUT}}", design.get("layout", "layout-a"))
+    return html
+
+
+def _inject_hook(template: str, data: dict, total_slides: int, bg_url: str = "", design: dict = {}) -> str:
     html = template
     html = html.replace("{{TAG}}", data.get("tag", "Claude AI"))
     html = html.replace("{{TITLE}}", data.get("title", ""))
@@ -46,10 +53,11 @@ def _inject_hook(template: str, data: dict, total_slides: int, bg_url: str = "")
     html = html.replace("{{TOTAL_SLIDES}}", f"{total_slides:02d}")
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
     html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
+    html = _inject_design_vars(html, design)
     return html
 
 
-def _inject_content(template: str, data: dict, slide_idx: int, total_slides: int, bg_url: str = "") -> str:
+def _inject_content(template: str, data: dict, slide_idx: int, total_slides: int, bg_url: str = "", design: dict = {}) -> str:
     html = template
     step_num = slide_idx
     html = html.replace("{{STEP_NUM}}", str(step_num))
@@ -62,10 +70,11 @@ def _inject_content(template: str, data: dict, slide_idx: int, total_slides: int
     html = html.replace("{{DOTS}}", _build_dots_html(total_slides, slide_idx))
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
     html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
+    html = _inject_design_vars(html, design)
     return html
 
 
-def _inject_cta(template: str, data: dict, total_slides: int, bg_url: str = "") -> str:
+def _inject_cta(template: str, data: dict, total_slides: int, bg_url: str = "", design: dict = {}) -> str:
     html = template
     html = html.replace("{{CTA_TITLE}}", data.get("cta_title", "Síguenos para más tips"))
     html = html.replace("{{CTA_SUBTITLE}}", data.get("cta_subtitle", "Cada día un nuevo truco de Claude AI"))
@@ -74,6 +83,7 @@ def _inject_cta(template: str, data: dict, total_slides: int, bg_url: str = "") 
     html = html.replace("{{DOTS}}", _build_dots_html(total_slides, total_slides - 1))
     html = html.replace("{{BG_IMAGE_URL}}", bg_url)
     html = html.replace("{{MASCOT_DATA_URI}}", _mascot_uri())
+    html = _inject_design_vars(html, design)
     return html
 
 
@@ -109,10 +119,17 @@ async def render_carousel(content: dict) -> list[str]:
     """
     OUTPUT_DIR.mkdir(exist_ok=True)
 
-    # Pick template family by content['template_style']
-    style = content.get("template_style", "editorial")
+    style = content.get("template_style", "dynamic")
     if style not in VALID_STYLES:
-        style = "editorial"
+        style = "dynamic"
+
+    # Dynamic: pick palette + layout from topic hash
+    design = {}
+    if style == "dynamic":
+        topic = content.get("topic", content.get("hook", {}).get("title", "default"))
+        design = pick_design(topic)
+        print(f"  Design: {design['palette'] or 'default'} / {design['layout']}")
+
     style_dir = TEMPLATES_ROOT / style
     print(f"  Rendering with style: {style}")
 
@@ -120,27 +137,21 @@ async def render_carousel(content: dict) -> list[str]:
     content_template = (style_dir / "slide_content.html").read_text(encoding="utf-8")
     cta_template = (style_dir / "slide_cta.html").read_text(encoding="utf-8")
 
-    # News + grid styles use a background/device image from Unsplash
     bg_url = ""
     if style in ("news", "grid", "photo"):
         bg_query = content.get("bg_query", "abstract technology orange")
         bg_url = fetch_bg_image(bg_query)
         print(f"  Background: {bg_url[:80]}...")
 
-    total_slides = 2 + len(content["slides"])  # hook + N content + cta
+    total_slides = 2 + len(content["slides"])
 
-    # Prepare all HTML pages
     pages = []
+    pages.append(_inject_hook(hook_template, content["hook"], total_slides, bg_url, design))
 
-    # Slide 1: Hook
-    pages.append(_inject_hook(hook_template, content["hook"], total_slides, bg_url))
-
-    # Slides 2-N: Content
     for i, slide_data in enumerate(content["slides"]):
-        pages.append(_inject_content(content_template, slide_data, i + 1, total_slides, bg_url))
+        pages.append(_inject_content(content_template, slide_data, i + 1, total_slides, bg_url, design))
 
-    # Slide N+1: CTA
-    pages.append(_inject_cta(cta_template, content.get("cta", {}), total_slides, bg_url))
+    pages.append(_inject_cta(cta_template, content.get("cta", {}), total_slides, bg_url, design))
     
     # Render all
     output_paths = []

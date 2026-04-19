@@ -199,9 +199,9 @@ def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
     if len(data["slides"]) != 4:
         raise ValueError(f"Expected 4 slides, got {len(data['slides'])}")
 
-    style = data.get("template_style", "bold")
-    if style not in {"flat", "news", "editorial", "grid", "dark", "photo", "bold"}:
-        style = "bold"
+    style = data.get("template_style", "dynamic")
+    if style not in {"flat", "news", "editorial", "grid", "dark", "photo", "bold", "dynamic"}:
+        style = "dynamic"
     data["template_style"] = style
     data.setdefault("bg_query", "artificial intelligence technology abstract")
 
