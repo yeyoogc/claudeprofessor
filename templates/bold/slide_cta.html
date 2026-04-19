@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #111010;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Ghost "FIN" text */
+  .ghost-text {
+    position: absolute;
+    right: -40px;
+    bottom: -30px;
+    font-size: 360px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+
+  /* Coral diagonal stripe top-right */
+  .stripe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 8px;
+    background: #D97757;
+    z-index: 1;
+  }
+
+  /* Top bar */
+  .topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px 64px 0;
+  }
+
+  .brand {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .slide-counter {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+  }
+
+  /* Main */
+  .main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 72px;
+    gap: 36px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #D97757;
+  }
+
+  h1 {
+    font-size: 88px;
+    font-weight: 900;
+    color: #F2EFE9;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    max-width: 880px;
+  }
+
+  h1 .accent {
+    color: #D97757;
+    font-style: italic;
+  }
+
+  .cta-sub {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(242,239,233,0.45);
+    line-height: 1.5;
+    max-width: 640px;
+    border-left: 4px solid rgba(217,119,87,0.4);
+    padding-left: 20px;
+  }
+
+  /* Divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    max-width: 880px;
+  }
+
+  /* Follow row */
+  .follow-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .mascot-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid rgba(217,119,87,0.5);
+    object-fit: cover;
+    background: #1a1918;
+    flex-shrink: 0;
+  }
+
+  .follow-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .follow-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #F2EFE9;
+  }
+
+  .follow-handle {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(242,239,233,0.4);
+  }
+
+  /* Bottom bar */
+  .bottombar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 64px 44px;
+  }
+
+  .save-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .save-hint svg {
+    width: 22px;
+    height: 22px;
+    fill: rgba(255,255,255,0.2);
+  }
+
+  .site {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="ghost-text">FIN</div>
+  <div class="stripe"></div>
+
+  <div class="topbar">
+    <div class="brand">@claudeprofessor</div>
+    <div class="slide-counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="main">
+    <div class="eyebrow">Comenta PROFESOR</div>
+    <h1>{{CTA_TITLE}}</h1>
+    <p class="cta-sub">{{CTA_SUBTITLE}}</p>
+    <div class="divider"></div>
+    <div class="follow-row">
+      <img class="mascot-avatar" src="{{MASCOT_DATA_URI}}" alt="Claude Professor" />
+      <div class="follow-text">
+        <div class="follow-name">Claude Professor</div>
+        <div class="follow-handle">claudeprofessor.page</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottombar">
+    <div class="save-hint">
+      <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Guardar
+    </div>
+    <div class="site">claudeprofessor.page</div>
+  </div>
+
+</body>
+</html>
