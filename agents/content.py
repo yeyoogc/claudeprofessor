@@ -42,6 +42,7 @@ TOPIC PRIORITY (pick what's fresh and NOT already covered):
 - Comparisons: Claude vs GPT-4o on specific tasks with real results
 
 Template style rules:
+- "bold": DEFAULT. Swiss editorial, massive typography, cream + black + coral. Use for anything impactful.
 - "flat": Lists, prompt collections, quick tips compilations (e.g. "5 tricks", "10 prompts").
 - "news": Announcements, product launches, new features, bold comparisons.
 - "editorial": Tutorials, how-to deep dives, conceptual explanations.
@@ -198,9 +199,9 @@ def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
     if len(data["slides"]) != 4:
         raise ValueError(f"Expected 4 slides, got {len(data['slides'])}")
 
-    style = data.get("template_style", "editorial")
-    if style not in {"flat", "news", "editorial", "grid", "dark", "photo"}:
-        style = "editorial"
+    style = data.get("template_style", "bold")
+    if style not in {"flat", "news", "editorial", "grid", "dark", "photo", "bold"}:
+        style = "bold"
     data["template_style"] = style
     data.setdefault("bg_query", "artificial intelligence technology abstract")
 

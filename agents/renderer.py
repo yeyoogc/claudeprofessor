@@ -26,7 +26,7 @@ def _mascot_uri() -> str:
 
 TEMPLATES_ROOT = Path(__file__).parent.parent / "templates"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
-VALID_STYLES = {"flat", "news", "editorial", "grid", "dark", "photo"}
+VALID_STYLES = {"flat", "news", "editorial", "grid", "dark", "photo", "bold"}
 
 
 def _build_dots_html(total: int, active_index: int) -> str:
