@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:#F2EFE9; --surface:#111010; --text:#111010;
+    --accent:#D97757; --muted:rgba(17,16,16,0.45); --border:rgba(17,16,16,0.1);
+  }
+  .palette-night  { --bg:#0D0D0D; --surface:#1A1816; --text:#F2EFE9; --accent:#D97757; --muted:rgba(242,239,233,0.4); --border:rgba(242,239,233,0.08); }
+  .palette-slate  { --bg:#1B2340; --surface:#252F4A; --text:#E8EAF0; --accent:#D97757; --muted:rgba(232,234,240,0.4); --border:rgba(232,234,240,0.1); }
+  .palette-sand   { --bg:#F5F0E8; --surface:#2A2520; --text:#2A2520; --accent:#C4623E; --muted:rgba(42,37,32,0.4); --border:rgba(42,37,32,0.1); }
+  .palette-ink    { --bg:#F8F8F6; --surface:#111; --text:#111; --accent:#E05A2B; --muted:rgba(17,17,17,0.4); --border:rgba(17,17,17,0.08); }
+  .palette-dusk   { --bg:#1C1624; --surface:#251D30; --text:#EDE8F5; --accent:#D97757; --muted:rgba(237,232,245,0.4); --border:rgba(237,232,245,0.08); }
+
+  /* CTA inverts: dark backgrounds use surface, light ones use surface */
+  body {
+    width:1080px; height:1080px;
+    background:var(--surface); color:var(--bg);
+    font-family:'Inter',sans-serif;
+    overflow:hidden; position:relative;
+    display:flex; flex-direction:column;
+  }
+
+  .ghost { position:absolute; right:-30px; bottom:-20px; font-size:380px; font-weight:900; color:rgba(255,255,255,0.04); line-height:1; letter-spacing:-0.05em; pointer-events:none; z-index:0; }
+
+  /* Layout-specific top accents */
+  .layout-a .top-bar { position:absolute; top:0; right:0; width:340px; height:6px; background:var(--accent); z-index:2; }
+  .layout-b .top-bar { position:absolute; top:0; left:0; right:0; height:6px; background:var(--accent); z-index:2; }
+  .layout-c .top-bar { position:absolute; top:0; left:0; width:6px; bottom:0; background:var(--accent); z-index:2; }
+  .layout-d .top-bar { position:absolute; top:0; left:0; right:0; height:6px; background:var(--accent); z-index:2; }
+  .layout-e .top-bar { position:absolute; top:0; right:0; width:6px; bottom:0; background:var(--accent); z-index:2; }
+
+  .topbar { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:52px 68px 0; }
+  .brand { font-size:14px; font-weight:700; letter-spacing:0.04em; color:rgba(255,255,255,0.25); }
+  .counter { font-size:13px; font-weight:700; color:rgba(255,255,255,0.2); letter-spacing:0.06em; }
+
+  .main { position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 68px; gap:32px; }
+
+  .eyebrow { font-size:12px; font-weight:900; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); }
+
+  h1 { font-size:84px; font-weight:900; line-height:0.92; letter-spacing:-0.04em; color:var(--bg); max-width:880px; }
+  h1 .accent { color:var(--accent); font-style:italic; }
+
+  /* Light palettes: text is dark */
+  .palette-sand h1, .palette-ink h1 { color:var(--text); }
+  .palette-sand .brand, .palette-ink .brand { color:var(--muted); }
+  .palette-sand .counter, .palette-ink .counter { color:var(--muted); }
+  .palette-sand .ghost, .palette-ink .ghost { color:rgba(0,0,0,0.05); }
+
+  .cta-sub { font-size:22px; font-weight:500; line-height:1.5; max-width:640px; border-left:4px solid rgba(217,119,87,0.45); padding-left:20px; }
+  .palette-sand .cta-sub, .palette-ink .cta-sub { color:var(--muted); }
+  .cta-sub { color:rgba(255,255,255,0.45); }
+
+  .divider { width:100%; height:1px; background:rgba(255,255,255,0.08); max-width:880px; }
+  .palette-sand .divider, .palette-ink .divider { background:var(--border); }
+
+  .follow-row { display:flex; align-items:center; gap:18px; }
+  .mascot { width:68px; height:68px; border-radius:50%; border:2px solid rgba(217,119,87,0.4); object-fit:cover; flex-shrink:0; }
+  .follow-name { font-size:19px; font-weight:800; color:var(--bg); line-height:1.2; }
+  .palette-sand .follow-name, .palette-ink .follow-name { color:var(--text); }
+  .follow-handle { font-size:14px; font-weight:500; color:rgba(255,255,255,0.35); }
+  .palette-sand .follow-handle, .palette-ink .follow-handle { color:var(--muted); }
+
+  .bottombar { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:0 68px 44px; }
+  .save { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+  .palette-sand .save, .palette-ink .save { color:var(--muted); }
+  .save svg { width:20px; height:20px; fill:currentColor; }
+  .site { font-size:13px; font-weight:600; color:rgba(255,255,255,0.2); }
+  .palette-sand .site, .palette-ink .site { color:var(--muted); }
+</style>
+</head>
+<body class="{{PALETTE}} {{LAYOUT}}">
+  <div class="top-bar"></div>
+  <div class="ghost">FIN</div>
+
+  <div class="topbar">
+    <div class="brand">@claudeprofessor</div>
+    <div class="counter">{{SLIDE_NUM}} / {{TOTAL_SLIDES}}</div>
+  </div>
+
+  <div class="main">
+    <div class="eyebrow">Comenta PROFESOR</div>
+    <h1>{{CTA_TITLE}}</h1>
+    <p class="cta-sub">{{CTA_SUBTITLE}}</p>
+    <div class="divider"></div>
+    <div class="follow-row">
+      <img class="mascot" src="{{MASCOT_DATA_URI}}" />
+      <div>
+        <div class="follow-name">Claude Professor</div>
+        <div class="follow-handle">claudeprofessor.page</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottombar">
+    <div class="save">
+      <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Guardar
+    </div>
+    <div class="site">claudeprofessor.page</div>
+  </div>
+</body>
+</html>

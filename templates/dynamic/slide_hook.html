@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ── PALETTES ───────────────────────────────────────── */
+  :root {
+    --bg: #F2EFE9; --surface: #111010; --text: #111010;
+    --accent: #D97757; --accent2: #C4623E; --muted: rgba(17,16,16,0.45);
+    --border: rgba(17,16,16,0.1); --tag-bg: #D97757; --tag-color: #fff;
+  }
+  .palette-night   { --bg:#0D0D0D; --surface:#1A1816; --text:#F2EFE9; --accent:#D97757; --muted:rgba(242,239,233,0.45); --border:rgba(242,239,233,0.08); }
+  .palette-slate   { --bg:#1B2340; --surface:#252F4A; --text:#E8EAF0; --accent:#D97757; --muted:rgba(232,234,240,0.45); --border:rgba(232,234,240,0.1); }
+  .palette-sand    { --bg:#F5F0E8; --surface:#2A2520; --text:#2A2520; --accent:#C4623E; --muted:rgba(42,37,32,0.45); --border:rgba(42,37,32,0.1); }
+  .palette-ink     { --bg:#F8F8F6; --surface:#111; --text:#111; --accent:#E05A2B; --muted:rgba(17,17,17,0.4); --border:rgba(17,17,17,0.08); }
+  .palette-dusk    { --bg:#1C1624; --surface:#251D30; --text:#EDE8F5; --accent:#D97757; --muted:rgba(237,232,245,0.4); --border:rgba(237,232,245,0.08); }
+
+  body {
+    width: 1080px; height: 1080px;
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; position: relative;
+    color: var(--text);
+  }
+
+  /* ── LAYOUT A: Split vertical (black left) ─────────── */
+  .layout-a .col {
+    position: absolute; left:0; top:0; bottom:0; width:400px;
+    background: var(--surface);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+    z-index:2;
+  }
+  .layout-a .col::after {
+    content:''; position:absolute; right:0; top:0; bottom:0; width:5px; background:var(--accent);
+  }
+  .layout-a .col-ghost {
+    position:absolute; bottom:-20px; left:0; width:400px; overflow:hidden;
+    font-size:320px; font-weight:900; color:rgba(255,255,255,0.04);
+    line-height:1; letter-spacing:-0.05em; pointer-events:none; z-index:1;
+  }
+  .layout-a .content { position:absolute; left:440px; right:0; top:0; bottom:0; display:flex; flex-direction:column; justify-content:center; padding:0 52px; gap:28px; z-index:2; }
+  .layout-a .bottombar { position:absolute; left:440px; right:0; bottom:0; padding:0 52px 40px; z-index:3; display:flex; justify-content:flex-end; }
+
+  /* ── LAYOUT B: Top band ─────────────────────────────── */
+  .layout-b .band {
+    position:absolute; top:0; left:0; right:0; height:380px;
+    background:var(--surface); z-index:1;
+    display:flex; align-items:flex-end; padding:0 68px 36px;
+  }
+  .layout-b .band::after { content:''; position:absolute; bottom:0; left:0; right:0; height:5px; background:var(--accent); }
+  .layout-b .band-ghost {
+    position:absolute; right:-20px; top:-30px;
+    font-size:380px; font-weight:900; color:rgba(255,255,255,0.04);
+    line-height:1; pointer-events:none; letter-spacing:-0.05em;
+  }
+  .layout-b .content { position:absolute; top:400px; left:0; right:0; bottom:0; padding:36px 68px 0; display:flex; flex-direction:column; justify-content:center; gap:22px; z-index:2; }
+  .layout-b .bottombar { position:absolute; left:0; right:0; bottom:0; padding:0 68px 40px; z-index:3; display:flex; justify-content:flex-end; }
+  .layout-b .tag-pos { position:absolute; top:36px; left:68px; z-index:3; }
+
+  /* ── LAYOUT C: Full bleed dark + corner accent ───── */
+  .layout-c body { background: var(--surface) !important; }
+  .layout-c .bg-full { position:absolute; inset:0; background:var(--surface); z-index:0; }
+  .layout-c .corner-accent { position:absolute; top:0; right:0; width:260px; height:260px; background:var(--accent); clip-path:polygon(100% 0,0 0,100% 100%); z-index:1; }
+  .layout-c .content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 68px; gap:28px; z-index:2; }
+  .layout-c .bottombar { position:absolute; left:0; right:0; bottom:0; padding:0 68px 44px; z-index:3; display:flex; justify-content:space-between; align-items:center; }
+
+  /* ── LAYOUT D: Center composition ──────────────────── */
+  .layout-d .content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:0 80px; gap:28px; z-index:2; }
+  .layout-d .accent-bar { position:absolute; left:0; top:0; bottom:0; width:8px; background:var(--accent); z-index:1; }
+  .layout-d .big-num { position:absolute; right:-10px; bottom:40px; font-size:400px; font-weight:900; color:var(--border); line-height:1; letter-spacing:-0.05em; pointer-events:none; z-index:0; }
+  .layout-d .bottombar { position:absolute; left:0; right:0; bottom:0; padding:0 80px 44px; z-index:3; display:flex; justify-content:space-between; align-items:center; }
+
+  /* ── LAYOUT E: Diagonal split ────────────────────── */
+  .layout-e .diag {
+    position:absolute; top:0; left:0; right:0; height:1080px;
+    background:var(--surface);
+    clip-path:polygon(0 0, 100% 0, 100% 42%, 0 68%);
+    z-index:1;
+  }
+  .layout-e .diag::after { content:''; position:absolute; bottom:0; left:0; right:0; height:6px; background:var(--accent); }
+  .layout-e .content-top { position:absolute; top:0; left:0; right:0; height:60%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 68px 40px; z-index:2; gap:20px; }
+  .layout-e .content-bot { position:absolute; bottom:0; left:0; right:0; height:40%; display:flex; flex-direction:column; justify-content:center; padding:0 68px; z-index:2; gap:16px; }
+  .layout-e .bottombar { position:absolute; left:0; right:0; bottom:0; padding:0 68px 40px; z-index:3; display:flex; justify-content:flex-end; }
+
+  /* ── SHARED ELEMENTS ─────────────────────────────── */
+  .tag-pill {
+    display:inline-flex; align-items:center;
+    background:var(--tag-bg,var(--accent)); color:var(--tag-color,#fff);
+    font-size:13px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase;
+    padding:8px 20px; border-radius:999px;
+  }
+  .layout-c .tag-pill, .layout-e .tag-pill { background:var(--accent); }
+
+  h1 {
+    font-size:88px; font-weight:900; line-height:0.92;
+    letter-spacing:-0.04em; color:var(--text); max-width:900px;
+  }
+  .layout-a h1, .layout-b .band h1 { font-size:80px; }
+  .layout-c h1, .layout-e .content-top h1 { color:var(--bg); font-size:84px; }
+  h1 .accent { color:var(--accent); font-style:italic; }
+  .layout-c h1 .accent { color:var(--accent); }
+
+  .subtitle {
+    font-size:22px; font-weight:500; color:var(--muted); line-height:1.5;
+    max-width:600px; border-left:4px solid var(--accent); padding-left:18px;
+  }
+  .layout-c .subtitle { color:rgba(242,239,233,0.55); }
+  .layout-b .subtitle { max-width:700px; }
+
+  .mascot-box {
+    width:160px; height:160px; border-radius:24px;
+    border:3px solid rgba(255,255,255,0.12); overflow:hidden;
+    background:rgba(255,255,255,0.06);
+    box-shadow:0 0 0 6px rgba(217,119,87,0.15);
+  }
+  .mascot-box img { width:100%; height:100%; object-fit:cover; }
+
+  .handle { font-size:14px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:0.04em; }
+
+  .author { display:flex; align-items:center; gap:12px; }
+  .avatar { width:52px; height:52px; border-radius:50%; border:2px solid var(--border); object-fit:cover; flex-shrink:0; }
+  .author-name { font-size:15px; font-weight:800; color:var(--text); line-height:1.2; }
+  .author-handle { font-size:13px; font-weight:500; color:var(--muted); }
+  .layout-c .author-name { color:var(--bg); }
+  .layout-c .author-handle { color:rgba(242,239,233,0.4); }
+
+  .swipe {
+    display:flex; align-items:center; gap:9px;
+    font-size:12px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);
+  }
+  .swipe-circle {
+    width:38px; height:38px; border-radius:50%; border:2px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .swipe-circle svg { width:12px; height:12px; stroke:var(--muted); fill:none; stroke-width:2.5; }
+  .brand-top { font-size:14px; font-weight:700; color:var(--muted); letter-spacing:0.04em; }
+</style>
+</head>
+<body class="{{PALETTE}} {{LAYOUT}}">
+
+<!-- LAYOUT A -->
+<template id="tpl-layout-a">
+  <div class="col">
+    <div class="col-ghost">01</div>
+    <div class="mascot-box"><img src="{{MASCOT_DATA_URI}}" /></div>
+    <div class="handle">@claudeprofessor</div>
+  </div>
+  <div class="content">
+    <div class="tag-pill">{{TAG}}</div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+  </div>
+  <div class="bottombar">
+    <div class="swipe">Desliza<div class="swipe-circle"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></div></div>
+  </div>
+</template>
+
+<!-- LAYOUT B -->
+<template id="tpl-layout-b">
+  <div class="band">
+    <div class="band-ghost">01</div>
+    <h1>{{TITLE}}</h1>
+  </div>
+  <div class="tag-pos"><div class="tag-pill">{{TAG}}</div></div>
+  <div class="content">
+    <p class="subtitle">{{SUBTITLE}}</p>
+    <div class="author">
+      <img class="avatar" src="{{MASCOT_DATA_URI}}" />
+      <div><div class="author-name">Claude Professor</div><div class="author-handle">@claudeprofessor</div></div>
+    </div>
+  </div>
+  <div class="bottombar">
+    <div class="swipe">Desliza<div class="swipe-circle"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></div></div>
+  </div>
+</template>
+
+<!-- LAYOUT C -->
+<template id="tpl-layout-c">
+  <div class="bg-full"></div>
+  <div class="corner-accent"></div>
+  <div class="content">
+    <div class="tag-pill">{{TAG}}</div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+  </div>
+  <div class="bottombar">
+    <div class="author">
+      <img class="avatar" src="{{MASCOT_DATA_URI}}" />
+      <div><div class="author-name">Claude Professor</div><div class="author-handle">@claudeprofessor</div></div>
+    </div>
+    <div class="swipe">Desliza<div class="swipe-circle"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></div></div>
+  </div>
+</template>
+
+<!-- LAYOUT D -->
+<template id="tpl-layout-d">
+  <div class="accent-bar"></div>
+  <div class="big-num">01</div>
+  <div class="content">
+    <div class="tag-pill">{{TAG}}</div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+  </div>
+  <div class="bottombar">
+    <div class="author">
+      <img class="avatar" src="{{MASCOT_DATA_URI}}" />
+      <div><div class="author-name">Claude Professor</div><div class="author-handle">@claudeprofessor</div></div>
+    </div>
+    <div class="swipe">Desliza<div class="swipe-circle"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></div></div>
+  </div>
+</template>
+
+<!-- LAYOUT E -->
+<template id="tpl-layout-e">
+  <div class="diag"></div>
+  <div class="content-top">
+    <div class="tag-pill">{{TAG}}</div>
+    <h1>{{TITLE}}</h1>
+  </div>
+  <div class="content-bot">
+    <p class="subtitle">{{SUBTITLE}}</p>
+    <div class="author">
+      <img class="avatar" src="{{MASCOT_DATA_URI}}" />
+      <div><div class="author-name">Claude Professor</div><div class="author-handle">@claudeprofessor</div></div>
+    </div>
+  </div>
+  <div class="bottombar">
+    <div class="swipe">Desliza<div class="swipe-circle"><svg viewBox="0 0 14 14"><polyline points="4,2 10,7 4,12"/></svg></div></div>
+  </div>
+</template>
+
+<script>
+  const layout = document.body.className.match(/layout-\w/)?.[0] || 'layout-a';
+  const tpl = document.getElementById('tpl-' + layout);
+  if (tpl) document.body.appendChild(tpl.content.cloneNode(true));
+</script>
+</body>
+</html>
