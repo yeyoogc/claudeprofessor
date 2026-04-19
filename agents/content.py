@@ -8,6 +8,7 @@ Falls back to curated content_bank if ANTHROPIC_API_KEY is not set.
 import json
 import re
 from datetime import date
+from pathlib import Path
 
 import config
 
@@ -16,21 +17,29 @@ You are the content brain for @claudeprofessor, an Instagram account that teache
 people how to use Claude AI with beautiful educational carousels in Spanish.
 
 Your job:
-1. Search the web for the LATEST Claude / Anthropic news from today or this week.
-2. Pick the single most interesting / viral topic from the priority list below.
+1. Search the web for FRESH content from multiple sources (see source list below).
+2. Pick the single most interesting / viral topic NOT already covered (see covered topics injected in user prompt).
 3. Generate a full carousel dataset as JSON.
 
-TOPIC PRIORITY (rotate through categories, don't repeat same category two days in a row):
-- New Claude models, API features, pricing changes (highest virality)
-- Claude Code: new features, skills, hooks, MCP servers, slash commands
-- AI Agents: multi-agent systems, agent loops, tool use, CrewAI/LangGraph with Claude
-- MCP (Model Context Protocol): new servers, connectors, integrations (Notion, GitHub, Slack...)
-- RAG & memory: vector databases, long context, document analysis with Claude
-- Prompt engineering: advanced techniques, XML tags, system prompts, few-shot
-- Productivity: real use cases (coding, writing, analysis, automation)
-- Comparisons & benchmarks: Claude vs competitors, model rankings
-- Open source projects: cool LLM apps, Claude integrations worth trying
-- Claude for business: ROI, enterprise use cases, workflows
+CONTENT SOURCES to search (rotate through all of them):
+- GitHub: trending repos, popular Claude Code skills (search "awesome-claude-code", "site:github.com claude skill"), viral AI tools
+- Instagram creators: @soyenriqueochoa, @mrconsejero, @neuralnate posts about Claude/AI
+- Anthropic blog & changelog: new Claude features, API updates, pricing
+- Twitter/X: viral Claude tips, prompt engineering threads
+- YouTube: popular Claude tutorials, AI productivity videos
+- Reddit r/ClaudeAI, r/LocalLLaMA: hot posts and community discoveries
+- Developer communities: Dev.to, Hashnode, HuggingFace blogs about Claude
+
+TOPIC PRIORITY (pick what's fresh and NOT already covered):
+- Viral GitHub skills/repos for Claude Code (highest engagement potential)
+- Trending prompts or techniques from other creators
+- New Claude features/API updates (only if genuinely new this week)
+- Claude Code: hooks, MCP servers, real workflows from the community
+- AI Agents: real multi-agent examples people are building
+- MCP: specific popular servers (GitHub MCP, Notion MCP, Playwright MCP...)
+- Prompt engineering: specific techniques with examples
+- Real use cases: coding, writing, analysis, automation with concrete examples
+- Comparisons: Claude vs GPT-4o on specific tasks with real results
 
 Template style rules:
 - "flat": Lists, prompt collections, quick tips compilations (e.g. "5 tricks", "10 prompts").
@@ -46,7 +55,11 @@ Output ONLY valid JSON — no markdown fences, no text before or after.
 USER_PROMPT = """\
 Today is {today}.
 
-Search for the latest Claude / Anthropic news and pick the best topic for today's carousel.
+ALREADY PUBLISHED — do NOT repeat these topics (pick something completely different):
+{published_topics}
+
+Search for fresh content from GitHub trending, other creators (@soyenriqueochoa etc.), \
+Anthropic changelog, Reddit, and Twitter. Pick a topic that is NOT in the list above.
 
 Then output ONLY this JSON (all slide text in SPANISH, titles max 8 words, body max 25 words, tips max 20 words):
 
@@ -118,6 +131,20 @@ def _extract_text(response) -> str:
     return "".join(parts)
 
 
+def _load_published_topics() -> str:
+    posts_path = Path(__file__).parent.parent / "docs" / "posts.json"
+    if not posts_path.exists():
+        return "None yet."
+    try:
+        posts = json.loads(posts_path.read_text(encoding="utf-8"))
+        if not posts:
+            return "None yet."
+        lines = [f"- {p['topic']} ({p.get('date', '?')})" for p in posts if p.get("topic")]
+        return "\n".join(lines) if lines else "None yet."
+    except Exception:
+        return "None yet."
+
+
 def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
     if not config.ANTHROPIC_API_KEY:
         print("  ANTHROPIC_API_KEY not set. Using curated content bank...")
@@ -128,6 +155,7 @@ def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
 
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
     today = date.today().isoformat()
+    published_topics = _load_published_topics()
 
     if topic_hint:
         topic_section = (
@@ -144,7 +172,11 @@ def generate_content(topic_hint: str = None, template_hint: str = None) -> dict:
         max_tokens=2048,
         system=SYSTEM_PROMPT,
         tools=[{"type": "web_search_20260209", "name": "web_search", "allowed_callers": ["direct"]}],
-        messages=[{"role": "user", "content": USER_PROMPT.format(today=today, topic_section=topic_section)}],
+        messages=[{"role": "user", "content": USER_PROMPT.format(
+            today=today,
+            topic_section=topic_section,
+            published_topics=published_topics,
+        )}],
     )
 
     text = _extract_text(response)
