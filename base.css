@@ -1,0 +1,222 @@
+/* Hoja base de ClaudeProfessor.
+   La comparten index, bóveda, skills y prompts: si una regla cambia, cambia
+   en las cuatro. Antes cada página llevaba su copia y se desincronizaban a la
+   primera edición.
+
+   Los colores salen del manual de marca (marca.py). No se inventa ninguno
+   aquí: si hace falta uno nuevo, se añade allí primero. */
+:root{
+    /* Rampa terracota del logo (tono 38,5° en OKLCH). El 500 es el color
+       exacto de la mascota; los demás pasos se derivaron de él. */
+    --coral:#CE6B4B; --coral-cl:#FBA589; --coral-os:#93482F;
+    --crema:#F0EEE6; --papel:#FAF7F2; --blanco:#fff;
+    /* La tinta es la de las gafas del logo, no un gris cálido inventado. */
+    --tinta:#11162C; --sec:rgba(17,22,44,.68); --tenue:rgba(17,22,44,.38);
+    --linea:rgba(17,22,44,.12); --noche:#11162C; --bata:#EDF5F8;
+    --arena:#EAD9C8; --arena-bd:rgba(147,72,47,.30); --arena-tx:#482215;
+    --arena-ey:#93482F;
+    --punto:rgba(17,22,44,.17);
+    --radio:100px; --sombra:0 10px 30px rgba(17,22,44,.08);
+  }
+  /* El modo oscuro se elige, no se voltea: cada paso está medido contra la
+     superficie oscura, no aclarado a ojo desde el claro. */
+  @media (prefers-color-scheme:dark){
+    :root{--papel:#0C1020; --crema:#161B31; --blanco:#1C2239; --tinta:#EDF5F8;
+          --sec:rgba(237,245,248,.72); --tenue:rgba(237,245,248,.42);
+          --linea:rgba(237,245,248,.14); --coral:#FBA589; --coral-os:#F0815E;
+          /* La arena a plena luz deslumbra sobre fondo oscuro: aquí es el
+             terracota llevado al fondo de su rampa, con el texto en claro. */
+          --arena:#3A1D14; --arena-bd:rgba(251,165,137,.34); --arena-tx:#FFE0D6;
+          --arena-ey:#FBA589;
+          --punto:rgba(237,245,248,.14);}
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  /* Rejilla de puntos: un punto de 1px cada 32px, tan tenue que no se lee
+     como patrón sino como papel milimetrado. Es lo que más define la silueta
+     de la referencia. Va en el body y no en una capa aparte: un elemento
+     fijo con z-index negativo queda por detrás del fondo del documento y no
+     se ve ni un punto. */
+  body{background:var(--papel);color:var(--tinta);
+       background-image:radial-gradient(var(--punto) 1px,transparent 1px);
+       background-size:32px 32px;background-attachment:fixed;
+       font:500 17px/1.6 'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .env{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:6px}
+
+  /* ── Héroe ───────────────────────────────────────────────────────────
+     Centrado y sobre claro, como la referencia: mascota, wordmark en
+     minúsculas con punto, lema, tarjeta destacada y dos filas de píldoras.
+     Lo que no se copia es el color — el naranja es de tododeia; aquí manda
+     el terracota del logo. */
+  .heroe{min-height:100svh;display:flex;flex-direction:column;
+         position:relative;padding:26px 0 30px}
+  /* width:100% es obligatorio: el `margin:0 auto` de .env anula el estirado
+     dentro de un contenedor flex y los hijos se encogen al contenido. */
+  .heroe > .env{width:100%}
+  .barra{display:flex;justify-content:space-between;align-items:center;
+         font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+         font-weight:700;color:var(--tenue);position:relative;z-index:2}
+  .barra .ast-mini{width:15px;height:15px;color:var(--coral);
+                   vertical-align:-2px;margin-right:8px}
+  .barra a:hover{color:var(--tinta)}
+
+  .heroe-cuerpo{flex:1;display:flex;flex-direction:column;align-items:center;
+                justify-content:center;text-align:center;gap:15px;
+                position:relative;z-index:2;padding:34px 0}
+  h1.wordmark{font-family:'Montserrat',sans-serif;font-weight:800;
+              font-size:clamp(31px,7.3vw,90px);letter-spacing:-.045em;
+              line-height:.95;white-space:nowrap}
+  h1.wordmark .pt{color:var(--coral)}
+  .lema{color:var(--sec);font-size:clamp(15px,2vw,19px)}
+
+  /* Tarjeta destacada: el equivalente al banner de «edición del mes». Va
+     pegada al lema y es el único sitio de la página con fondo cálido, para
+     que la vista caiga ahí antes que en las píldoras. */
+  .destacado{margin-top:6px;display:inline-flex;align-items:center;gap:14px;
+             background:var(--arena);border:1px solid var(--arena-bd);
+             border-radius:16px;padding:11px 22px 11px 12px;text-align:left;
+             transition:transform .18s,box-shadow .18s}
+  .destacado:hover{transform:translateY(-2px);
+                   box-shadow:0 10px 26px rgba(17,22,44,.12)}
+  .destacado .ico{width:42px;height:42px;border-radius:11px;background:#fff;
+                  display:grid;place-items:center;flex:none;
+                  box-shadow:0 1px 3px rgba(17,22,44,.16)}
+  .destacado .ico svg{width:24px;height:24px;color:var(--coral)}
+  .destacado .ed{display:block;font-size:10.5px;font-weight:700;
+                 letter-spacing:.16em;text-transform:uppercase;color:var(--arena-ey)}
+  .destacado .tt{display:block;font-family:'Montserrat',sans-serif;font-weight:800;
+                 font-size:17px;letter-spacing:-.015em;color:var(--arena-tx);margin-top:1px}
+
+  /* Dos filas de píldoras. Las medidas son las de la referencia: radio
+     completo, 12px/24px de relleno, 16px de cuerpo. Lo que cambia es el
+     reparto de pesos: allí compiten cinco rellenas, aquí solo destacan dos. */
+  .pastillas{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;
+             margin-top:6px}
+  .pill{display:inline-flex;align-items:center;gap:9px;border-radius:100px;
+        padding:12px 24px;font-size:16px;font-weight:500;
+        border:1px solid transparent;
+        transition:transform .16s,box-shadow .16s,background .16s,border-color .16s}
+  .pill:hover{transform:translateY(-2px)}
+  .pill svg{width:17px;height:17px;flex:none}
+  .pill.lleno{background:var(--coral);color:#11162C;font-weight:700}
+  .pill.lleno:hover{box-shadow:0 8px 20px rgba(206,107,75,.36)}
+  .pill.borde{background:transparent;border-color:var(--coral);
+              color:var(--tinta);font-weight:700}
+  .pill.borde:hover{background:rgba(206,107,75,.11)}
+  .pill.neutro{background:var(--blanco);border-color:var(--linea);color:var(--tinta)}
+  .pill.neutro:hover{border-color:var(--coral)}
+  /* La oscura lleva un aro terracota, como la «Bóveda» del original: es la
+     que hay que pulsar y tiene que ganarle a las neutras. */
+  .pill.oscuro{background:var(--noche);color:#EDF5F8;font-weight:700;
+               box-shadow:0 0 0 2.5px rgba(206,107,75,.55)}
+  .pill.oscuro:hover{box-shadow:0 0 0 2.5px var(--coral),
+                     0 8px 20px rgba(17,22,44,.26)}
+  .pill.oscuro svg{color:var(--coral-cl)}
+  @media (prefers-color-scheme:dark){
+    /* Se invierte: sobre fondo oscuro la que manda es la clara. El aro
+       también cambia de paso, porque el terracota de modo claro se apaga
+       contra la tinta y el aro dejaba de leerse. */
+    .pill.oscuro{background:#EDF5F8;color:#11162C;
+                 box-shadow:0 0 0 2.5px rgba(251,165,137,.60)}
+    .pill.oscuro:hover{box-shadow:0 0 0 2.5px #FBA589,
+                       0 8px 20px rgba(0,0,0,.40)}
+    .pill.oscuro svg{color:#93482F}
+    .pill.lleno{color:#11162C}
+  }
+
+  /* Mascot: dos capas para que el brazo salude de verdad. Es CSS y no un
+     vídeo: pesa nada, escala nítido y respeta el modo oscuro. */
+  .mascot{position:relative;width:clamp(104px,14vw,164px);aspect-ratio:1;flex:none;
+          animation:flotar 3.2s ease-in-out infinite}
+  .mascot img{position:absolute;inset:0;width:100%;height:100%;
+              image-rendering:pixelated}
+  /* Pivote en la articulación del hombro (borde interior del brazo, a media
+     altura). Con el pivote abajo el brazo se despegaba del cuerpo al girar. */
+  .mascot .brazo{transform-origin:80.5% 42%;
+                 animation:saludo 2.8s ease-in-out infinite}
+  @keyframes saludo{
+    0%,52%,100%{transform:rotate(0deg)}
+    58%{transform:rotate(-34deg)}
+    65%{transform:rotate(-6deg)}
+    72%{transform:rotate(-32deg)}
+    79%{transform:rotate(-8deg)}
+    86%{transform:rotate(-24deg)}
+    93%{transform:rotate(-3deg)}
+  }
+  @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @media (prefers-reduced-motion:reduce){.mascot,.mascot .brazo{animation:none}}
+
+  /* ── Secciones ───────────────────────────────────────────────────────
+     Todas sobre la misma rejilla de puntos, sin paneles que corten la
+     página. La referencia no cambia de fondo en ningún momento y es lo que
+     le da esa sensación de sitio ligero. */
+  section{padding:76px 0}
+  .cabecera-sec{text-align:center;margin-bottom:38px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+           color:var(--coral);font-weight:700;margin-bottom:12px}
+  h2{font-family:'Montserrat',sans-serif;font-size:clamp(27px,4.4vw,40px);
+     letter-spacing:-.03em;line-height:1.08;font-weight:800;text-wrap:balance}
+  h2 em{font-style:italic;font-weight:600;color:var(--coral)}
+  .intro{margin:14px auto 0;color:var(--sec);max-width:56ch;font-size:17px}
+
+  .rejilla{display:grid;gap:22px;
+           grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .rejilla.dos{max-width:880px;margin:0 auto;
+               grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+
+  /* Tarjeta con cabecera de imagen, como las de producto de la referencia:
+     franja de color con el icono centrado, etiqueta encima, y un pie
+     separado por una línea con la acción a la derecha. */
+  .tarjeta{background:var(--blanco);border:1px solid var(--linea);border-radius:18px;
+           overflow:hidden;display:flex;flex-direction:column;
+           transition:transform .18s,box-shadow .18s,border-color .18s}
+  .tarjeta:hover{transform:translateY(-4px);border-color:rgba(206,107,75,.45);
+                 box-shadow:0 18px 44px rgba(17,22,44,.11)}
+  /* Cabecera de tarjeta: la mascota en la situación que cuenta el recurso,
+     generada con FLUX usando el logo como referencia. El fondo crema de la
+     imagen se continúa con el de la caja, así que en modo claro la ilustración
+     parece recortada y no pegada dentro de un rectángulo. */
+  .capa{position:relative;height:176px;background:#F0EEE6;overflow:hidden}
+  .capa img{width:100%;height:100%;object-fit:cover;object-position:center 46%;
+            display:block;image-rendering:pixelated}
+  @media (prefers-color-scheme:dark){
+    /* Sobre fondo oscuro el crema de la ilustración se convierte en un ladrillo
+       blanco. Se apaga un punto para que no deslumbre al lado del panel. */
+    .capa{background:#241E1A}
+    .capa img{filter:brightness(.88) saturate(1.04)}
+  }
+  .etq{position:absolute;top:13px;left:13px;font-size:10.5px;letter-spacing:.14em;
+       text-transform:uppercase;font-weight:700;color:#11162C;
+       background:var(--coral-cl);padding:6px 12px;border-radius:100px}
+  .cuerpo-t{padding:20px 22px 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .tarjeta h3{font-family:'Montserrat',sans-serif;font-size:18.5px;
+              letter-spacing:-.018em;font-weight:800}
+  .tarjeta p{color:var(--sec);font-size:15px;line-height:1.5;flex:1}
+  .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;
+        font-size:13.5px;color:var(--tenue);
+        border-top:1px solid var(--linea);padding-top:15px;margin-top:5px}
+  .accion{display:inline-flex;align-items:center;gap:7px;background:var(--coral);
+          color:#11162C;font-weight:700;font-size:14px;padding:9px 17px;
+          border-radius:100px;transition:box-shadow .16s}
+  .tarjeta:hover .accion{box-shadow:0 6px 16px rgba(206,107,75,.38)}
+
+  .ver-todo{text-align:center;margin-top:32px}
+
+  .cta-final{text-align:center;padding:84px 24px 96px}
+  .cta-final h2{max-width:16ch;margin:0 auto}
+
+  footer{border-top:1px solid var(--linea);padding:34px 0;color:var(--tenue);
+         font-size:14.5px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer a:hover{color:var(--coral)}
+
+  @media (max-width:620px){
+    .heroe{padding-top:18px}
+    .heroe-cuerpo{gap:13px;padding:24px 0}
+    .destacado{padding:10px 16px 10px 10px;gap:11px}
+    .destacado .tt{font-size:15px}
+    .pill{padding:11px 19px;font-size:15px}
+    section{padding:56px 0}
+    .capa{height:138px}
+  }
