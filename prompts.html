@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20 prompts de Claude · ClaudeProfessor</title>
+<meta name="description" content="20 prompts de Claude listos para copiar, en español. Sin humo: cada uno resuelve una tarea concreta.">
+<link rel="stylesheet" href="fuentes.css">
+<style>
+  :root{
+    --coral:#CE6B4B; --coral-o:#93482F;
+    --crema:#F0EEE6; --crema-c:#F7F5EF;
+    --tinta:#11162C; --sec:rgba(17,22,44,.68); --tenue:rgba(17,22,44,.40);
+    --punto:rgba(17,22,44,.17);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--crema);color:var(--tinta);
+       font:500 17px/1.65 'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+       -webkit-font-smoothing:antialiased;background-image:radial-gradient(var(--punto) 1px,transparent 1px);background-size:32px 32px;background-attachment:fixed}
+  .envoltorio{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+
+  header{margin-bottom:56px}
+  .marca{font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--coral);margin-bottom:20px}
+  h1{font-family:'Montserrat',sans-serif;font-size:clamp(34px,7vw,52px);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+  h1 em{font-style:normal;color:var(--coral)}
+  .entradilla{margin-top:20px;font-size:19px;color:var(--sec);max-width:56ch}
+
+  .aviso{margin-top:32px;padding:18px 22px;border-left:5px solid var(--coral);
+         background:var(--crema-c);font-size:16px;color:var(--sec)}
+
+  h2{font-family:'Montserrat',sans-serif;margin:56px 0 8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+     color:var(--coral);font-weight:700}
+
+  .prompt{border-top:1px solid rgba(25,25,25,.12);padding:26px 0}
+  .prompt h3{font-size:20px;font-weight:700;letter-spacing:-.01em;display:flex;gap:12px}
+  .prompt h3 span{color:var(--coral);font-variant-numeric:tabular-nums}
+  .prompt p.para{margin-top:6px;color:var(--sec);font-size:16px}
+  .prompt pre{margin-top:14px;background:#fff;border:1px solid rgba(25,25,25,.10);
+              border-radius:10px;padding:18px 20px;white-space:pre-wrap;
+              font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  footer{margin-top:72px;padding-top:28px;border-top:1px solid rgba(25,25,25,.12);
+         color:var(--tenue);font-size:15px}
+  footer a{color:var(--coral);font-weight:600;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  @media (prefers-color-scheme:dark){
+    :root{--crema:#141413;--crema-c:#1C1B19;--tinta:#EDEBE5;
+          --sec:rgba(237,235,229,.70);--tenue:rgba(237,235,229,.42);
+          --coral:#E0916F}
+    .prompt pre{background:#1C1B19;border-color:rgba(237,235,229,.14)}
+  }
+</style>
+</head>
+<body>
+<div class="envoltorio">
+
+<header>
+  <div class="marca">✴ ClaudeProfessor</div>
+  <h1>20 prompts de Claude <em>listos para copiar</em></h1>
+  <p class="entradilla">Sin humo y sin tecnicismos. Cada uno resuelve una tarea concreta
+  que probablemente estés haciendo a mano. Cópialos tal cual la primera vez; adáptalos
+  cuando veas cómo responden.</p>
+
+  <div class="aviso"><strong>La idea que los hace funcionar:</strong> no le pidas a Claude
+  una opinión, dale un <em>encargo</em> con criterio de salida. «Mejora este texto» da
+  resultados vagos; «dime qué frase pierde al lector y por qué» da algo accionable.</div>
+</header>
+
+<h2>Leer y decidir</h2>
+
+<div class="prompt">
+  <h3><span>01</span> El documento que no te vas a leer</h3>
+  <p class="para">Súbele el PDF. La clave es pedirle que lo trabaje como si tuviera que defenderlo.</p>
+  <pre>Lee este documento y dime: las 5 ideas que de verdad importan, lo que se contradice entre secciones, y las 3 preguntas que me harían si tuviera que defenderlo.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>02</span> La reunión que no apuntaste</h3>
+  <p class="para">Lo difícil no es resumir, es saber quién hace qué y para cuándo.</p>
+  <pre>De estas notas saca solo las decisiones tomadas y las tareas, cada una con responsable y fecha. Si algo quedó sin decidir, ponlo aparte como pendiente.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>03</span> El contrato antes de firmarlo</h3>
+  <p class="para">No sustituye a un abogado. Sirve para saber qué preguntarle.</p>
+  <pre>Léelo como si fueras la parte contraria buscando aprovecharse. Dime qué cláusulas me perjudican, cuáles están redactadas de forma ambigua y qué falta que debería estar.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>04</span> Comparar opciones sin sesgo</h3>
+  <p class="para">Obligarle a defender la que menos te gusta es lo que hace útil la comparación.</p>
+  <pre>Estoy entre estas opciones: [A] y [B]. Defiende cada una como si te pagaran por ella, luego dime cuál elegirías tú y qué información me falta para decidir bien.</pre>
+</div>
+
+<h2>Escribir</h2>
+
+<div class="prompt">
+  <h3><span>05</span> El texto que no convence</h3>
+  <p class="para">No le pidas que lo mejore: pídele el diagnóstico y arréglalo tú.</p>
+  <pre>Este texto no me convence pero no sé por qué. Dime qué frase concreta pierde al lector, qué sobra y qué promesa no estoy cumpliendo. No lo reescribas todavía.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>06</span> Escribir con tu voz, no con la suya</h3>
+  <p class="para">Primero que aprenda cómo escribes; luego que produzca.</p>
+  <pre>Te paso 3 textos míos. Antes de escribir nada, descríbeme cómo escribo: longitud de frase, qué palabras repito, qué nunca digo. Cuando lo tengas, escribe [lo que sea] con esa voz.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>07</span> El correo difícil</h3>
+  <p class="para">Tres versiones te dejan elegir el tono con la cabeza fría.</p>
+  <pre>Tengo que decir esto: [situación]. Escríbeme tres versiones del correo: una directa, una diplomática y una que cierre la puerta. Dime qué arriesgo con cada una.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>08</span> Titulares que no son de relleno</h3>
+  <p class="para">Pedirle 20 y quedarte con 2 funciona mejor que pedirle 3.</p>
+  <pre>Dame 20 titulares para esto: [tema]. Diez con una cifra concreta, cinco con una pérdida que evitar y cinco con una pregunta incómoda. Nada de adjetivos vacíos.</pre>
+</div>
+
+<h2>Aprender</h2>
+
+<div class="prompt">
+  <h3><span>09</span> Aprender algo de cero</h3>
+  <p class="para">El truco es obligarle a parar. Si no, suelta un tocho y no aprendes.</p>
+  <pre>Enséñame esto desde cero. Explica un concepto, ponme un ejemplo y hazme una pregunta antes de seguir. No avances hasta que responda bien.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>10</span> Comprobar que lo has entendido</h3>
+  <p class="para">Explicar algo mal es la forma más rápida de descubrir qué te falta.</p>
+  <pre>Te explico con mis palabras lo que creo que he entendido. Dime qué parte está mal, cuál está incompleta y qué me estoy saltando sin darme cuenta.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>11</span> El tema que te da pereza</h3>
+  <p class="para">Analogías con algo que ya dominas.</p>
+  <pre>Explícame [tema] usando analogías de [algo que domines: cocina, fútbol, música]. Nada de tecnicismos hasta que haya entendido la idea de fondo.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>12</span> Prepararte una conversación</h3>
+  <p class="para">Ensayar con alguien que te lleve la contraria.</p>
+  <pre>Vas a hacer de [cliente / jefe / inversor] escéptico. Yo te presento [lo que sea] y tú me pones las objeciones más incómodas, una a una. No me lo pongas fácil.</pre>
+</div>
+
+<h2>Trabajo repetitivo</h2>
+
+<div class="prompt">
+  <h3><span>13</span> La tarea de cada semana</h3>
+  <p class="para">La que más tiempo devuelve: deja de existir.</p>
+  <pre>Cada semana hago esto a mano: [descríbelo]. Pregúntame lo que necesites saber y luego constrúyeme una herramienta que lo haga por mí.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>14</span> Ordenar un desastre de datos</h3>
+  <p class="para">Que te diga qué está sucio antes de tocarlo.</p>
+  <pre>Te paso estos datos en bruto. Antes de transformarlos, dime qué inconsistencias ves: duplicados, formatos mezclados, huecos. Luego pásalos a una tabla limpia.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>15</span> Convertir de un formato a otro</h3>
+  <p class="para">Enseñarle un ejemplo del resultado vale más que describirlo.</p>
+  <pre>Te enseño un ejemplo de entrada y cómo quiero exactamente la salida. Aplícalo a los demás sin cambiar el criterio ni inventarte campos.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>16</span> Una plantilla que te sirva siempre</h3>
+  <p class="para">Deja de escribir el mismo prompt cada vez.</p>
+  <pre>Hemos afinado esto entre los dos. Conviértelo en una plantilla reutilizable con huecos claros para lo que cambia cada vez, y dime en qué casos NO funcionaría.</pre>
+</div>
+
+<h2>Pensar mejor</h2>
+
+<div class="prompt">
+  <h3><span>17</span> Antes de lanzar algo</h3>
+  <p class="para">Imaginar el fracaso ya ocurrido saca fallos que una lista de riesgos no ve.</p>
+  <pre>Imagina que esto ha salido mal dentro de seis meses. Escribe la explicación de por qué fracasó, con lo que hoy parecía poco importante. Luego dime qué haría distinto hoy.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>18</span> Poner precio a algo</h3>
+  <p class="para">Que ataque tu razonamiento, no que te dé un número.</p>
+  <pre>Estoy pensando cobrar [X] por [esto]. No me des un número: dime qué supuestos míos son frágiles, qué compara el cliente conmigo y qué justificaría cobrar el doble.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>19</span> Cuando estás atascado</h3>
+  <p class="para">Casi siempre el problema es que la pregunta está mal formulada.</p>
+  <pre>Llevo dando vueltas a esto: [problema]. Antes de proponer nada, dime si estoy haciéndome la pregunta correcta y qué pregunta mejor debería estar haciéndome.</pre>
+</div>
+
+<div class="prompt">
+  <h3><span>20</span> El resumen del que sí te acuerdas</h3>
+  <p class="para">Cierra cualquier conversación larga con esto.</p>
+  <pre>Resume lo que hemos decidido en esta conversación: qué acordamos, qué descartamos y por qué, y qué queda pendiente. Escríbelo para mí dentro de tres meses, cuando no me acuerde del contexto.</pre>
+</div>
+
+<footer>
+  <p>Más cosas de Claude, en español y sin humo, en
+  <a href="https://instagram.com/claudeprofessor">@claudeprofessor</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

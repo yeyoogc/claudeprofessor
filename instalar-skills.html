@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo instalar las skills de Claude · ClaudeProfessor</title>
+<meta name="description" content="Guía para instalar las skills oficiales de Anthropic, en la app de Claude y en Claude Code. Con la tabla de qué skill está en qué plugin.">
+<style>
+  :root{
+    --coral:#CE6B4B; --coral-o:#93482F;
+    --crema:#F0EEE6; --crema-c:#F7F5EF;
+    --tinta:#11162C; --sec:rgba(17,22,44,.68); --tenue:rgba(17,22,44,.40);
+    --linea:rgba(25,25,25,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--crema);color:var(--tinta);
+       font:400 17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .envoltorio{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+
+  header{margin-bottom:56px}
+  .marca{font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--coral);margin-bottom:20px}
+  h1{font-size:clamp(34px,7vw,52px);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+  h1 em{font-style:normal;color:var(--coral)}
+  .entradilla{margin-top:20px;font-size:19px;color:var(--sec);max-width:56ch}
+
+  .aviso{margin-top:32px;padding:18px 22px;border-left:5px solid var(--coral);
+         background:var(--crema-c);font-size:16px;color:var(--sec)}
+  .aviso strong{color:var(--tinta)}
+
+  h2{margin:56px 0 8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+     color:var(--coral);font-weight:700}
+  h3{font-size:22px;font-weight:800;letter-spacing:-.01em;margin-top:34px}
+  h3 + p{margin-top:8px;color:var(--sec)}
+  p + p{margin-top:14px}
+
+  ol.pasos{margin:20px 0 0;padding:0;list-style:none;counter-reset:paso}
+  ol.pasos li{counter-increment:paso;position:relative;padding:0 0 20px 46px}
+  ol.pasos li::before{content:counter(paso);position:absolute;left:0;top:-2px;
+    width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;
+    font-weight:800;font-size:15px;display:grid;place-items:center}
+  ol.pasos li b{font-weight:700}
+  .ruta{display:inline-block;background:var(--crema-c);border:1px solid var(--linea);
+        border-radius:6px;padding:1px 8px;font-weight:600;font-size:15px;white-space:nowrap}
+
+  pre{margin-top:14px;background:#fff;border:1px solid rgba(25,25,25,.10);
+      border-radius:10px;padding:18px 20px;white-space:pre-wrap;overflow-x:auto;
+      font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+  code{font:400 .93em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+       background:var(--crema-c);border:1px solid var(--linea);
+       border-radius:5px;padding:1px 6px}
+  pre code{background:none;border:0;padding:0}
+
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:16px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--linea);vertical-align:top}
+  th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue);
+     font-weight:700;border-bottom-width:2px}
+  td:first-child{white-space:nowrap}
+  td code{font-size:14px}
+  .env{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+       font-weight:700;padding:2px 7px;border-radius:20px;
+       background:rgba(206,107,75,.14);color:var(--coral-o)}
+
+  footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--linea);
+         color:var(--tenue);font-size:15px}
+  footer a{color:var(--coral);font-weight:600;text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  @media (prefers-color-scheme:dark){
+    :root{--crema:#141413;--crema-c:#1C1B19;--tinta:#EDEBE5;
+          --sec:rgba(237,235,229,.70);--tenue:rgba(237,235,229,.42);
+          --coral:#E0916F;--coral-o:#E0916F;--linea:rgba(237,235,229,.14)}
+    pre{background:#1C1B19;border-color:rgba(237,235,229,.14)}
+    .env{background:rgba(224,145,111,.16)}
+  }
+</style>
+</head>
+<body>
+<div class="envoltorio">
+
+<header>
+  <div class="marca">✴ ClaudeProfessor</div>
+  <h1>Cómo instalar <em>las skills de Claude</em></h1>
+  <p class="entradilla">Las skills oficiales de Anthropic son gratis y están publicadas.
+  Lo que casi nadie explica es dónde se activan y por qué a veces instalas una cosa y
+  te falta la mitad.</p>
+
+  <div class="aviso">
+    <strong>Lo primero, para ahorrarte tiempo:</strong> si usas Claude desde la web o
+    la app de escritorio, no tienes que instalar nada. Ya están ahí, solo hay que
+    encenderlas. Instalar solo hace falta en Claude Code.
+  </div>
+</header>
+
+<h2>Ruta 1 · La app de Claude</h2>
+<h3>Sin terminal, sin comandos</h3>
+<p>Funciona en los planes Free, Pro, Max, Team y Enterprise. Son dos ajustes
+distintos y en sitios distintos, y ese es justo el paso donde se atasca todo el
+mundo: activar las skills sin lo primero no sirve de nada.</p>
+
+<ol class="pasos">
+  <li><b>Activa la ejecución de código.</b> En <span class="ruta">Ajustes → Capacidades</span>,
+  enciende <b>«Ejecución de código y creación de archivos»</b>. Las skills la necesitan
+  para funcionar: sin esto no aparecen o no hacen nada.</li>
+  <li><b>Enciende las skills.</b> Ahora ve a <span class="ruta">Personalizar → Skills</span>
+  y activa las que quieras, una a una.</li>
+  <li><b>Úsalas.</b> No hay que llamarlas. Claude lee la descripción de cada skill y la
+  carga sola cuando la conversación encaja. Si quieres forzarla, nómbrala:
+  «usa la skill <code>doc-coauthoring</code>».</li>
+</ol>
+
+<div class="aviso">
+  <strong>Si estás en un plan de empresa</strong> y no ves las opciones, no es cosa tuya:
+  el propietario de la organización tiene que habilitarlas antes en
+  <span class="ruta">Ajustes de organización → Skills</span>.
+</div>
+
+<h2>Ruta 2 · Claude Code</h2>
+<h3>Dos comandos, y hay que poner los dos</h3>
+<p>Aquí sí se instalan. Primero registras el repositorio de Anthropic como
+mercado de plugins:</p>
+
+<pre><code>/plugin marketplace add anthropics/skills</code></pre>
+
+<p>Y después instalas los paquetes. <b>Son dos y necesitas los dos</b>, porque las
+skills de escribir están repartidas entre ellos: si instalas solo uno te faltan la
+mitad y acabas pensando que la skill no existe.</p>
+
+<pre><code>/plugin install example-skills@anthropic-agent-skills
+/plugin install document-skills@anthropic-agent-skills</code></pre>
+
+<p>Luego se usan mencionándolas sin más: «Usa la skill <code>pdf</code> para sacar los
+campos de este formulario».</p>
+
+<h2>Qué hay en cada paquete</h2>
+<p>Esta tabla es la que te ahorra el rato de buscar. Las de redacción y las de
+diseño no viven en el mismo sitio.</p>
+
+<table>
+  <thead>
+    <tr><th>Skill</th><th>Paquete</th><th>Para qué</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>doc-coauthoring</code></td><td><span class="env">example</span></td>
+        <td>Escribir documentos en tres fases, con prueba de lector al final</td></tr>
+    <tr><td><code>internal-comms</code></td><td><span class="env">example</span></td>
+        <td>Comunicación interna: 3P, newsletters, FAQ, informes</td></tr>
+    <tr><td><code>skill-creator</code></td><td><span class="env">example</span></td>
+        <td>Crear tus propias skills</td></tr>
+    <tr><td><code>canvas-design</code></td><td><span class="env">example</span></td>
+        <td>Diseño gráfico: primero el criterio, luego la pieza</td></tr>
+    <tr><td><code>frontend-design</code></td><td><span class="env">example</span></td>
+        <td>Interfaces que no parezcan una plantilla</td></tr>
+    <tr><td><code>theme-factory</code></td><td><span class="env">example</span></td>
+        <td>Diez temas con su paleta y sus tipografías</td></tr>
+    <tr><td><code>brand-guidelines</code></td><td><span class="env">example</span></td>
+        <td>Identidad de marca aplicada (la de Anthropic, como plantilla)</td></tr>
+    <tr><td><code>algorithmic-art</code></td><td><span class="env">example</span></td>
+        <td>Arte generativo por código</td></tr>
+    <tr><td><code>webapp-testing</code></td><td><span class="env">example</span></td>
+        <td>Probar aplicaciones web</td></tr>
+    <tr><td><code>web-artifacts-builder</code></td><td><span class="env">example</span></td>
+        <td>Construir artefactos web</td></tr>
+    <tr><td><code>mcp-builder</code></td><td><span class="env">example</span></td>
+        <td>Crear servidores MCP</td></tr>
+    <tr><td><code>slack-gif-creator</code></td><td><span class="env">example</span></td>
+        <td>GIFs para Slack</td></tr>
+    <tr><td><code>docx</code></td><td><span class="env">document</span></td>
+        <td>Word con control de cambios y comentarios</td></tr>
+    <tr><td><code>pdf</code></td><td><span class="env">document</span></td>
+        <td>Crear, rellenar, editar y extraer datos de PDF</td></tr>
+    <tr><td><code>pptx</code></td><td><span class="env">document</span></td>
+        <td>PowerPoint</td></tr>
+    <tr><td><code>xlsx</code></td><td><span class="env">document</span></td>
+        <td>Excel</td></tr>
+  </tbody>
+</table>
+
+<h2>Hacer la tuya</h2>
+<h3>Una skill es una carpeta con un archivo dentro</h3>
+<p>No hay más misterio: una carpeta con un <code>SKILL.md</code> que empieza por un
+bloque con <code>name</code> y <code>description</code>. Esa descripción es lo único que
+Claude lee para decidir si la skill aplica, así que es la parte que hay que escribir
+con cuidado: si dice cuándo usarla en palabras concretas, se activa cuando toca.</p>
+
+<pre><code>---
+name: escribe-como-yo
+description: Aprende mi voz a partir de textos míos antes de
+  escribir nada. Úsala cuando te pida escribir un texto que
+  tenga que sonar a mí.
+---
+
+# Instrucciones que Claude va a seguir…</code></pre>
+
+<p>En Claude Code se copia a la carpeta de skills de tu usuario:</p>
+
+<pre><code>cp -r mi-skill ~/.claude/skills/</code></pre>
+
+<p>Y en la app de Claude se sube comprimida en ZIP desde
+<span class="ruta">Personalizar → Skills</span>, botón <b>+</b> →
+<b>Crear skill</b> → <b>Subir una skill</b>.</p>
+
+<div class="aviso">
+  <strong>El atajo:</strong> instala <code>skill-creator</code> y pídele que escriba
+  la skill por ti. Le das tres textos tuyos y te devuelve tus reglas escritas,
+  que es exactamente lo que no vas a acordarte de repetir en cada chat.
+</div>
+
+<h2>Y si quieres las mías</h2>
+<p>Tengo tres publicadas y abiertas, hechas a partir de métodos que he explicado
+en carruseles: <code>escribe-como-yo</code>, <code>interroga-documentos</code> y
+<code>reunion-a-tareas</code>. Están en
+<a href="/#skills">claudeprofessor.page</a>, gratis y para cambiarlas a tu gusto.</p>
+
+<footer>
+  <p>Si algo de esto no te funciona, escríbeme por
+  <a href="https://instagram.com/claudeprofessor">@claudeprofessor</a> y lo miramos.
+  Lo corrijo aquí para el siguiente.</p>
+  <p style="margin-top:14px">✴ <a href="/">claudeprofessor.page</a></p>
+</footer>
+
+</div>
+</body>
+</html>
