@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La marca de Claude: qué demuestra y qué no · ClaudeProfessor</title>
+<meta name="description" content="Claude marca lo que escribe. Qué demuestra esa marca, qué no demuestra, y qué mirar en su lugar si corriges trabajos.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/marcas">
+<meta property="og:title" content="La marca de Claude: qué demuestra y qué no">
+<meta property="og:description" content="Claude marca lo que escribe. Qué demuestra esa marca, qué no demuestra, y qué mirar en su lugar si corriges trabajos.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>La marca de Claude: <em>qué demuestra y qué no</em></h1>
+  <p class="entradilla">Claude deja una marca en lo que escribe. La parte que casi nadie ha
+  contado es que esa marca no es simétrica: sirve para señalar a alguien y no sirve para
+  defenderse. Eso es lo que hay que entender antes de usarla para nada.</p>
+</header>
+
+<h2>01 · No es un aviso al pie. Va dentro de las palabras</h2>
+<p>Cuando un modelo de los que llevan marca escribe un texto, teje dentro de ese texto una marca
+<b>imperceptible</b>. No se ve, no se lee y no cambia el significado ni la calidad de la
+respuesta. No hay un «generado con IA» al final, ni un carácter raro, ni nada que puedas mirar tú.</p>
+<p>Como forma parte del texto mismo, la marca <b>viaja contigo al copiar y pegar</b>, y —esto lo
+dicen con cuidado— <i>puede</i> sobrevivir a algunas ediciones. No dicen que sobreviva a todas.</p>
+<p>Y va puesta <b>en el modelo</b>, no en la aplicación. Por eso da igual por dónde salga el
+texto: no hay una app que la ponga y otra que no.</p>
+
+<h2>02 · En los ficheros es otra cosa distinta</h2>
+<p>Aquí es donde casi todo el mundo se lía, porque son <b>dos mecanismos que no tienen nada que
+ver</b> y se llaman igual de cara al público.</p>
+<p>Cuando Claude genera un fichero —ponen de ejemplo <code>.png</code>, <code>.jpg</code> y
+<code>.svg</code>— no teje nada dentro de la imagen: le <b>engancha metadatos firmados</b>. Sigue
+el estándar abierto <b>C2PA</b>, que es el que usa media industria para registrar de dónde viene
+un contenido. Esa firma hace dos cosas: dice que el fichero pasó por Claude y permite ver si
+alguien lo tocó después.</p>
+<div class="aviso">
+  <strong>Por qué importa la diferencia:</strong> unos metadatos son una etiqueta pegada por
+  fuera, y se caen. Si conviertes el fichero de formato, lo vuelves a guardar o —sobre todo— le
+  haces un pantallazo, la firma desaparece. La marca del texto no funciona así, porque está
+  dentro. Confundir las dos lleva a conclusiones opuestas con el mismo caso.
+</div>
+
+<h2>03 · Desde el 2 de agosto, en todo el mundo, y sin casilla</h2>
+<p>Los modelos lanzados <b>desde el 2 de agosto de 2026</b> salen ya con marca. Los anteriores no:
+la ley les da un periodo de transición y Anthropic dice que está trabajando en añadírsela.</p>
+<p>Esto nació del reglamento europeo de IA —Anthropic firmó el código de buenas prácticas sobre
+transparencia—, y por eso mucha gente lo dio por cosa de Europa. No lo es. Lo escriben así: la
+marca se aplica <b>donde se ofrezca Claude, en todo el mundo</b>. Y en todos los productos: la
+API, la app de Claude, Claude Code, Cowork y Tag. También cuando se usa el modelo a través de
+AWS, Google Cloud o Microsoft Foundry.</p>
+<p>Y no hay dónde apagarlo. <b>En toda la página no aparece ni un ajuste, ni una casilla, ni un
+plan que lo quite.</b> Es coherente con que la marca del texto se ponga en el modelo: no es una
+opción del producto.</p>
+<p>El único matiz que sí ponen ellos: <i>algunas plataformas o funciones pueden no admitir
+ciertos tipos de marca</i>. Los metadatos firmados, en concreto, no llegan a todas partes.</p>
+
+<h2>04 · Qué demuestra una marca detectada</h2>
+<p>Poco más que un indicio, y lo dicen ellos con todas las letras: si aparece una marca, eso
+indica que el contenido <b>pudo pasar por Claude</b>. Y añaden que <b>no es del todo
+concluyente</b>.</p>
+<p>Dan dos motivos, y los dos son cotidianos:</p>
+<ul>
+  <li><b>Claude puede no ser el autor.</b> La gente usa Claude para corregir, traducir, resumir o
+  convertir ficheros. La salida puede llevar marca <i>aunque las ideas, el texto o los datos
+  vengan de otro sitio</i>. Es decir: escribiste tú el trabajo entero, le pediste que te
+  arreglara las comas, y sale marcado igual que si lo hubiera escrito él.</li>
+  <li><b>El contenido pudo cambiar después.</b> Lo marcado se puede editar, recortar o mezclar
+  con otro material una vez que Claude lo ha tocado.</li>
+</ul>
+<p>Traducido: una marca dice que ese texto pasó por Claude en algún momento. No dice que Claude
+lo escribiera, y desde luego no dice que tú lo copiaras.</p>
+
+<h2>05 · Qué no demuestra que no haya marca</h2>
+<p>Esta es la frase que hay que llevarse, y está literal en su página: <b>que no se detecte marca
+no significa que el contenido no sea de una IA</b>.</p>
+<p>Listan cinco motivos por los que un texto de IA puede no dar señal:</p>
+<ul>
+  <li>Lo generó un modelo <b>anterior</b> a que existiera la marca.</li>
+  <li>El texto se ha <b>editado mucho</b>, parafraseado, traducido o mezclado con otra escritura.</li>
+  <li>El fragmento es <b>muy corto</b> y no hay texto suficiente para una señal fiable.</li>
+  <li>Al fichero le <b>quitaron los metadatos</b> al convertirlo, al reguardarlo o con un pantallazo.</li>
+  <li>Salió por una plataforma, función o tipo de fichero <b>sin soporte</b> para esa marca.</li>
+</ul>
+<p>Y hay un sexto que su página no menciona porque no le toca: <b>esa página solo habla de
+Claude</b>. Que un texto no lleve la marca de Claude no dice nada de si lo escribió otra
+herramienta. Cada empresa decide qué marca y cuándo.</p>
+
+<div class="aviso">
+  <strong>Si solo te llevas una cosa:</strong> una marca no prueba que copiaras, y su ausencia no
+  prueba que no. Sirve para levantar una sospecha y no sirve para quitártela de encima. Cualquiera
+  que te la venda como prueba —en un sentido o en el otro— no se ha leído la página.
+</div>
+
+<h2>06 · Y a día de hoy no hay con qué comprobarlo</h2>
+<p>Esto es lo que más cambia la conversación práctica, y es fácil pasarlo por alto: <b>todavía no
+existe el detector</b>.</p>
+<p>Anthropic dice que va a permitir que los usuarios y terceros detecten sus marcas, porque el
+código que ha firmado se lo exige, y que <b>publicará cómo en una documentación técnica que aún
+no está</b>. Es un compromiso en marcha, no una herramienta que puedas abrir hoy.</p>
+<p>Así que si alguien te enseña ahora mismo un «detector de IA» y te dice que ha encontrado la
+marca de Claude, <b>no es esta marca</b>. Serán las herramientas de siempre, las que puntúan un
+texto por cómo suena y llevan años equivocándose con gente que escribe ordenado.</p>
+
+<h2>Qué se puede concluir de cada caso</h2>
+<p>La tabla completa cabe en cuatro filas. La columna de la derecha es corta a propósito:</p>
+<div class="tabla">
+<table>
+  <thead><tr><th>El caso</th><th>Lo que puedes concluir</th></tr></thead>
+  <tbody>
+    <tr><td>Salta la marca en un texto</td><td>Que ese texto pasó por Claude en algún momento. Ni quién lo pensó, ni cuánto puso cada uno.</td></tr>
+    <tr><td>No salta la marca</td><td>Nada. Ni que sea tuyo, ni que no lo sea.</td></tr>
+    <tr><td>Salta en un fichero</td><td>Que ese fichero pasó por Claude, y además si lo han manipulado después.</td></tr>
+    <tr><td>Son dos líneas sueltas</td><td>Nada tampoco: puede ser texto demasiado corto para dar señal fiable.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Si corriges trabajos, esto te toca a ti</h2>
+<p>La asimetría es el problema entero. Un alumno al que le salta la marca no tiene forma de
+demostrar que solo pidió ayuda para pulir el texto —sale marcado igual que quien lo copió
+entero—, y un alumno que copió con otra herramienta no da señal ninguna. Si corriges con eso,
+castigas al que pidió ayuda y se te escapa el que no la pidió a Claude.</p>
+<p>Lo que sí distingue a uno de otro no está en el resultado, está en el proceso. Y el proceso se
+pregunta, que además cuesta menos que discutir sobre un detector:</p>
+<pre>Cuéntame cómo lo hiciste: por dónde empezaste, qué descartaste y por qué.
+Enséñame un borrador anterior.
+¿De dónde sale este dato? Llévame a la fuente.
+Esta decisión de aquí, ¿por qué esta y no la otra?
+Explícame esta parte con tus palabras, sin mirar.</pre>
+<p>Nada de eso lo aprueba quien pegó un texto sin leerlo, y todo eso lo contesta sin despeinarse
+quien usó la IA y sabe lo que entregó. Que es, al final, la distinción que querías hacer.</p>
+<div class="aviso">
+  <strong>Y si el que corrige eres tú y usas Claude para corregir:</strong> los informes,
+  comentarios y rúbricas que te escriba también salen marcados. La regla vale igual en las dos
+  direcciones.
+</div>
+
+<h2>Cómo comprobarlo tú, que esto caduca</h2>
+<p>Todo lo de arriba está en una sola página de soporte de Anthropic, y es la única que hay que
+mirar cuando esto cambie:</p>
+<pre><code>support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content</code></pre>
+<p><b>Comprobado el 15 de agosto de 2026</b>, y conviene volver, porque la propia página dice que
+la irán actualizando y que publicará más detalle técnico cuando lo tenga.</p>
+<p>Un apunte de honestidad, ya que la casa lo pide: buena parte de esa página está escrita en
+futuro —«se aplicará», «funcionará», «compartiremos»—. Es un compromiso firmado y en despliegue,
+no un botón que lleve dos años funcionando. Lo que ya es firme es el calendario: los modelos
+nuevos salen marcados, y los viejos van detrás.</p>
+
+<div class="siguiente">
+  <p>¿Te ha tocado esto de cerca, corrigiendo o entregando? Cuéntamelo por DM. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+</body>
+</html>
