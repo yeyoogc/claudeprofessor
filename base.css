@@ -1,7 +1,9 @@
 /* Hoja base de ClaudeProfessor.
-   La comparten index, bóveda, skills y prompts: si una regla cambia, cambia
-   en las cuatro. Antes cada página llevaba su copia y se desincronizaban a la
-   primera edición.
+   La comparten las cinco páginas del sitio — index, bóveda, skills, prompts y
+   la guía de instalación: si una regla cambia, cambia en las cinco. Antes cada
+   página llevaba su copia y se desincronizaban a la primera edición; prompts y
+   la guía llegaron a tener su propio modo oscuro, con un negro cálido y un
+   coral que no salían de marca.py.
 
    Los colores salen del manual de marca (marca.py). No se inventa ninguno
    aquí: si hace falta uno nuevo, se añade allí primero. */
@@ -42,6 +44,10 @@
        font:500 17px/1.6 'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
        -webkit-font-smoothing:antialiased;overflow-x:hidden}
   .env{max-width:1080px;margin:0 auto;padding:0 24px}
+  /* Columna de lectura: 720px de texto dentro del mismo canalón de 24px que
+     el resto del sitio, para que la vuelta de arriba y el pie caigan en la
+     misma vertical que los párrafos. */
+  .env.estrecho{max-width:768px}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:6px}
 
@@ -203,6 +209,96 @@
   .tarjeta:hover .accion{box-shadow:0 6px 16px rgba(206,107,75,.38)}
 
   .ver-todo{text-align:center;margin-top:32px}
+
+  /* ── Páginas interiores ──────────────────────────────────────────────
+     Todo lo que no es la portada: sin héroe a pantalla completa y con una
+     vuelta arriba. Estaba copiado en el <style> de bóveda y de skills, que
+     es justo lo que esta hoja existe para evitar. */
+  .volver{display:inline-flex;align-items:center;gap:8px;font-size:13px;
+          font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+          color:var(--tenue);padding:34px 0 0}
+  .volver:hover{color:var(--coral)}
+  .volver svg{width:15px;height:15px;color:var(--coral)}
+  main > section{padding:46px 0 84px}
+
+  /* ── Páginas de lectura ──────────────────────────────────────────────
+     Prompts y la guía de instalación: texto largo en una columna, no una
+     rejilla de tarjetas. Son las dos páginas a las que llega el tráfico
+     desde el DM, así que tienen que parecer el mismo sitio que la portada;
+     antes traían su propia paleta entera y no lo parecían. */
+  /* El padding lateral lo pone .env; aquí solo el aire de arriba, que separa
+     la vuelta del titular, y el de abajo antes del cierre. */
+  .lectura{padding-top:38px;padding-bottom:24px}
+  .lectura header{margin-bottom:52px}
+  .lectura h1{font-family:'Montserrat',sans-serif;font-weight:800;
+              font-size:clamp(33px,6.6vw,50px);line-height:1.06;
+              letter-spacing:-.025em;text-wrap:balance}
+  .lectura h1 em{font-style:normal;color:var(--coral)}
+  .entradilla{margin-top:20px;font-size:19px;color:var(--sec);max-width:56ch}
+  .lectura h2{font-family:'Montserrat',sans-serif;margin:54px 0 8px;
+              font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+              color:var(--coral);font-weight:700}
+  .lectura h3{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:800;
+              letter-spacing:-.015em;margin-top:32px}
+  .lectura h3 + p{margin-top:8px;color:var(--sec)}
+  .lectura p + p{margin-top:14px}
+  /* El reset de arriba quita el padding a todo, y una lista sin él pierde la
+     sangría y se le salen los puntos del contenedor. Se devuelve aquí. */
+  .lectura ul,.lectura ol{margin-top:14px;padding-left:26px}
+  .lectura li{line-height:1.6;margin-top:7px}
+  .lectura li::marker{color:var(--coral)}
+  /* Los enlaces dentro del texto sí llevan color: en el resto del sitio el
+     enlace es una tarjeta o una píldora entera y se ve solo. */
+  .lectura p a,.lectura li a,.lectura td a{color:var(--coral);font-weight:600}
+  .lectura p a:hover,.lectura li a:hover,.lectura td a:hover{text-decoration:underline}
+
+  /* Aviso: el inciso que corta la lectura sin sacarte de ella. */
+  .aviso{margin-top:30px;padding:18px 22px;border-left:5px solid var(--coral);
+         background:var(--blanco);font-size:16px;color:var(--sec)}
+  .aviso strong{color:var(--tinta)}
+
+  pre{margin-top:14px;background:var(--blanco);border:1px solid var(--linea);
+      border-radius:10px;padding:18px 20px;white-space:pre-wrap;overflow-x:auto;
+      font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+  code{font:400 .93em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+       background:var(--blanco);border:1px solid var(--linea);
+       border-radius:5px;padding:1px 6px}
+  pre code{background:none;border:0;padding:0}
+
+  /* Una tabla de tres columnas no cabe en un móvil, y el body lleva
+     overflow-x:hidden: sin este envoltorio la última columna no es que se
+     salga, es que desaparece y no hay forma de llegar a ella. Y el móvil es
+     todo el tráfico que llega desde Instagram. */
+  .tabla{overflow-x:auto;margin-top:18px;-webkit-overflow-scrolling:touch}
+  .tabla table{margin-top:0;min-width:456px}
+  /* Y en pantalla de móvil ni siquiera rodando se lee: la columna que
+     importa —para qué sirve cada skill— queda partida por la mitad. Ahí la
+     tabla deja de ser tabla y cada fila se apila. La cabecera sobra porque
+     el orden ya dice qué es cada cosa: nombre, paquete, para qué. */
+  @media (max-width:560px){
+    .tabla{overflow:visible}
+    .tabla table,.tabla tbody,.tabla tr,.tabla td{display:block;width:auto;min-width:0}
+    .tabla thead{display:none}
+    .tabla tr{border-bottom:1px solid var(--linea);padding:15px 0}
+    .tabla td{border:0;padding:0}
+    .tabla td:first-child{white-space:normal}
+    .tabla td:nth-child(2){margin:9px 0 7px}
+    .tabla td:last-child{color:var(--sec);font-size:15px;line-height:1.5}
+  }
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:16px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--linea);
+        vertical-align:top}
+  th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+     color:var(--tenue);font-weight:700;border-bottom-width:2px}
+  td:first-child{white-space:nowrap}
+  td code{font-size:14px}
+
+  /* Cierre de página de lectura: quien llega aquí desde un DM ha terminado
+     de leer y no tiene dónde ir. Las mismas píldoras del héroe, en pequeño. */
+  .siguiente{margin-top:64px;padding-top:34px;border-top:1px solid var(--linea);
+             text-align:center}
+  .siguiente p{color:var(--sec);margin-bottom:18px}
+  .siguiente .pastillas{margin-top:0}
 
   .cta-final{text-align:center;padding:84px 24px 96px}
   .cta-final h2{max-width:16ch;margin:0 auto}

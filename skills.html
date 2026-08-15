@@ -5,17 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skills abiertas · ClaudeProfessor</title>
 <meta name="description" content="Skills de Claude abiertas y gratuitas, listas para instalar.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/skills">
+<meta property="og:title" content="Skills de Claude que puedes instalar hoy">
+<meta property="og:description" content="Tres skills abiertas y gratuitas. Te las descargas, las metes en tu Claude y funcionan.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="La mascota de ClaudeProfessor junto al nombre del sitio">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="fuentes.css">
 <link rel="stylesheet" href="base.css">
-<style>
-  /* Página interior: sin héroe a pantalla completa, con una vuelta arriba. */
-  .volver{display:inline-flex;align-items:center;gap:8px;font-size:13px;
-          font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-          color:var(--tenue);padding:34px 0 0}
-  .volver:hover{color:var(--coral)}
-  .volver svg{width:15px;height:15px;color:var(--coral)}
-  section{padding:46px 0 84px}
-</style>
 </head>
 <body>
 
@@ -27,6 +33,12 @@
       <p class="eyebrow">Skills abiertas</p>
       <h2>Skills de Claude que puedes <em>instalar hoy</em></h2>
       <p class="intro">Abiertas y gratuitas. Te las descargas, las metes en tu Claude y funcionan. Si mejoras alguna, mándamela y la publico con tu nombre.</p>
+      <!-- Sin esto, el botón de cada tarjeta abre un SKILL.md a pelo y quien
+           llega desde el DM no sabe qué hacer con ese archivo. La guía existía
+           y no estaba enlazada desde ninguna parte. -->
+      <div class="ver-todo">
+        <a class="pill borde" href="instalar-skills.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.5 2.5 0 0 1 4.8.8c0 1.7-2.4 2-2.4 3.5"/><path d="M12 17.2h.01"/></svg>¿Primera vez? Cómo se instalan</a>
+      </div>
     </div>
 
     <div class="rejilla">
@@ -35,8 +47,8 @@
         <div class="cuerpo-t">
           <h3>Escribe como yo</h3>
           <p>Le enseña tu voz a partir de tres textos tuyos antes de escribir una sola línea. El método del carrusel, empaquetado.</p>
-          <div class="meta"><span>SKILL.md</span>
-            <span class="accion">Instalar &rarr;</span></div>
+          <div class="meta"><span>Archivo SKILL.md</span>
+            <span class="accion">Abrir &rarr;</span></div>
         </div>
       </a>
 
@@ -45,8 +57,8 @@
         <div class="cuerpo-t">
           <h3>Interroga mis documentos</h3>
           <p>Lee un PDF largo como si tuviera que defenderlo mañana: contradicciones, huecos y las preguntas incómodas.</p>
-          <div class="meta"><span>SKILL.md</span>
-            <span class="accion">Instalar &rarr;</span></div>
+          <div class="meta"><span>Archivo SKILL.md</span>
+            <span class="accion">Abrir &rarr;</span></div>
         </div>
       </a>
 
@@ -55,8 +67,8 @@
         <div class="cuerpo-t">
           <h3>De reunión a tareas</h3>
           <p>Convierte notas sueltas en decisiones y tareas con responsable y fecha. Lo que quedó sin decidir, aparte.</p>
-          <div class="meta"><span>SKILL.md</span>
-            <span class="accion">Instalar &rarr;</span></div>
+          <div class="meta"><span>Archivo SKILL.md</span>
+            <span class="accion">Abrir &rarr;</span></div>
         </div>
       </a>
     </div>
@@ -66,6 +78,7 @@
 <footer><div class="env" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
   <span>ClaudeProfessor · Hecho en Jaén</span>
   <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="boveda.html">Bóveda</a> ·
     <a href="index.html">Inicio</a></span>
 </div></footer>
 

@@ -5,83 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cómo instalar las skills de Claude · ClaudeProfessor</title>
 <meta name="description" content="Guía para instalar las skills oficiales de Anthropic, en la app de Claude y en Claude Code. Con la tabla de qué skill está en qué plugin.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/instalar-skills">
+<meta property="og:title" content="Cómo instalar las skills de Claude">
+<meta property="og:description" content="Dónde se activan en la app y qué dos paquetes hay que instalar en Claude Code. Con la tabla de qué skill está en cuál.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="La mascota de ClaudeProfessor junto al nombre del sitio">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
 <style>
-  :root{
-    --coral:#CE6B4B; --coral-o:#93482F;
-    --crema:#F0EEE6; --crema-c:#F7F5EF;
-    --tinta:#11162C; --sec:rgba(17,22,44,.68); --tenue:rgba(17,22,44,.40);
-    --linea:rgba(25,25,25,.12);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--crema);color:var(--tinta);
-       font:400 17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-       -webkit-font-smoothing:antialiased}
-  .envoltorio{max-width:720px;margin:0 auto;padding:56px 24px 96px}
-
-  header{margin-bottom:56px}
-  .marca{font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
-         color:var(--coral);margin-bottom:20px}
-  h1{font-size:clamp(34px,7vw,52px);line-height:1.05;letter-spacing:-.02em;font-weight:800}
-  h1 em{font-style:normal;color:var(--coral)}
-  .entradilla{margin-top:20px;font-size:19px;color:var(--sec);max-width:56ch}
-
-  .aviso{margin-top:32px;padding:18px 22px;border-left:5px solid var(--coral);
-         background:var(--crema-c);font-size:16px;color:var(--sec)}
-  .aviso strong{color:var(--tinta)}
-
-  h2{margin:56px 0 8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
-     color:var(--coral);font-weight:700}
-  h3{font-size:22px;font-weight:800;letter-spacing:-.01em;margin-top:34px}
-  h3 + p{margin-top:8px;color:var(--sec)}
-  p + p{margin-top:14px}
-
+  /* Solo lo de esta página: los pasos numerados y la ruta de menús. Lo demás
+     —tipografía, color, columna, avisos, código y tablas— sale de base.css.
+     Esta página ni siquiera cargaba la hoja base: iba con la tipografía del
+     sistema y con su propio modo oscuro. */
   ol.pasos{margin:20px 0 0;padding:0;list-style:none;counter-reset:paso}
   ol.pasos li{counter-increment:paso;position:relative;padding:0 0 20px 46px}
   ol.pasos li::before{content:counter(paso);position:absolute;left:0;top:-2px;
     width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;
     font-weight:800;font-size:15px;display:grid;place-items:center}
   ol.pasos li b{font-weight:700}
-  .ruta{display:inline-block;background:var(--crema-c);border:1px solid var(--linea);
+  .ruta{display:inline-block;background:var(--blanco);border:1px solid var(--linea);
         border-radius:6px;padding:1px 8px;font-weight:600;font-size:15px;white-space:nowrap}
-
-  pre{margin-top:14px;background:#fff;border:1px solid rgba(25,25,25,.10);
-      border-radius:10px;padding:18px 20px;white-space:pre-wrap;overflow-x:auto;
-      font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
-  code{font:400 .93em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
-       background:var(--crema-c);border:1px solid var(--linea);
-       border-radius:5px;padding:1px 6px}
-  pre code{background:none;border:0;padding:0}
-
-  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:16px}
-  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--linea);vertical-align:top}
-  th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue);
-     font-weight:700;border-bottom-width:2px}
-  td:first-child{white-space:nowrap}
-  td code{font-size:14px}
-  .env{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  /* Etiqueta de paquete de la tabla. Se llamaba .env, que es la clase del
+     contenedor de base.css: al cargar la hoja base se pisaban. */
+  .paq{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
        font-weight:700;padding:2px 7px;border-radius:20px;
-       background:rgba(206,107,75,.14);color:var(--coral-o)}
-
-  footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--linea);
-         color:var(--tenue);font-size:15px}
-  footer a{color:var(--coral);font-weight:600;text-decoration:none}
-  footer a:hover{text-decoration:underline}
-
-  @media (prefers-color-scheme:dark){
-    :root{--crema:#141413;--crema-c:#1C1B19;--tinta:#EDEBE5;
-          --sec:rgba(237,235,229,.70);--tenue:rgba(237,235,229,.42);
-          --coral:#E0916F;--coral-o:#E0916F;--linea:rgba(237,235,229,.14)}
-    pre{background:#1C1B19;border-color:rgba(237,235,229,.14)}
-    .env{background:rgba(224,145,111,.16)}
-  }
+       background:rgba(206,107,75,.14);color:var(--coral-os)}
+  @media (prefers-color-scheme:dark){.paq{background:rgba(251,165,137,.16)}}
 </style>
 </head>
 <body>
-<div class="envoltorio">
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
 
 <header>
-  <div class="marca">✴ ClaudeProfessor</div>
+  <p class="eyebrow">Guía paso a paso</p>
   <h1>Cómo instalar <em>las skills de Claude</em></h1>
   <p class="entradilla">Las skills oficiales de Anthropic son gratis y están publicadas.
   Lo que casi nadie explica es dónde se activan y por qué a veces instalas una cosa y
@@ -138,45 +107,47 @@ campos de este formulario».</p>
 <p>Esta tabla es la que te ahorra el rato de buscar. Las de redacción y las de
 diseño no viven en el mismo sitio.</p>
 
+<div class="tabla">
 <table>
   <thead>
     <tr><th>Skill</th><th>Paquete</th><th>Para qué</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>doc-coauthoring</code></td><td><span class="env">example</span></td>
+    <tr><td><code>doc-coauthoring</code></td><td><span class="paq">example</span></td>
         <td>Escribir documentos en tres fases, con prueba de lector al final</td></tr>
-    <tr><td><code>internal-comms</code></td><td><span class="env">example</span></td>
+    <tr><td><code>internal-comms</code></td><td><span class="paq">example</span></td>
         <td>Comunicación interna: 3P, newsletters, FAQ, informes</td></tr>
-    <tr><td><code>skill-creator</code></td><td><span class="env">example</span></td>
+    <tr><td><code>skill-creator</code></td><td><span class="paq">example</span></td>
         <td>Crear tus propias skills</td></tr>
-    <tr><td><code>canvas-design</code></td><td><span class="env">example</span></td>
+    <tr><td><code>canvas-design</code></td><td><span class="paq">example</span></td>
         <td>Diseño gráfico: primero el criterio, luego la pieza</td></tr>
-    <tr><td><code>frontend-design</code></td><td><span class="env">example</span></td>
+    <tr><td><code>frontend-design</code></td><td><span class="paq">example</span></td>
         <td>Interfaces que no parezcan una plantilla</td></tr>
-    <tr><td><code>theme-factory</code></td><td><span class="env">example</span></td>
+    <tr><td><code>theme-factory</code></td><td><span class="paq">example</span></td>
         <td>Diez temas con su paleta y sus tipografías</td></tr>
-    <tr><td><code>brand-guidelines</code></td><td><span class="env">example</span></td>
+    <tr><td><code>brand-guidelines</code></td><td><span class="paq">example</span></td>
         <td>Identidad de marca aplicada (la de Anthropic, como plantilla)</td></tr>
-    <tr><td><code>algorithmic-art</code></td><td><span class="env">example</span></td>
+    <tr><td><code>algorithmic-art</code></td><td><span class="paq">example</span></td>
         <td>Arte generativo por código</td></tr>
-    <tr><td><code>webapp-testing</code></td><td><span class="env">example</span></td>
+    <tr><td><code>webapp-testing</code></td><td><span class="paq">example</span></td>
         <td>Probar aplicaciones web</td></tr>
-    <tr><td><code>web-artifacts-builder</code></td><td><span class="env">example</span></td>
+    <tr><td><code>web-artifacts-builder</code></td><td><span class="paq">example</span></td>
         <td>Construir artefactos web</td></tr>
-    <tr><td><code>mcp-builder</code></td><td><span class="env">example</span></td>
+    <tr><td><code>mcp-builder</code></td><td><span class="paq">example</span></td>
         <td>Crear servidores MCP</td></tr>
-    <tr><td><code>slack-gif-creator</code></td><td><span class="env">example</span></td>
+    <tr><td><code>slack-gif-creator</code></td><td><span class="paq">example</span></td>
         <td>GIFs para Slack</td></tr>
-    <tr><td><code>docx</code></td><td><span class="env">document</span></td>
+    <tr><td><code>docx</code></td><td><span class="paq">document</span></td>
         <td>Word con control de cambios y comentarios</td></tr>
-    <tr><td><code>pdf</code></td><td><span class="env">document</span></td>
+    <tr><td><code>pdf</code></td><td><span class="paq">document</span></td>
         <td>Crear, rellenar, editar y extraer datos de PDF</td></tr>
-    <tr><td><code>pptx</code></td><td><span class="env">document</span></td>
+    <tr><td><code>pptx</code></td><td><span class="paq">document</span></td>
         <td>PowerPoint</td></tr>
-    <tr><td><code>xlsx</code></td><td><span class="env">document</span></td>
+    <tr><td><code>xlsx</code></td><td><span class="paq">document</span></td>
         <td>Excel</td></tr>
   </tbody>
 </table>
+</div>
 
 <h2>Hacer la tuya</h2>
 <h3>Una skill es una carpeta con un archivo dentro</h3>
@@ -214,13 +185,23 @@ en carruseles: <code>escribe-como-yo</code>, <code>interroga-documentos</code> y
 <code>reunion-a-tareas</code>. Están en
 <a href="skills.html">claudeprofessor.page</a>, gratis y para cambiarlas a tu gusto.</p>
 
-<footer>
-  <p>Si algo de esto no te funciona, escríbeme por
-  <a href="https://instagram.com/claudeprofessor">@claudeprofessor</a> y lo miramos.
-  Lo corrijo aquí para el siguiente.</p>
-  <p style="margin-top:14px">✴ <a href="index.html">claudeprofessor.page</a></p>
-</footer>
-
+<div class="siguiente">
+  <p>Si algo de esto no te funciona, escríbeme por DM y lo miramos: lo corrijo
+  aquí para el siguiente.</p>
+  <div class="pastillas">
+    <a class="pill borde" href="skills.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>Mis tres skills</a>
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
 </div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
 </body>
 </html>
