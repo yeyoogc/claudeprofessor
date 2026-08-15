@@ -260,9 +260,14 @@
   pre{margin-top:14px;background:var(--blanco);border:1px solid var(--linea);
       border-radius:10px;padding:18px 20px;white-space:pre-wrap;overflow-x:auto;
       font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+  /* El `overflow-wrap` va porque una url dentro de un `code` es una sola
+     palabra sin espacios: no parte por ningún sitio, se sale de su columna y
+     arrastra la página entera a scroll horizontal. Pasó con la de soporte de
+     Google en /google, que mide 360px metida en una columna de 343 y sacaba
+     ocho píxeles. Con `anywhere` parte donde le toque. */
   code{font:400 .93em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
        background:var(--blanco);border:1px solid var(--linea);
-       border-radius:5px;padding:1px 6px}
+       border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
   pre code{background:none;border:0;padding:0}
 
   /* Una tabla de tres columnas no cabe en un móvil, y el body lleva
