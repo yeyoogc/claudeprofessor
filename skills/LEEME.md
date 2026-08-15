@@ -1,13 +1,33 @@
 # Skills abiertas de ClaudeProfessor
 
-Tres skills de Claude, gratuitas y abiertas. Cada una empaqueta un método que
+Once skills de Claude, gratuitas y abiertas. Cada una empaqueta un método que
 he explicado en un carrusel, para que no tengas que acordarte de él.
+
+**Escribir**
 
 | Skill | Para qué |
 |---|---|
 | `escribe-como-yo` | Aprende tu voz de tres textos tuyos antes de escribir una línea |
+| `dime-por-que-falla` | Critica un texto tuyo sin reescribirlo: te deja a ti los arreglos |
+| `correo-dificil` | El correo que llevas días evitando: reclamar, decir que no, pedir perdón |
+
+**Ordenar y decidir**
+
+| Skill | Para qué |
+|---|---|
 | `interroga-documentos` | Lee un PDF largo como si tuviera que defenderlo mañana |
 | `reunion-a-tareas` | Notas sueltas → decisiones y tareas con responsable y fecha |
+| `decidir-con-criterio` | Criterios antes que opciones, y una recomendación al final |
+| `conviertelo-en-plantilla` | La tarea que repites cada semana, convertida en encargo reutilizable |
+
+**Oficios**
+
+| Skill | Para qué |
+|---|---|
+| `examiname` | Estudia preguntándote a ti, no soltándote el resumen |
+| `corrige-trabajos` | Treinta entregas con la misma rúbrica y el mismo listón |
+| `responde-a-clientes` | Los mismos veinte mensajes, con tu tono y sin inventarse un precio |
+| `antes-de-pegarlo` | Quita del documento lo que no debe salir de tu ordenador |
 
 ## Cómo se instalan
 
@@ -41,7 +61,9 @@ directamente.
 ## Si la mejoras
 
 Mándamela por [@claudeprofessor](https://instagram.com/claudeprofessor) y la
-publico aquí con tu nombre. Lo que más se agradece:
+publico aquí con tu nombre. Varias se apoyan entre sí —`antes-de-pegarlo` se
+menciona desde `corrige-trabajos` y desde `responde-a-clientes`, por ejemplo—,
+así que si cambias una, mira si hay otra que la nombra. Lo que más se agradece:
 
 - Casos donde la skill se queda corta o se activa cuando no debe.
 - Reglas nuevas que hayas comprobado que funcionan, no que suenen bien.
