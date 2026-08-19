@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El montaje de las cuatro piezas · ClaudeProfessor</title>
+<meta name="description" content="Claude en tu carpeta, tus skills, subagentes y un disparador. En qué orden se montan.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/asistente">
+<meta property="og:title" content="El montaje de las cuatro piezas">
+<meta property="og:description" content="Claude en tu carpeta, tus skills, subagentes y un disparador. En qué orden se montan.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Un asistente <em>que es tuyo</em></h1>
+  <p class="entradilla">Un chat te contesta; un asistente ya lo tenía hecho cuando llegas. Son cuatro piezas y ninguna se paga aparte. Casi todo el mundo tiene la primera y ninguna de las otras tres.</p>
+</header>
+
+<h2>01 · Uno · Claude en tu carpeta, no en una pestaña</h2>
+<p>Instalado en tu ordenador y viendo tus archivos de verdad. Deja de ser algo a lo que le pegas texto y pasa a ser algo que trabaja donde trabajas tú. Si nunca lo has hecho, empieza por una carpeta que no dé miedo romper.</p>
+
+<h2>02 · Dos · Tus skills, que es donde está lo tuyo</h2>
+<p>Sin esta pieza el asistente es rápido pero genérico, y lo genérico lo tiene cualquiera. Empieza por una sola: lo que haces cada semana y odias repetir. La plantilla está en la bóveda, en «tu primera skill».</p>
+
+<h2>03 · Tres · Subagentes para lo que ensucia</h2>
+<p>Rebuscar, comparar, revisar. Cada uno en su ventana devolviéndote la conclusión en vez de trescientas líneas. Tres listos para copiar, también en la bóveda.</p>
+
+<h2>04 · Cuatro · Que arranque solo</h2>
+<p>La pieza que casi nadie pone y la que hace la diferencia. Lo que depende de que te acuerdes no pasa de la segunda semana. En Mac y Linux basta con una tarea programada del sistema que abra Claude en la carpeta y le dé el encargo:</p>
+<pre># Todos los días a las 8:00, en la carpeta de trabajo
+0 8 * * *  cd ~/trabajo &amp;&amp; claude -p &quot;$(cat ~/trabajo/encargo-mañana.txt)&quot;</pre>
+
+<h2>05 · El encargo de la mañana, en un archivo aparte</h2>
+<p>Guárdalo en <code>encargo-mañana.txt</code> y así lo cambias sin tocar la tarea programada:</p>
+<pre>Revisa el correo de las últimas 24 horas y sepáralo en urgente, espera respuesta y puedo ignorarlo.
+Mira mi calendario de hoy y dime con quién hablo y qué quedó pendiente con cada uno.
+Déjalo escrito en resumen-hoy.md. No me mandes nada más.</pre>
+
+<h2>06 · El orden importa</h2>
+<p>Monta la uno y la dos, y úsalas dos semanas antes de tocar las otras. Un disparador automático sobre un asistente que todavía no tiene tu criterio te entrega basura puntualmente todas las mañanas.</p>
+
+<div class="aviso">
+  <strong>Por qué en tu ordenador y no en una web.</strong> Porque ve tus archivos de verdad, porque sigue ahí mañana, y porque la carpeta es tuya: la copias y te la llevas.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>

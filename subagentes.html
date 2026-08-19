@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tres subagentes listos para copiar · ClaudeProfessor</title>
+<meta name="description" content="Qué son, dónde se guardan y tres que puedes pegar hoy en tu carpeta.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/subagentes">
+<meta property="og:title" content="Tres subagentes listos para copiar">
+<meta property="og:description" content="Qué son, dónde se guardan y tres que puedes pegar hoy en tu carpeta.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Tres <em>subagentes</em> para copiar</h1>
+  <p class="entradilla">Un subagente rebusca en su propia ventana y te devuelve solo la conclusión, en vez de inundarte el chat con trescientas líneas que no vas a releer. Son un archivo de texto con dos líneas obligatorias.</p>
+</header>
+
+<h2>01 · Dónde se guardan, que no da lo mismo</h2>
+<p>En <code>.claude/agents/</code> si es de este proyecto — se sube al repositorio y lo mejora todo el equipo. En <code>~/.claude/agents/</code> si lo quieres en todos tus proyectos: ese se queda en tu ordenador y es tu forma de trabajar.</p>
+
+<h2>02 · El revisor de textos</h2>
+<p>Para lo que escribes antes de publicarlo. Guárdalo como <code>revisor-textos.md</code>:</p>
+<pre>---
+name: revisor-textos
+description: Se usa al revisar cualquier texto antes de publicarlo o enviarlo.
+tools: Read, Grep
+---
+
+Eres un revisor exigente y breve.
+
+Señala solo tres cosas, y en este orden:
+1. Frases que se entienden a la segunda lectura.
+2. Adjetivos que pueden quitarse sin perder información.
+3. Afirmaciones sin dato que las sostenga.
+
+No reescribas el texto. Señala y explica en una línea por qué.</pre>
+
+<h2>03 · El que busca sin llenarte el chat</h2>
+<p>Para cuando necesitas saber algo que está repartido en veinte archivos. Guárdalo como <code>rastreador.md</code>:</p>
+<pre>---
+name: rastreador
+description: Se usa cuando hay que buscar algo repartido por muchos archivos y solo interesa la conclusión.
+tools: Read, Grep, Glob
+---
+
+Busca lo que te pidan y devuelve SOLO:
+· La respuesta en dos frases.
+· Los archivos exactos donde está, con su línea.
+· Lo que has mirado y NO tenía nada, para que no se vuelva a mirar.
+
+No pegues el contenido de los archivos.</pre>
+
+<h2>04 · El abogado del diablo</h2>
+<p>El más útil de los tres y el que menos gente usa. Guárdalo como <code>contras.md</code>:</p>
+<pre>---
+name: contras
+description: Se usa antes de tomar una decisión, para buscar en contra de lo que ya se ha decidido.
+---
+
+Tu trabajo es buscar por qué esto puede salir mal.
+
+Dame:
+· Las tres formas más probables de que esto falle.
+· Qué asumimos sin haberlo comprobado.
+· Qué haría falta que fuera verdad para que la decisión sea buena.
+
+No propongas alternativas. Solo busca los agujeros.</pre>
+
+<h2>05 · Cuándo NO usarlos</h2>
+<p>Cuando vas a necesitar el detalle a mano. El subagente te da el resumen y tira el resto, así que si luego quieres releer lo que encontró, no está. Úsalos para lo que ensucia, no para lo que importa.</p>
+
+<h2>06 · Veinte a la vez</h2>
+<p>Para investigaciones independientes se lanzan varios en paralelo y el límite por sesión es veinte. Lo que en serie te lleva la tarde tarda lo que el más lento.</p>
+
+<div class="aviso">
+  <strong>Empieza por el tercero.</strong> El abogado del diablo es el que más veces te va a ahorrar un día entero, y es el que nadie escribe porque no parece que haga nada.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pasar tus prompts a skills · ClaudeProfessor</title>
+<meta name="description" content="Cómo convertir la libreta de prompts en archivos que se activan solos y funcionan en cualquier herramienta.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/prompts-a-skills">
+<meta property="og:title" content="Pasar tus prompts a skills">
+<meta property="og:description" content="Cómo convertir la libreta de prompts en archivos que se activan solos y funcionan en cualquier herramienta.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>De la libreta de prompts <em>a skills</em></h1>
+  <p class="entradilla">Un prompt guardado en una nota lo pegas tú cada vez y vive dentro de una app. Una skill se activa sola cuando toca, vive en una carpeta tuya y la leen ya más de treinta herramientas, Claude y ChatGPT entre ellas.</p>
+</header>
+
+<h2>01 · Qué es, sin rodeos</h2>
+<p>Un archivo de texto llamado <code>SKILL.md</code> con cuatro datos arriba y las instrucciones debajo, en español llano. Anthropic publicó la especificación en diciembre de 2025 y en cuarenta y ocho horas ya la leían Microsoft y OpenAI. Por eso el mismo archivo vale en Claude Code, en Codex, en Cursor o en VS Code.</p>
+
+<h2>02 · Empieza por el que más repites</h2>
+<p>No por el más impresionante. Abre donde guardes tus prompts y busca el que has pegado más veces este mes: ese ya está probado y ya sabes cómo tiene que salir.</p>
+
+<h2>03 · Conviértelo</h2>
+<p>Pégale el prompt tal cual y pídele esto. Lo importante es la segunda frase: sin ella escribe una descripción vaga y la skill no se activa nunca.</p>
+<pre>Este es un prompt que uso mucho. Conviértelo en una skill.
+La descripción tiene que decir CUÁNDO usarla, con las palabras que yo diría al pedirlo, no un resumen de lo que hace.
+Antes de escribirla, pregúntame qué no debe hacer nunca y cómo se sabe que ha quedado bien.</pre>
+
+<h2>04 · Dónde se guarda</h2>
+<p>En <code>.claude/skills/</code> dentro de un proyecto si es de ese proyecto, o en <code>~/.claude/skills/</code> si la quieres en todos. La segunda es la que convierte tu forma de trabajar en algo que te sigue a todas partes.</p>
+
+<h2>05 · Cómo se la llevas a otra herramienta</h2>
+<p>Copiando la carpeta. No hay exportación ni conversión: el mismo archivo que lee Claude Code lo lee Codex. Comprueba en la documentación de la otra herramienta en qué carpeta las busca, que es lo único que cambia.</p>
+
+<h2>06 · Cómo saber si está bien escrita</h2>
+<p>Abre un chat nuevo, sin decir nada de la skill, y pide lo de siempre con tus palabras. Si entra sola, la descripción está bien. Si no entra, no reescribas las instrucciones: reescribe la descripción, que es donde está el fallo el 90% de las veces.</p>
+
+<div class="aviso">
+  <strong>Lo que ganas no es velocidad.</strong> Es que tu criterio deja de ser de alquiler. Si mañana cambias de herramienta, todo lo que has afinado se va contigo en una carpeta.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>

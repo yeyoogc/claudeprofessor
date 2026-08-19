@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los seis modos de permiso de Claude Code · ClaudeProfessor</title>
+<meta name="description" content="Qué hace cada modo, cuál trae de fábrica y cómo se cambia. Comprobado en la documentación oficial.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/modos-permiso">
+<meta property="og:title" content="Los seis modos de permiso de Claude Code">
+<meta property="og:description" content="Qué hace cada modo, cuál trae de fábrica y cómo se cambia. Comprobado en la documentación oficial.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Los <em>seis modos</em> de permiso</h1>
+  <p class="entradilla">En los planes Pro, Max y Team la sesión arranca en automático. No es que nadie revise: revisa un segundo modelo en tu lugar. Y ese modelo mira si un comando es peligroso, no si tu idea es buena.</p>
+</header>
+
+<h2>01 · Cómo se cambia</h2>
+<p>Con <b>Shift+Tab</b> se van pasando en el terminal, y abajo a la derecha se ve en cuál estás. También se puede arrancar directamente en uno:</p>
+<pre>claude --permission-mode plan</pre>
+
+<h2>02 · default — solo lecturas</h2>
+<p>El manual de toda la vida. Pregunta antes de tocar archivos y antes de cualquier comando que no sea de solo lectura. Es el que quieres cuando entras en algo que no es tuyo o en algo que da miedo romper.</p>
+
+<h2>03 · acceptEdits — edita sin preguntar</h2>
+<p>Lee, edita archivos y ejecuta los comandos corrientes de sistema (crear carpetas, mover, copiar) sin consultarte. Para cuando estás iterando sobre código que vas revisando tú a la vez.</p>
+
+<h2>04 · plan — investiga y propone, no toca</h2>
+<p>Lee, rebusca y escribe un plan, pero <b>no edita tu código</b>: las ediciones quedan bloqueadas hasta que apruebas el plan. Es el que convierte «me lo ha roto» en «no era eso, cámbialo». Se entra con Shift+Tab o con <code>/plan</code>.</p>
+
+<h2>05 · auto — todo, con revisión de otro modelo</h2>
+<p>Ejecuta sin preguntarte y un clasificador revisa por detrás. Es el que traes de fábrica en Pro, Max y Team. Sirve para tareas largas donde ir aprobando cada paso te saca de la tarea.</p>
+
+<h2>06 · dontAsk — solo lo preaprobado</h2>
+<p>Únicamente las herramientas que hayas autorizado antes; el resto ni pregunta, falla. Pensado para automatizaciones y scripts, no para trabajar delante.</p>
+
+<h2>07 · bypassPermissions — sin ninguna comprobación</h2>
+<p>Todo, sin clasificador y sin ti. La propia documentación lo acota a contenedores y máquinas virtuales aisladas. Si estás en tu ordenador con tus cosas, este no.</p>
+
+<h2>08 · El detalle que explica por qué a ti no te pasa</h2>
+<p>El arranque en automático necesita Claude Code <b>2.1.228</b> o posterior en macOS, Linux y WSL, y <b>2.1.233</b> en Windows nativo. Por debajo de ahí sigue preguntándote, y de ahí que a unos les haya cambiado y a otros no. Para mirarlo:</p>
+<pre>claude --version</pre>
+
+<h2>09 · El hábito que compensa</h2>
+<p>Plan primero, automático después. Entras en plan, lees lo que propone, lo corriges y entonces lo sueltas. El clasificador te cubre de un comando destructivo; de una mala idea bien ejecutada no te cubre nadie.</p>
+
+<div class="aviso">
+  <strong>Comprobado el 17 de agosto de 2026</strong> en la documentación oficial de Anthropic. Es la parte de Claude Code que más ha cambiado este año, así que si lees esto mucho después, verifícalo.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
