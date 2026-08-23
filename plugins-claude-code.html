@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plugins de Claude Code que valen la pena · ClaudeProfessor</title>
+<meta name="description" content="Cómo abrir la tienda de plugins de Claude Code, qué instala uno de verdad, y la regla que evita el lío.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/plugins-claude-code">
+<meta property="og:title" content="Plugins de Claude Code que valen la pena">
+<meta property="og:description" content="Cómo abrir la tienda de plugins de Claude Code, qué instala uno de verdad, y la regla que evita el lío.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Plugins de Claude Code <em>que valen la pena</em></h1>
+  <p class="entradilla">Mucha gente usa Claude Code como una terminal donde escribir y no sabe que tiene tienda. Un plugin le enchufa varias cosas de una vez —skills, subagentes, hooks, conexiones— sin montarlas a mano. Aquí está cómo abrir la tienda, unos cuantos que cambian el día, y la regla que evita el lío.</p>
+</header>
+
+<h2>01 · Abrir la tienda</h2>
+<p>Anthropic mantiene dos tiendas oficiales. La suya viene ya puesta; la de la comunidad se añade con una línea. Desde dentro de Claude Code:</p>
+<pre>/plugin marketplace add anthropics/claude-plugins-community
+/plugin</pre>
+<p>El segundo comando abre el gestor: ahí ves lo que hay, lo instalas y lo activas. Las dos tiendas están revisadas por Anthropic — no es un repo cualquiera de internet.</p>
+
+<h2>02 · Qué te enchufa un plugin</h2>
+<p>No es una cosa: es un paquete. Un plugin puede traer, de golpe, cualquiera de estas —y compartirlas con tu equipo:</p>
+<ul>
+  <li><b>Skills</b> — tu forma de hacer una tarea, para que la repita igual.</li>
+  <li><b>Subagentes</b> — manos que investigan o revisan solas y te dan la conclusión.</li>
+  <li><b>Hooks</b> — acciones automáticas (formatear al guardar, revisar antes de un commit).</li>
+  <li><b>Conexiones (MCP)</b> — Claude hablando con tus otras herramientas.</li>
+</ul>
+
+<h2>03 · Dos que cambian el día</h2>
+<p>De la tienda de la comunidad, dos que casi todo el mundo agradece. Los nombres van tal cual para buscarlos en el gestor:</p>
+
+<h3><code>agent-knowledge</code> — memoria entre sesiones</h3>
+<p>Le da a Claude una memoria que se guarda y se sincroniza: lo que aprendió ayer sobre tu proyecto sigue ahí hoy. Dejas de reexplicarle el contexto en cada chat nuevo. Es la diferencia entre un cuaderno y un chat que empieza de cero.</p>
+
+<h3><code>agentic-security</code> — el guardián del código</h3>
+<p>Pasa un control de seguridad a lo que Claude genera: busca fallos y claves o contraseñas filtradas, en cada cambio y no cuando te acuerdas. Si publicas lo que te sale sin mirarlo, este es el primero que instalas.</p>
+
+<p>El resto se ve en el propio <code>/plugin</code>: abre el gestor, mira las dos tiendas y busca por lo que necesites (pruebas, documentación, tu lenguaje). Lo que hay cambia cada semana, así que la lista de verdad es la que ves ahí dentro.</p>
+
+<h2>04 · La regla de oro</h2>
+<p>Un plugin es potente porque toca cosas: corre con los permisos de Claude. Por eso se elige con cuidado.</p>
+<ul>
+  <li><b>De la tienda oficial</b>, la de Anthropic o la de la comunidad revisada — no un repo suelto que te pasa alguien.</li>
+  <li><b>Mira qué trae</b> antes de decir que sí: qué skills, qué hooks, a qué se conecta.</li>
+  <li><b>Uno cada vez.</b> Cinco el primer día es ruido. Instala uno, úsalo una semana, y luego el siguiente.</li>
+</ul>
+
+<p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+<p><a class="boton" href="boveda.html">Volver a la bóveda</a></p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empezar con Claude Code · ClaudeProfessor</title>
+<meta name="description" content="Qué es Claude Code, cómo se instala en una línea, y las tres primeras cosas que le pides para ver la diferencia con un chat.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/empezar-con-claude-code">
+<meta property="og:title" content="Empezar con Claude Code">
+<meta property="og:description" content="Qué es Claude Code, cómo se instala en una línea, y las tres primeras cosas que le pides para ver la diferencia con un chat.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Empezar con <em>Claude Code</em></h1>
+  <p class="entradilla">Un chat te contesta; Claude Code trabaja donde trabajas tú — abre tus carpetas, corre los comandos y escribe los cambios. Se instala en una línea y en cinco minutos le pides la primera cosa. Esto es lo justo para arrancar.</p>
+</header>
+
+<h2>Qué es, en una frase</h2>
+<p>Claude Code es Claude instalado en tu ordenador, en la terminal (y también en el editor, en una app de escritorio o en el navegador). No es una pestaña a la que le pegas texto: ve tus archivos, ejecuta comandos, edita el código y trabaja con git. Va con tu suscripción de Claude de pago; no se paga aparte.</p>
+
+<h2>01 · Instalarlo, una línea</h2>
+<p>En la terminal de tu Mac, Linux o WSL:</p>
+<pre>curl -fsSL https://claude.ai/install.sh | bash</pre>
+<p>En Windows con PowerShell es <code>irm https://claude.ai/install.ps1 | iex</code>. También está en Homebrew (<code>brew install --cask claude-code</code>) y como extensión de VS Code y JetBrains. La primera vez te pide iniciar sesión con tu cuenta de Claude.</p>
+
+<h2>02 · Abrirlo en tu proyecto</h2>
+<p>Vas a la carpeta de tu proyecto y lo arrancas. Ese <code>cd</code> importa: Claude Code trabaja sobre la carpeta desde la que lo abres.</p>
+<pre>cd mi-proyecto
+claude</pre>
+
+<h2>03 · Las tres primeras cosas que le pides</h2>
+<p>Aquí se ve la diferencia con un chat. No le pegas nada: se lo dices y lo hace.</p>
+<ul>
+  <li><b>Que lo entienda:</b> «lee esta carpeta y dime qué hace este proyecto». Lo lee él solo, no se lo pegas.</li>
+  <li><b>Que lo arregle:</b> «hay un fallo cuando hago X, encuéntralo y arréglalo». Busca, edita el archivo y te enseña el antes y el después.</li>
+  <li><b>Que lo guarde:</b> «guarda esto con un buen mensaje». Prepara el cambio, escribe el mensaje y hace el commit.</li>
+</ul>
+
+<h2>Cuándo sigue ganando el chat</h2>
+<p>No es uno contra otro. Para una duda suelta, una idea rápida o cuando no tienes el proyecto delante, abrir un chat es más rápido. Claude Code es para cuando hay que TOCAR cosas: archivos, comandos, tu repositorio.</p>
+
+<h2>El siguiente paso</h2>
+<p>Cuando le cojas el aire, dos cosas lo cambian de nivel: enseñarle <a href="plantilla-skill.html">una skill</a> con tu forma de trabajar, y añadirle <a href="plugins-claude-code.html">plugins</a> desde su tienda. Pero eso es para después; hoy, instálalo y pídele la primera.</p>
+
+<p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+<p><a class="boton" href="boveda.html">Volver a la bóveda</a></p>
+
+</main>
+</body>
+</html>
