@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>280 automatizaciones que ya están hechas · ClaudeProfessor</title>
-<meta name="description" content="Las 18 categorías de automatizaciones ya montadas, las aplicaciones que tocan y los tres pasos para poner una a funcionar sin construirla.">
+<meta name="description" content="El enlace al repositorio, las 18 categorías de automatizaciones ya montadas, las aplicaciones que tocan y los pasos para poner una a funcionar sin construirla.">
 <link rel="icon" href="icono.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icono-180.png">
 <meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://claudeprofessor.page/automatizaciones-ya-hechas">
 <meta property="og:title" content="280 automatizaciones que ya están hechas">
-<meta property="og:description" content="Las 18 categorías de automatizaciones ya montadas, las aplicaciones que tocan y los tres pasos para poner una a funcionar sin construirla.">
+<meta property="og:description" content="El enlace al repositorio, las 18 categorías de automatizaciones ya montadas, las aplicaciones que tocan y los pasos para poner una a funcionar sin construirla.">
 <meta property="og:image" content="https://claudeprofessor.page/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,31 +30,35 @@
 <header>
   <p class="eyebrow">De la bóveda</p>
   <h1>280 automatizaciones <em>ya montadas</em></h1>
-  <p class="entradilla">No hay que construir ninguna. Están hechas, ordenadas por categorías, y ponerlas a funcionar son tres gestos. Esta ficha recoge lo que sale en el carrusel, sin añadir nada por el camino.</p>
+  <p class="entradilla">No hay que construir ninguna. Están hechas, ordenadas por categorías, y ponerlas a funcionar es descargar un fichero e importarlo. Aquí está el enlace, lo que hay dentro y lo que tienes que poner tú para que arranquen.</p>
 </header>
 
-<h2>01 · Qué es y de dónde sale</h2>
-<p>Un repositorio de GitHub con más de 24.000 estrellas que reúne <strong>280 automatizaciones ya construidas</strong>, repartidas en <strong>18 categorías</strong>. La gracia no es que existan: es que no hay que montar ninguna. Cada una viene entera y lista, y lo único que haces tú es elegir cuál quieres.</p>
+<h2>01 · Dónde están</h2>
+<p>Se llama <strong>awesome-n8n-templates</strong> y es un repositorio de GitHub: <a href="https://github.com/enescingoz/awesome-n8n-templates">github.com/enescingoz/awesome-n8n-templates</a>. Dentro hay <strong>280 automatizaciones ya construidas</strong>, repartidas en <strong>18 categorías</strong>, y a 26 de agosto de 2026 lleva <strong>casi 25.000 estrellas</strong>. La gracia no es que existan: es que no hay que montar ninguna. Cada una viene entera, y lo único que haces tú es elegir cuál.</p>
 
-<h2>02 · Las tres que más se notan el primer día</h2>
+<h2>02 · Con qué se abren: n8n</h2>
+<p>Las 280 son ficheros <code>.json</code> de <strong>n8n</strong>, que es el programa donde una automatización se ve como un diagrama de cajas unidas por flechas. Sin n8n el fichero no hace nada, así que ese es el primer paso: o abres una cuenta en su nube (tiene prueba) o lo instalas en tu propio servidor. Es el único requisito de toda la lista.</p>
+
+<h2>03 · Las tres que más se notan el primer día</h2>
 <p>Son los tres ejemplos con los que se abre el carrusel, y valen como termómetro de lo que hay dentro: <strong>la bandeja de entrada que se ordena sola</strong> —el correo llega, se clasifica y se archiva sin que abras nada—, <strong>el seguimiento a tus contactos mientras duermes</strong> —sale cuando tiene que salir, también de madrugada— y <strong>lo que publicas una vez saliendo en todas las redes</strong>, sin copiar, pegar ni entrar en una por una.</p>
 
-<h2>03 · Con qué habla</h2>
-<p>Con las aplicaciones que ya tienes abiertas todo el día. Las que se nombran expresamente son cinco: <code>Gmail</code>, <code>Slack</code>, <code>WhatsApp</code>, <code>Notion</code> y <code>Stripe</code>. Y ahí no acaba: entre unas cosas y otras son 18 categorías, así que lo raro sería que lo que tú usas no estuviera.</p>
+<h2>04 · Con qué habla</h2>
+<p>Con las aplicaciones que ya tienes abiertas todo el día. En la lista están <code>Gmail</code>, <code>Telegram</code>, <code>Slack</code>, <code>Discord</code>, <code>WhatsApp</code>, <code>Notion</code>, <code>Airtable</code>, <code>Google Drive</code> y <code>Google Sheets</code>, además de Instagram, X, LinkedIn y WordPress. Y por el lado de la IA: OpenAI, Claude, Gemini y bases de datos vectoriales para montar un chatbot que responda con tus documentos.</p>
 
-<h2>04 · Cómo se pone una a funcionar</h2>
-<p>Tres gestos, y ni uno más. No hay que entender cómo está hecha por dentro, ni montarla pieza a pieza, ni empezar de cero. Esta es la lista para tenerla delante mientras lo haces:</p>
-<pre>1. Coges el fichero de la automatización que quieras.
-2. Le das a importar.
-3. Empieza a funcionar.
+<h2>05 · Cómo se pone una a funcionar</h2>
+<p>No hay que entender cómo está hecha por dentro, ni montarla pieza a pieza, ni empezar de cero. Lo único que pone uno de su parte son las claves: cada automatización necesita permiso para entrar en tu correo o en tu Notion, y eso se lo das tú. Esta es la lista para tenerla delante mientras lo haces:</p>
+<pre>1. Descarga el fichero .json de la automatización que quieras.
+2. En n8n: Workflows → Import from File, y eliges ese fichero.
+3. Conecta tus cuentas — te las va pidiendo servicio por servicio.
+4. Dale a activar.
 
 Lo que hacías a mano cada mañana ya está hecho por alguien.</pre>
 
-<h2>05 · Por qué esto es una ventaja mientras dure</h2>
+<h2>06 · Por qué esto es una ventaja mientras dure</h2>
 <p>Porque casi todo el mundo sigue haciéndolo a mano: vaciando el correo, acordándose de cada seguimiento, pegando lo mismo en cada red y volviendo a empezar al día siguiente. No trabajan menos que tú ni saben menos: están montando algo que ya estaba montado.</p>
 
 <div class="aviso">
-  <strong>Antes de enchufar ninguna, ábrela y mírala.</strong> Una automatización de estas entra en tu correo, en tus mensajes y en tus cobros: abre la que vayas a usar y comprueba qué toca antes de darle acceso a nada. No hay ninguna prisa por dejarla suelta el primer día.
+  <strong>Antes de activar ninguna, ábrela y mírala.</strong> Una vez activada trabaja sola y con tus llaves puestas: entra en tu correo, en tus mensajes y en lo que le hayas conectado. Así que después de importarla, y antes de darle a activar, recórrela en el editor de n8n y mira qué cajas lleva y a qué se conecta cada una. Empieza por una sola, la más aburrida, y déjala una semana antes de poner la segunda.
 </div>
 <div class="siguiente">
   <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
