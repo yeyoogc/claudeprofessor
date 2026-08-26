@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una interfaz que no parece de IA · ClaudeProfessor</title>
+<meta name="description" content="Las cuatro herramientas que le arreglan el ojo a Claude Code: referencia, sistema, criterio y una prueba en el navegador de verdad.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/interfaz-que-no-parece-de-ia">
+<meta property="og:title" content="Una interfaz que no parece de IA">
+<meta property="og:description" content="Las cuatro herramientas que le arreglan el ojo a Claude Code: referencia, sistema, criterio y una prueba en el navegador de verdad.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Una interfaz que <em>no parece</em> de IA</h1>
+  <p class="entradilla">El código funciona y la pantalla no. No es culpa de tu prompt: sin una referencia delante, el modelo tira por el centro y saca siempre la misma cara. Estas cuatro se lo arreglan, y van en este orden. Lo que está entre corchetes es lo único que cambias tú.</p>
+</header>
+
+<h2>01 · SkillUI — darle la referencia</h2>
+<p>Es lo primero, porque todo lo demás depende de que sepa a qué se tiene que parecer. Le pasas una dirección, una carpeta tuya o un repositorio y desmonta su sistema de diseño —colores, tipografías, espaciados, radios, componentes, animaciones— en ficheros que Claude lee solo: <code>SKILL.md</code>, <code>CLAUDE.md</code>, <code>DESIGN.md</code> y los de componentes y animaciones. Deja de describirle el estilo con palabras.</p>
+<pre>npm install -g skillui
+skillui --url https://[la web que te gusta] --mode ultra
+
+# abre esa carpeta con Claude Code y pídele:
+Lee SKILL.md y DESIGN.md antes de escribir nada.
+Monta [la pantalla que quieras] usando ESOS tokens: sus colores, sus
+tipografías y sus espaciados, no los tuyos por defecto.
+Si algo no está en el sistema, dímelo en vez de inventártelo.</pre>
+
+<h2>02 · UI/UX Pro Max — que decida el sistema</h2>
+<p>Un muestrario grande al que pregunta antes de decidir nada: 84 estilos, 192 paletas, 74 parejas de tipografías y 98 reglas de uso, con los errores típicos de cada tipo de producto. Le dices qué estás construyendo y te devuelve el sistema entero razonado. Tiene tres ruedas: <code>--variance</code> para lo atrevido, <code>--motion</code> para el movimiento y <code>--density</code> para el aire.</p>
+<pre>npx skills add nextlevelbuilder/ui-ux-pro-max-skill \
+  --skill ui-ux-pro-max --agent claude-code
+
+# y dentro de Claude Code:
+--design-system -p &quot;[lo que estás construyendo: un panel, una tienda,
+una app móvil]&quot; --variance 7 --persist
+
+Explícame en una línea por qué has elegido esa paleta y esa pareja de
+tipografías, y dime qué anti-patrón estás evitando con cada decisión.</pre>
+
+<h2>03 · Impeccable — el criterio y la revisión</h2>
+<p>Le instala un vocabulario de diseño entero y 59 reglas que cazan solas los vicios de siempre: tipografías gastadas, texto gris sobre color, negros puros, tarjetas metidas dentro de tarjetas. Son 23 órdenes, todas con la misma palabra. Se instala copiando su carpeta <code>.claude</code> dentro de tu proyecto, o en <code>~/.claude/</code> si la quieres en todos.</p>
+<pre>git clone https://github.com/pbakaus/impeccable
+cp -r impeccable/dist/claude-code/.claude/* ~/.claude/
+
+# el orden que funciona, dentro de Claude Code:
+/impeccable critique   → que te diga qué está mal y por qué
+/impeccable audit      → pasa las reglas por todo el proyecto
+/impeccable polish     → que lo arregle sin rehacerlo
+/impeccable bolder     → si te sigue pareciendo tímido</pre>
+
+<h2>04 · Playwright — que lo mire con sus ojos</h2>
+<p>Hasta aquí escribe a ciegas. Con esto abre tu aplicación en un navegador de verdad, navega, hace clic, rellena formularios y ve qué falla antes que tú. No mira píxeles: lee el árbol de accesibilidad de la página, que es lo que entiende de verdad. Es una sola línea, una sola vez.</p>
+<pre>claude mcp add playwright npx @playwright/mcp@latest
+
+# y ya se lo pides con palabras:
+Abre [localhost:3000], entra en [la pantalla que acabas de tocar],
+rellena el formulario con datos falsos y envíalo.
+Dime qué se ve mal, qué peticiones fallan y qué texto se sale de su caja.
+Hazme una captura de cada paso y arregla solo lo que hayas visto romperse.</pre>
+
+<h2>05 · El orden, que es media batalla</h2>
+<p>Las cuatro no van sueltas: van una detrás de otra. Referencia, sistema, revisión y prueba. Al revés no sirve de nada — pulir una pantalla que todavía no sabe a qué se parece es pintar sobre gris. Este es el encargo que las encadena en una sola sesión, cuando ya las tienes instaladas:</p>
+<pre>Vamos a rehacer [la pantalla] en cuatro pasos y me paras en cada uno.
+
+1. Lee el sistema de diseño extraído y dime en tres líneas de qué va.
+2. Propón el sistema para [lo que construyo] y espera a que lo apruebe.
+3. Monta la pantalla y pásale critique. Enséñame lo que ha salido mal.
+4. Ábrela en el navegador, pruébala y arregla solo lo que se rompa.
+
+No pases de paso sin enseñarme el resultado del anterior.</pre>
+
+<div class="aviso">
+  <strong>Instala una, no las cuatro.</strong> Empieza por SkillUI con una web que te guste: es la que más cambia el resultado y la que se nota en el primer intento. Y ojo con la cuarta: darle el navegador es darle una llave, así que pídele siempre que diga qué va a tocar antes de tocarlo. Las cuatro son de terceros y viven fuera de Claude: se actualizan por su cuenta y el comando de hoy puede no ser el de dentro de tres meses.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
