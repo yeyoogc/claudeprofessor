@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monta tu Jarvis, pieza a pieza · ClaudeProfessor</title>
+<meta name="description" content="Motor, memoria, voz y una sola pantalla. Los cuatro pasos en orden, con los encargos.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/asistente-que-te-escucha">
+<meta property="og:title" content="Monta tu Jarvis, pieza a pieza">
+<meta property="og:description" content="Motor, memoria, voz y una sola pantalla. Los cuatro pasos en orden, con los encargos.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Monta tu <em>Jarvis</em></h1>
+  <p class="entradilla">Un chat te contesta cuando le escribes; tu Jarvis te contesta cuando le hablas, y deja apuntado lo que ha hecho. Son cuatro piezas y se montan en este orden: el motor, la memoria, la voz y la cara. Cada una funciona sola, así que puedes parar después de cualquiera.</p>
+</header>
+
+<h2>01 · Uno · El motor: Claude Code y una carpeta de habilidades</h2>
+<p>Claude Code abierto en una carpeta tuya y, dentro, una carpeta de habilidades. Cada habilidad es un archivo <code>SKILL.md</code> con el paso a paso de una sola cosa, y se activa sola cuando llega el encargo que le toca. Cinco habilidades pequeñas valen más que un prompt gigante: el prompt gigante lo relees entero cada vez y se contradice consigo mismo. Empieza por estas cinco, que son las que se usan a diario:</p>
+<pre>métricas ..... saca tus números del día
+bandeja ...... el resumen de la mañana
+tendencias ... qué se está moviendo en lo tuyo
+plan ......... las tres prioridades de hoy
+bóveda ....... lee y escribe la memoria</pre>
+
+<h2>02 · El encargo para escribir la primera</h2>
+<p>No escribas la habilidad a mano: dictásela a partir de algo que ya haces cada semana. Pégale esto en Claude Code, dentro de la carpeta:</p>
+<pre>Vamos a escribir una habilidad para esta carpeta.
+Te cuento algo que hago cada semana y quiero dejar de repetir: [descríbelo con tus palabras, sin ordenarlo].
+Hazme las preguntas que necesites, de una en una, hasta tener el paso a paso.
+Luego déjalo escrito en SKILL.md, con una descripción que diga CUÁNDO debe activarse sola, no solo qué hace.</pre>
+
+<h2>03 · Dos · La memoria: tus notas, en tres carpetas</h2>
+<p>La memoria son archivos de texto enlazados entre sí, no una base de datos. Todo lo que Jarvis captura o entrega aterriza ahí, y como son notas normales puedes abrir cualquiera y leer lo que sabe. Tres carpetas bastan, y la diferencia entre ellas es en qué estado está lo que guardas:</p>
+<pre>bóveda/crudo ...... todo lo que captura tal cual entra
+bóveda/limpio ..... lo que ya has depurado y das por bueno
+bóveda/entregas ... lo que te devuelve hecho</pre>
+
+<h2>04 · La regla de la memoria</h2>
+<p>Si no está en la bóveda, no ha pasado. Las notas se enlazan unas con otras y acaban dibujando un mapa de lo que sabes; Jarvis lo mira antes de contestarte, y por eso contesta rápido en vez de empezar de cero. Este es el encargo que deja la costumbre montada:</p>
+<pre>Al terminar cualquier encargo, escribe lo que has hecho en bóveda/entregas, en un archivo de texto con la fecha en el nombre.
+Enlaza esa nota con las que ya existan sobre lo mismo.
+Y antes de contestarme cualquier cosa, mira primero si ya está en la bóveda.</pre>
+
+<h2>05 · Tres · La voz: los oídos y la boca, en tu máquina</h2>
+<p>Mantienes pulsado un botón, hablas, y lo que dices entra como texto; la respuesta sale por el altavoz. Las dos mitades —el dictado que te escucha y la voz que te contesta— corren en tu propio ordenador, así que el audio no sale de la máquina. Es la pieza más rápida de montar: unos quince minutos de cableado.</p>
+
+<h2>06 · Por qué en tu ordenador y no en un servicio</h2>
+<p>Tres razones, y ninguna es ideológica: es gratis siempre, es privado por defecto y no esperas a que conteste ninguna API. Un asistente al que hay que esperar dos segundos cada vez deja de usarse en una semana.</p>
+
+<h2>07 · Cuatro · La cara: una sola pantalla</h2>
+<p>La última pieza es la que lo convierte en algo que tienes abierto todo el día: una pantalla única donde ves el estado, los encargos, la agenda y lo último de tu bóveda, en vez de seis pestañas. Se monta con Claude Code en una tarde. Pégale esto:</p>
+<pre>Móntame una sola pantalla para mi Jarvis, en terminal oscuro:
+estado del sistema, panel de encargos, la agenda de hoy,
+entrada y salida de audio y lo último de mi bóveda.
+Una pantalla. Sin pestañas.</pre>
+
+<h2>08 · Ejecútalo y retócalo hablando</h2>
+<p>Ábrelo y déjalo puesto un día entero antes de tocar nada. Los arreglos que pidas después ya no son de diseño, son de uso: lo que miras a cada rato arriba y lo que no miras nunca, fuera.</p>
+
+<h2>09 · Cómo es el día una vez montado</h2>
+<p>Esto es lo que hace Jarvis con las cuatro piezas puestas. Los encargos son los mismos que arriba; lo que cambia es que ya no los escribes, los dices:</p>
+<pre>07:00  «Resumen de la mañana»  → correo, calendario y novedades, en voz alta
+09:00  «El plan de hoy»        → las tres prioridades, escritas en la bóveda
+14:00  «Sácame los números»    → suscriptores, visitas y seguidores, anotados
+19:00  «Cierra el día»         → lo hecho, registrado; lo de mañana, en cola
+       a cualquier hora        → le preguntas y la bóveda se acuerda de todo</pre>
+
+<div class="aviso">
+  <strong>El orden importa, y la memoria es la que casi nadie monta.</strong> Con el motor solo ya tienes algo útil, pero empieza de cero cada mañana. La segunda pieza es la que hace que mañana sepa lo de hoy, y es la que se salta todo el mundo por ir a la voz, que luce más. Esta ficha sale de la pieza de @danielbrown.ia del 06/08/2026 que versionamos el 27/08: en esta casa nos fiamos de las cuentas de referencia y lo decimos.
+</div>
+<div class="siguiente">
+  <p>Si lo pruebas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
