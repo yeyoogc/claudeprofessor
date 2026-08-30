@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El agente que te lleva el correo · ClaudeProfessor</title>
+<meta name="description" content="Conectar Gmail, escribir el pliego y dejarle la ronda de cada mañana. Los encargos enteros, listos para pegar.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/agente-de-correo">
+<meta property="og:title" content="El agente que te lleva el correo">
+<meta property="og:description" content="Conectar Gmail, escribir el pliego y dejarle la ronda de cada mañana. Los encargos enteros, listos para pegar.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>El agente que te lleva el <em>correo</em></h1>
+  <p class="entradilla">No es un truco de un prompt: es un puesto de trabajo que se monta una vez y luego abre solo cada mañana. Ocho pasos, y los tres largos —la entrevista, el pliego y la ronda diaria— están aquí enteros para copiar. Se hace en una tarde y los dos o tres días siguientes son de corregirle.</p>
+</header>
+
+<h2>01 · El conector: la llave</h2>
+<p>Hasta que no le das acceso a tu cuenta, Claude no ve ni un mensaje. Se hace desde sus propios ajustes, en la parte de conectores: buscas Gmail, lo añades y le das permiso con la cuenta de Google que uses. Es lo único de toda la guía que no se hace escribiendo.</p>
+<pre>Claude
+→ Ajustes
+→ Conectores
+→ Añadir
+→ Gmail
+→ Conectar</pre>
+<p>Enviar en tu nombre es otra cosa y te lo va a pedir: la aprobación antes de que salga un correo viene puesta de fábrica. Déjala puesta hasta que lleves semanas fiándote de lo que escribe.</p>
+
+<h2>02 · El encargo que te entrevista</h2>
+<p>Aquí está el que más se salta la gente. La tentación es escribir tú las instrucciones del agente; sale mejor si le haces que te las saque él preguntando, porque pregunta cosas que tú no habrías pensado en poner. Pega esto tal cual en un chat nuevo:</p>
+<pre>Vas a llevar tú mi correo. Antes de tocar nada, entrevístame.
+Pregúntame de una en una y espera mi respuesta antes de seguir:
+  1. A qué me dedico y quién me escribe.
+  2. Qué es urgente de verdad para mí.
+  3. Qué remitentes y qué asuntos van siempre primero.
+  4. Enséñame tres correos míos ya contestados y fíjate en cómo escribo.
+Al terminar, devuélveme unas instrucciones de trabajo con mis reglas,
+qué es urgente, qué no se contesta nunca y mi firma.
+No entres en mi bandeja todavía.</pre>
+
+<h2>03 · Las cuatro preguntas, contestadas despacio</h2>
+<p>Va a preguntarte esas cuatro cosas y de ahí sale todo lo demás. Contéstalas como si estuvieras dejando el puesto a alguien que empieza mañana y no te va a poder llamar:</p>
+<ul>
+  <li><strong>A qué te dedicas y quién te escribe.</strong> De aquí saca a quién hay que contestar y a quién no.</li>
+  <li><strong>Qué te urge de verdad.</strong> Un cliente esperando una respuesta no es lo mismo que la factura de la luz, y hasta que no se lo digas los dos son «correo».</li>
+  <li><strong>Quién va primero.</strong> Remitentes y asuntos que abres antes que nada, con nombres y apellidos.</li>
+  <li><strong>Tres correos tuyos ya contestados.</strong> Es de donde copia tu manera de escribir. Elige tres distintos: uno cordial, uno seco y uno en el que dices que no.</li>
+</ul>
+
+<h2>04 · El pliego: lo que te devuelve</h2>
+<p>Al terminar la entrevista te devuelve una página con cuatro apartados. Eso es todo lo que sabe de tu correo, y conviene leerlo entero antes de guardarlo: lo que salga torcido aquí va a salir torcido en cada respuesta que escriba durante meses.</p>
+<ul>
+  <li><strong>Las reglas</strong> — cómo se contesta cuando contesta por ti.</li>
+  <li><strong>Lo urgente</strong> — lo que te avisa el mismo día, aunque sea domingo.</li>
+  <li><strong>Lo que no se toca</strong> — lo que nunca contesta solo y te deja a ti.</li>
+  <li><strong>La firma</strong> — cómo cierras tú un correo, tal cual, con tus saltos de línea.</li>
+</ul>
+<p>Si algún apartado te sale flojo, no lo arregles a mano: dile qué falta y que lo reescriba entero. Vas a pegarlo tal cual en el paso siguiente.</p>
+
+<h2>05 · El proyecto: donde vive el pliego</h2>
+<p>Un chat suelto se olvida de todo esto en cuanto lo cierras. Un proyecto guarda esas instrucciones y las aplica a cada conversación que abras dentro de él, así que el pliego se pega ahí una vez y ya no se vuelve a explicar.</p>
+<pre>Claude
+→ Proyectos
+→ Nuevo proyecto
+→ Nombre: Agente de correo
+→ Instrucciones: pega aquí el pliego entero</pre>
+<p>A partir de aquí, todo lo del correo se pide dentro del proyecto. Fuera de él, Claude vuelve a no saber nada de tu bandeja.</p>
+
+<h2>06 · La primera ronda, pedida a mano</h2>
+<p>Antes de dejarle nada fijo, una ronda dándole tú la orden. Comprueba que el conector sigue encendido, abre el proyecto y pídele estas tres cosas, una detrás de otra:</p>
+<pre>Resume mis últimos veinte no leídos y márcame lo urgente.
+
+Búscame lo que llevo tres días sin contestar.
+
+Escribe los borradores que toquen, con mi firma. No envíes nada:
+los quiero leer antes.</pre>
+<p>Esta ronda es para leer lo que escribe, no para que salga ningún correo. Fíjate sobre todo en qué ha llamado urgente: ahí es donde más se equivoca al principio, y es lo que vas a corregir estos días.</p>
+
+<h2>07 · Dos o tres días corrigiéndole</h2>
+<p>Trátalo como a cualquiera que entra nuevo: hace la ronda, tú la repasas y le dices qué está mal. Lo importante es dónde apuntas la corrección — cada una vuelve escrita a las instrucciones del proyecto, porque si se la dices solo en el chat, mañana no se acuerda.</p>
+<ul>
+  <li><strong>«Esto no era urgente»</strong> → fuera de la lista de urgentes, y con el porqué escrito.</li>
+  <li><strong>«Así no hablo yo»</strong> → le pegas cómo lo habrías dicho tú y lo añade al apartado de la firma.</li>
+  <li><strong>«A este no se le contesta»</strong> → al apartado de lo que no se toca.</li>
+</ul>
+<p>En dos o tres días deja de fallar en lo mismo. Si al cuarto sigue metiendo la pata en algo, casi siempre es que ese apartado del pliego está escrito de forma ambigua, no que no te entienda.</p>
+
+<h2>08 · La ronda diaria y el parte</h2>
+<p>Cuando ya lo hace a tu manera, se le pide para todos los días. Es la misma ronda de arriba, con una hora y con un parte al final para que tú abras el correo con el reparto hecho:</p>
+<pre>Hazlo todos los días a las 5 de la mañana:
+lee lo que ha entrado, apártame lo urgente,
+escribe los borradores que toquen
+y déjame el parte del día en una sola página, con tres bloques:
+  - QUÉ ESPERA RESPUESTA: de quién, sobre qué y desde cuándo.
+  - QUÉ HE DEJADO COLGADO: lo que envié yo y nadie ha contestado.
+  - QUÉ SE CONTESTA SOLO: lo que ya has redactado y está esperándome.
+Si algo no encaja en ninguno de los tres, ponlo aparte y dímelo.</pre>
+
+<div class="aviso">
+  <strong>Un agente con acceso a tu correo lee tu correo entero.</strong> Antes de conectarlo, mira qué cuenta le das: si en esa bandeja hay cosas que no quieres que salgan de ahí, empieza con una cuenta secundaria a la que reenvíes solo lo del trabajo. Y deja puesta la aprobación de envío hasta que lleves semanas leyendo lo que escribe: un borrador malo lo borras, un correo enviado ya no.
+</div>
+<div class="siguiente">
+  <p>Si lo montas y te sale algo raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
