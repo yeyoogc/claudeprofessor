@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nadie sella su propio plano · ClaudeProfessor</title>
+<meta name="description" content="La pauta de revisión cruzada: que el plan que escribe Claude lo ataque el agente de otro laboratorio antes de construir nada. Las cuatro fases, el pliego de supuestos y los encargos escritos enteros.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/nadie-sella-su-plano">
+<meta property="og:title" content="Nadie sella su propio plano">
+<meta property="og:description" content="La pauta de revisión cruzada: que el plan de Claude lo ataque otro agente antes de construir. Las cuatro fases y los encargos enteros.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Nadie sella su <em>propio plano</em></h1>
+  <p class="entradilla">Le pides a Claude que te plantee cómo montar algo y te devuelve un plan que se lee perfecto. Le preguntas si está bien y te dice que sí: lo ha revisado él. Esa es la trampa. El modelo que escribió el plan tiene exactamente los mismos puntos ciegos cuando lo corrige, así que revisarlo consigo mismo no revisa nada. La salida es traer a un agente de otro laboratorio —Codex, el de OpenAI— y ponerlo a atacar el plan antes de que se escriba una sola línea de código. Aquí está la pauta entera, con los encargos escritos para copiar.</p>
+</header>
+
+<h2>Las dos grietas</h2>
+<p>Un plan malo se rompe por dos sitios, y los dos se abren antes de programar nada:</p>
+<ul>
+  <li><strong>Entre tú y Claude</strong> — no estáis de acuerdo en qué se va a construir, y ninguno de los dos se ha dado cuenta.</li>
+  <li><strong>Entre Claude y lo que él mismo ha escrito</strong> — el plan suena terminado y no lo está. Mismo modelo, mismos puntos ciegos.</li>
+</ul>
+<p>La primera se cierra preguntando bien. La segunda no se cierra desde dentro: hace falta alguien que no tenga nada que defender.</p>
+
+<h2>Fase 0 · Reconocer</h2>
+<p>Antes de hacerte una sola pregunta, que vaya a mirar. Ninguna entrevista debería preguntar lo que el código ya responde. De ahí sale un <strong>pliego de supuestos</strong> de unos diez puntos que tú confirmas de una vez, en una sola respuesta, corrigiendo solo la línea que falle.</p>
+<pre>Antes de proponerme nada, reconoce el terreno.
+· Lee lo que ya existe en este proyecto y dime qué hay montado.
+· Si no hay nada aún, busca cómo se ha resuelto esto antes y dónde suele fallar.
+· Pregúntame cuánto quieres ahondar antes de gastar el rato.
+Luego escríbeme un PLIEGO DE SUPUESTOS de 10 puntos, uno por línea,
+con todo lo que estás dando por hecho. Yo te lo confirmo en UNA respuesta
+o te corrijo la línea que falle. No me preguntes nada que puedas mirar.</pre>
+
+<h2>Fase 1 · Interrogar</h2>
+<p>Ahora sí, las preguntas. Pero no las veinte: solo las que de verdad deciden algo. Las que parten el proyecto en dos van de una en una, y cada una llega con su porqué, con una recomendación mojada y con qué se rompe si se acierta mal. Las demás van juntas en un fajo que solo abres si quieres vetar alguna.</p>
+<pre>Separa tus preguntas en dos montones:
+· DE CARGA — las que cambian la estructura y luego no se deshacen.
+  Pregúntamelas de una en una, y cada una con tres líneas:
+  por qué importa · qué recomiendas tú · qué se rompe si nos equivocamos.
+· COSMÉTICAS — las demás. Dámelas todas juntas con tu recomendación puesta;
+  yo solo abro la que quiera cambiar.
+Y déjame siempre la salida: si te digo «acepto el resto», cierras y seguimos.</pre>
+<p>Con esto entras en cuatro sitios, no en diez, y sales con un plan cerrado en vez de con un cuestionario.</p>
+
+<h2>Fase 2 · Revisar</h2>
+<p>Aquí entra el segundo agente. Necesitas el Codex CLI de OpenAI, que va con tu cuenta de OpenAI, aparte de la de Claude:</p>
+<pre>npm install -g @openai/codex
+codex login</pre>
+<p>Deja el plan escrito en un fichero (<code>PLAN.md</code>), abre Codex en esa misma carpeta <strong>en solo lectura</strong> y pásaselo:</p>
+<pre>Aquí tienes el plan de implementación de este proyecto: PLAN.md
+Atácalo. No toques ningún fichero, solo lee.
+Dame los fallos numerados: qué está mal, por qué, y qué pasa si se construye así.
+Si el plan no se puede implementar tal y como está escrito, dilo en la primera línea.
+Termina con un veredicto: REHAZLO o APROBADO.</pre>
+<p>Vuelves a Claude con esos fallos, que rehaga el plan, y otra vuelta. Y otra. Una revisión real de este tipo fue así, ronda a ronda: <strong>26 fallos → 15 → 12 → 2 → ninguno</strong>. Cinco vueltas hasta que el revisor no encontró nada más.</p>
+<p>Las reglas que hacen que esto funcione y no sea teatro:</p>
+<ul>
+  <li><strong>Solo lectura</strong> — el que revisa no toca un fichero. Si puede arreglarlo, deja de buscar.</li>
+  <li><strong>La misma sesión</strong> — así se acuerda de todo lo que ya encontró y no repite hallazgos.</li>
+  <li><strong>Que se ataque a sí mismo</strong> — también las correcciones que él mismo aceptó en la ronda anterior.</li>
+  <li><strong>Claude arbitra</strong> — no todo hallazgo es bueno. Lo que rechace, que lo escriba y diga por qué.</li>
+  <li><strong>Un tope de rondas</strong> — si a la quinta no converge, se dice que hay un atasco. No se firma un aprobado para salir del paso.</li>
+</ul>
+
+<h2>Fase 3 · Construir</h2>
+<p>Opcional, y es la misma idea llevada al código: <strong>quien construye no corrige</strong>. Si construye Codex, Claude lee cada línea de lo que ha cambiado y pasa la prueba. Si construye Claude, se abre una sesión nueva de Codex que inspecciona lo cambiado y lo califica contra el plan que quedó cerrado. En los dos caminos el visto bueno final lo das tú.</p>
+
+<h2>Lo que cazan cinco rondas</h2>
+<p>En esa revisión real, los 55 hallazgos se repartieron así:</p>
+<ul>
+  <li><strong>1 mortal</strong> — el plan no se podía construir como estaba escrito: la ruta de acceso a los datos se contradecía con el permiso que se le daba.</li>
+  <li><strong>~6 tablas mal pensadas</strong> — de las que corrompen datos semanas después, cuando ya nadie mira el plan.</li>
+  <li><strong>~7 piezas que faltaban</strong> — una de ellas sin ningún sitio de donde sacar los datos.</li>
+  <li><strong>Ninguna decisión de producto tocada</strong> — el qué se construye no se discutió. Solo el cómo.</li>
+</ul>
+<p>Lo que asusta de esa lista es la primera línea: el plan se leía como completamente plausible.</p>
+
+<h2>Por dónde empezar</h2>
+<p>No se lo pases todo. Coge <strong>un solo plan</strong>, el que más te dolería rehacer dentro de tres semanas, y hazle una vuelta. Con uno basta para ver si esto te sirve. Y si Codex no le saca nada, tampoco has perdido: ya sabes algo que antes no sabías.</p>
+<p>Un aviso para el que lo monte: dos agentes discutiendo consumen el doble, y algunas rondas se llenan de hallazgos menores que no cambian nada. Por eso el tope de rondas está en la lista de arriba y no como consejo.</p>
+
+<div class="siguiente">
+  <p>Si lo montas y te sale raro, mándamelo por DM y lo afinamos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
