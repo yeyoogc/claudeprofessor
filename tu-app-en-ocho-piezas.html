@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu app, en ocho piezas · ClaudeProfessor</title>
+<meta name="description" content="La hoja de montaje: los ocho pasos que van de una idea a una página que cobra, con la herramienta de cada uno y los encargos escritos para copiar.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/tu-app-en-ocho-piezas">
+<meta property="og:title" content="Tu app, en ocho piezas">
+<meta property="og:description" content="Los ocho pasos de una idea a una página que cobra, con la herramienta de cada uno y los encargos escritos.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>Tu app, en <em>ocho piezas</em></h1>
+  <p class="entradilla">Entre una idea y una página que cobra dinero hay ocho pasos, y cada uno tiene su herramienta. El tercero es Claude Code, y es por el que se empieza: sin algo construido no hay nada que desplegar ni que cobrar. Aquí está la hoja de montaje entera, en orden, con los encargos escritos para copiar y el paso donde se queda parada la mayoría de la gente.</p>
+</header>
+
+<h2>La hoja de montaje</h2>
+<ol>
+  <li><strong>Ideas</strong> — ProductHunt</li>
+  <li><strong>Investigación</strong> — Perplexity</li>
+  <li><strong>Código</strong> — Claude Code</li>
+  <li><strong>Despliegue</strong> — Netlify</li>
+  <li><strong>Datos y cuentas</strong> — Supabase</li>
+  <li><strong>Cobro</strong> — Stripe</li>
+  <li><strong>Lo repetitivo</strong> — Hermes + Grok Bot</li>
+  <li><strong>Marca</strong> — X, LinkedIn, Instagram, YouTube</li>
+</ol>
+<p>El orden importa. Se monta de arriba abajo, y si te saltas uno lo vas a echar de menos dos pasos más abajo.</p>
+
+<h2>Paso 1 · El hueco, no la idea</h2>
+<p>ProductHunt es un tablón de lo que se lanza cada día. No entras a buscar una idea buena: entras a ver qué se repite —eso ya está tapado— y qué no aparece por ningún lado. Ahí es donde entras tú.</p>
+
+<h2>Paso 2 · Con la fuente puesta debajo</h2>
+<p>Tres preguntas y ninguna más, antes de escribir una línea de código. Perplexity te devuelve las respuestas con las fuentes debajo, que es la parte que normalmente nadie abre.</p>
+<pre>Voy a montar [lo que sea] para [quién].
+Contéstame tres cosas, cada una con sus fuentes:
+· MERCADO — quién tiene este problema y cuántos son
+· COMPETENCIA — quién lo resuelve ya y por dónde flojea
+· PRECIO — qué se está cobrando hoy por esto
+Si algo no lo puedes sostener con una fuente, dímelo en vez de rellenarlo.</pre>
+
+<h2>Paso 3 · Se lo describes y lo construye</h2>
+<p>Claude Code trabaja en tu terminal y sobre tus ficheros: le cuentas qué quieres y lo escribe. La diferencia con pedirle código a un chat es que aquí no copias y pegas nada, y que puedes hacerle enseñar lo que va a tocar antes de que lo toque.</p>
+<pre>Móntame una página para pedir hora.
+· un formulario con nombre, teléfono y hora
+· guarda cada reserva y enséñamelas en una lista
+· que se vea bien en el móvil
+Enséñame lo que vas a tocar antes de tocarlo.</pre>
+<p>Empieza por lo más pequeño que ya sirva para algo. Una página que hace una cosa y la hace entera vale más que media aplicación con seis pantallas a medias.</p>
+
+<h2>Paso 4 · Sacarla de tu ordenador</h2>
+<p>Este es el paso donde se queda parada la mayoría, y no por difícil: casi todos los tutoriales terminan justo cuando la cosa arranca en tu máquina. Mientras solo funcione en tu mesa, para el resto del mundo no existe.</p>
+<pre>Prepárame esto para subirlo a Netlify.
+· déjame el proyecto listo para desplegar
+· dime qué tengo que hacer yo a mano y en qué orden
+· avísame de lo que se va a romper al salir de mi ordenador</pre>
+
+<h2>Paso 5 · Los datos y las cuentas</h2>
+<p>Netlify sirve lo que se ve. Lo que se guarda —las reservas, los usuarios, quién ha entrado— va en Supabase: base de datos y cuentas en el mismo sitio.</p>
+
+<h2>Paso 6 · El día que deja de ser un proyecto</h2>
+<p>Con Stripe montas el pago suelto y la suscripción en una tarde. Hasta ayer tenías una demo que enseñabas y te decían qué bueno; desde hoy tienes una página que puedes abrir para ver si alguien ha pagado. Es el mismo trabajo y es otra cosa completamente distinta.</p>
+
+<h2>Paso 7 · Lo repetitivo</h2>
+<p>Agentes como Hermes o Grok Bot se comen el trabajo que se repite igual todos los días, ese por el que antes había que contratar a alguien. Este paso puede esperar: no hay nada repetitivo que delegar hasta que la página lleva semanas abierta y ya sabes qué es lo que se repite.</p>
+
+<h2>Paso 8 · Publica mientras la montas</h2>
+<p>No al final: durante. Así el público llega antes que el producto. Lo que se cuenta es la pieza que te ha costado dos tardes y por qué, lo que probaste y no funcionó con la captura puesta, y el día que entra el primer euro.</p>
+<p>Un aviso: este paso, él solo, da para una jornada completa. Si estás en la pieza 3, dedícale diez minutos al día y ya está.</p>
+
+<h2>Por dónde empezar</h2>
+<p>Por la tres, y para en la cinco. Con la página construida, subida y guardando datos ya tienes algo que se puede enseñar; lo demás se pone encima cuando eso funcione. Los pasos 1 y 2 son media tarde y te ahorran montar algo que no quería nadie.</p>
+<p>Y lo de siempre con las herramientas: los planes y los precios se mueven. Míralos el día que vayas a decidir, no el día que leas esto.</p>
+
+<div class="siguiente">
+  <p>Si lo montas y te atascas en algún paso, mándamelo por DM y lo miramos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>

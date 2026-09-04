@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La ficha del experto · ClaudeProfessor</title>
+<meta name="description" content="Cómo pasar todo lo que ha publicado alguien por NotebookLM, sacar una ficha de cómo piensa y pegarla en Claude: los encargos enteros, listos para copiar.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#0C1020" media="(prefers-color-scheme:dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClaudeProfessor">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://claudeprofessor.page/destila-a-tu-experto">
+<meta property="og:title" content="La ficha del experto">
+<meta property="og:description" content="NotebookLM lee todo lo que ha publicado esa persona y saca una ficha de cómo piensa. Esa ficha se pega en Claude.">
+<meta property="og:image" content="https://claudeprofessor.page/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="fuentes.css">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<div class="env estrecho"><a class="volver" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>claudeprofessor</a></div>
+
+<main class="env estrecho lectura">
+<header>
+  <p class="eyebrow">De la bóveda</p>
+  <h1>La ficha del <em>experto</em></h1>
+  <p class="entradilla">Hay gente que lleva años explicando lo que a ti te hace falta, y lo ha dejado casi todo en abierto: charlas, guías, entrevistas, su web. La idea es sencilla. NotebookLM se lo lee entero y saca una ficha de cómo piensa esa persona; esa ficha se pega en Claude y se queda puesta. A partir de ahí Claude no contesta con lo de siempre, contesta con el método de esa persona. Aquí están los dos encargos, escritos para copiar.</p>
+</header>
+
+<h2>El recorrido</h2>
+<ol>
+  <li><strong>Lo echas</strong> — sus vídeos, sus clases y sus documentos, dentro de un cuaderno de NotebookLM</li>
+  <li><strong>Se destila</strong> — le pides la ficha: sus ideas, su método y cómo lo explica</li>
+  <li><strong>Se vierte</strong> — guardas la ficha en un archivo y la pegas al principio del chat de Claude</li>
+</ol>
+
+<h2>Paso 0 · A quién</h2>
+<p>Vale cualquiera que haya dejado rastro. Tu mentor, con eso que te ha explicado veinte veces y no tienes escrito en ningún sitio. Un experto de tu campo, con sus charlas y sus guías. Un creador al que sigas, que suele tener publicado mucho más de lo que parece. Cuanto más haya dicho en público, más llena sale la ficha.</p>
+
+<h2>Paso 1 · Las fuentes</h2>
+<p>Un cuaderno nuevo en NotebookLM y dentro todo lo que encuentres de esa persona. Lo que admite:</p>
+<ul>
+  <li><strong>Enlaces de YouTube</strong> — sus charlas, sus entrevistas, sus directos</li>
+  <li><strong>PDF</strong> — sus guías, sus apuntes, su libro</li>
+  <li><strong>Páginas web</strong> — su blog y los artículos que haya escrito</li>
+  <li><strong>Texto pegado</strong> — lo que te dictó a ti en una llamada, o lo que apuntaste tú</li>
+</ul>
+<p>NotebookLM solo trabaja con lo que le has puesto dentro, y te dice de cuál de tus fuentes sale cada frase. Por eso sirve de puente: lo que salga de aquí se puede comprobar.</p>
+
+<h2>Paso 2 · El encargo para NotebookLM</h2>
+<p>La diferencia entre que esto funcione y que no está en no pedir un resumen. Un resumen te cuenta lo que dijo; tú quieres cómo lo piensa.</p>
+<pre>Con estas fuentes, escríbeme una ficha de cómo piensa esta persona.
+· sus ideas centrales, las que repite en todas partes
+· su método: en qué orden hace las cosas
+· cómo lo explica: sus palabras, sus ejemplos, sus comparaciones
+· lo que descarta, y por qué lo descarta
+Dime de qué fuente sale cada punto. Lo que no esté en las fuentes, no lo pongas.</pre>
+<p>Lo que devuelve es texto. Cópialo entero y guárdalo en un archivo, por ejemplo <code>ficha-del-experto.md</code>. Ese archivo es lo que vas a reutilizar cada vez.</p>
+
+<h2>Paso 3 · Pegarla en Claude</h2>
+<p>Abres un chat nuevo y pegas la ficha entera arriba del todo, antes de tu primera pregunta. Encima de la ficha, estas tres líneas:</p>
+<pre>Trabaja con esta ficha puesta.
+Responde con su método y con sus ejemplos, no con lo de siempre.
+Si algo no está en la ficha, dilo en vez de rellenarlo.</pre>
+<p>La última línea es la importante: sin ella, cuando la ficha no llegue, Claude te contestará lo genérico y tú no vas a notar dónde se acabó el experto y empezó el relleno.</p>
+
+<h2>Lo que cambia</h2>
+<p>La misma pregunta, dos respuestas. Sin la ficha: «depende de tus objetivos, lo importante es ser constante y medir lo que haces». Con la ficha: el orden concreto en que esa persona hace las cosas, con sus ejemplos y con lo que ella descarta. La primera vale para cualquiera. La segunda es la que te ahorra el año de probar por tu cuenta.</p>
+
+<h2>Qué hacer con eso</h2>
+<ul>
+  <li>Preguntarle antes de decidir, y que conteste como contestaría esa persona.</li>
+  <li>Darle lo que has escrito tú y que te lo corrija con su criterio.</li>
+  <li>Que te lo explique con sus ejemplos las veces que haga falta.</li>
+</ul>
+
+<h2>Por dónde empezar</h2>
+<p>Por tres fuentes: su charla más larga, su guía y su web. Con eso ya sale una ficha que se nota. Se tarda menos en hacerlo que en leer esta página.</p>
+<p>Dos avisos, y los dos son del método, no de la herramienta. El primero: la ficha solo tiene lo que le echaste; lo que esa persona nunca ha contado en público —que suele ser lo mejor que sabe— no va a estar ahí. El segundo: esto es una ficha de cómo piensa alguien, no esa persona. Sirve para trabajar con su criterio delante, no para citarla ni para ponerle palabras en la boca.</p>
+
+<div class="siguiente">
+  <p>Si haces una ficha buena de alguien, mándamela por DM y la miramos. Y por aquí sigue lo demás:</p>
+  <div class="pastillas">
+    <a class="pill oscuro" href="boveda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Bóveda</a>
+    <a class="pill neutro" href="https://instagram.com/claudeprofessor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@claudeprofessor</a>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="env estrecho" style="display:flex;justify-content:space-between;width:100%;gap:16px;flex-wrap:wrap">
+  <span>ClaudeProfessor · Hecho en Jaén</span>
+  <span><a href="https://instagram.com/claudeprofessor">Instagram</a> ·
+    <a href="index.html">Inicio</a></span>
+</div></footer>
+
+<script src="copiar.js" defer></script>
+
+</body>
+</html>
